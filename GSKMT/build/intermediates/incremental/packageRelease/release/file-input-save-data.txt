@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Tue Jan 30 19:43:37 IST 2018
+0.baseType=DIRECTORY
+0.base=E\:\\GSK_MT1\\GSKMT\\build\\intermediates\\transforms\\dex\\release\\0
+0.path=classes.dex
+0.set=DEX
+count=1

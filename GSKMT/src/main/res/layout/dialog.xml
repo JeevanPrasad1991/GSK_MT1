@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_root"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+   
+    android:orientation="vertical"
+    android:weightSum="40"
+     >
+
+    <!-- Include Header Bar -->
+    
+    
+	<ImageView android:id="@+id/image"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:visibility="gone"
+	    android:background="@drawable/daily_entry_ico"/>
+
+
+    <ListView
+        android:id="@+id/list_q"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:cacheColorHint="#00000000"
+        android:choiceMode="none"
+        android:divider="#ff9933"
+        android:dividerHeight="2dp" >
+    </ListView>
+
+    <Button
+        android:id="@+id/save_q"
+        android:layout_width="90sp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="5sp"
+        android:layout_weight=".8"
+        android:background="#ff9933"
+       
+        android:text="Save"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+</LinearLayout>

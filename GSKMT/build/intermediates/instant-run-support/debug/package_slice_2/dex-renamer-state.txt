@@ -1,0 +1,4 @@
+#Wed Mar 07 19:00:02 IST 2018
+base.0=F\:\\jeevanAndroidProject\\androidProject\\gskMT 7 March\\GSK_MT1\\GSKMT\\build\\intermediates\\transforms\\dexMerger\\debug\\3
+path.0=classes.dex
+renamed.0=classes.dex

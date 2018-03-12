@@ -1,0 +1,39 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home_root"
+    android:layout_width="400dp"
+    android:layout_height="fill_parent"
+   android:weightSum="100"
+    android:orientation="vertical"
+    
+     >
+
+    <!-- Include Header Bar -->
+    
+    
+	
+
+    <ListView
+        android:id="@+id/listView2"
+        android:layout_width="fill_parent"
+        android:layout_height="250dp"
+        
+        android:cacheColorHint="#00000000"
+        android:choiceMode="none"
+        android:divider="#ff9933"
+        android:dividerHeight="2dp" >
+
+    </ListView>
+
+    <Button
+        android:id="@+id/Save2"
+        android:layout_width="90sp"
+        android:layout_height="35dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="5sp"
+        
+        android:background="#ff9933"
+        android:text="Save"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+
+</LinearLayout>
