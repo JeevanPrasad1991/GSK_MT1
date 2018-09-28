@@ -20,11 +20,15 @@ import com.cpm.autoupdate.AutoupdateActivity;
 import com.cpm.database.GSKMTDatabase;
 import com.cpm.message.AlertMessage;
 
+import com.cpm.xmlGetterSetter.AttendenceStatusGetterSetter;
 import com.cpm.xmlGetterSetter.FailureGetterSetter;
 import com.cpm.xmlGetterSetter.LoginGetterSetter;
 
+import com.cpm.xmlGetterSetter.NoticeBoardGetterSetter;
 import com.cpm.xmlHandler.XMLHandlers;
+import com.crashlytics.android.Crashlytics;
 import com.example.gsk_mtt.R;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 import android.app.Activity;
@@ -55,18 +59,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity implements OnClickListener, LocationListener {
-
     private EditText mUsername, mPassword;
-
     private Button mLogin;
-    // private RelativeLayout login_remember;
-    // private ImageView login_remembericon;
-
     private String username, password, p_username, p_password;
     private double latitude = 0.0, longitude = 0.0;
     private int versionCode;
     private boolean isChecked;
-
     private LocationManager locmanager = null;
     private SharedPreferences preferences = null;
     private SharedPreferences.Editor editor = null;
@@ -77,14 +75,16 @@ public class LoginActivity extends Activity implements OnClickListener, Location
     String app_ver;
     int eventType;
     LoginGetterSetter lgs = null;
-//	private ArrayList<CoverageBean> coverageBeanlist = new ArrayList<CoverageBean>();
+    AttendenceStatusGetterSetter attendenceStatus = null;
+    NoticeBoardGetterSetter noticeboardgsetter = null;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         ContentResolver.setMasterSyncAutomatically(false);
-
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         // login_version = (TextView) findViewById(R.id.login_versiontext);
 
         mUsername = (EditText) findViewById(R.id.login_usertextbox);
@@ -93,67 +93,53 @@ public class LoginActivity extends Activity implements OnClickListener, Location
         // findViewById(R.id.login_rememberme);
         // login_remembericon = (ImageView)
         // findViewById(R.id.login_remembermeicon);
+//        mUsername.setText("testhfd");
+//      mUsername.setText("bijender.singh");
+//       mPassword.setText("cpm@5678");
 
-        //mUsername.setText("test");
-        //mPassword.setText("cpm123");
+//        mUsername.setText("test.six");
+//        mPassword.setText("cpm@5678");
 
 
         mLogin = (Button) findViewById(R.id.login_loginbtn);
-
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         editor = preferences.edit();
-
         p_username = preferences.getString(CommonString.KEY_USERNAME, null);
         p_password = preferences.getString(CommonString.KEY_PASSWORD, null);
         isChecked = preferences.getBoolean(CommonString.KEY_REMEMBER, false);
-
         try {
             app_ver = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-
-            // login_version.setText("Parinaam Version " + app_ver);
         } catch (NameNotFoundException e) {
-
             e.printStackTrace();
         }
 
         database = new GSKMTDatabase(this);
-//		database.open();
+        database.open();
 
         if (!isChecked) {
-            // login_remembericon.setImageResource(R.drawable.deactive_radio_box);
         } else {
             mUsername.setText(p_username);
             mPassword.setText(p_password);
         }
 
         mLogin.setOnClickListener(this);
-        // login_remember.setOnClickListener(this);
 
         locmanager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        boolean enabled = locmanager
-                .isProviderEnabled(LocationManager.GPS_PROVIDER);
-
+        boolean enabled = locmanager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         // Check if enabled and if not send user to the GSP settings
         // Better solution would be to display a dialog and suggesting to
         // go to the settings
         if (!enabled) {
-
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-                    LoginActivity.this);
-
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
             // Setting Dialog Title
             alertDialog.setTitle("GPS IS DISABLED...");
-
             // Setting Dialog Message
             alertDialog.setMessage("Click ok to enable GPS.");
-
             // Setting Positive "Yes" Button
             alertDialog.setPositiveButton("YES",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-
-                            intent = new Intent(
-                                    Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                             startActivity(intent);
                         }
                     });
@@ -163,33 +149,25 @@ public class LoginActivity extends Activity implements OnClickListener, Location
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             // Write your code here to invoke NO event
-
                             dialog.cancel();
                         }
                     });
 
             // Showing Alert Message
             alertDialog.show();
-
         }
 
         // Create a Folder for Images
-        File file = new File(Environment.getExternalStorageDirectory(),
-                "MT_GSK_Images");
+        File file = new File(Environment.getExternalStorageDirectory(), "MT_GSK_Images");
         if (!file.isDirectory()) {
             file.mkdir();
         }
 
-
-        mUsername.setText("testhfd");
-        mPassword.setText("cpm123");
     }
 
     @Override
     protected void onResume() {
-
         super.onResume();
-
     }
 
     @Override
@@ -202,7 +180,6 @@ public class LoginActivity extends Activity implements OnClickListener, Location
         // TODO Auto-generated method stub
         username = mUsername.getText().toString().trim();
         password = mPassword.getText().toString().trim();
-
         switch (v.getId()) {
             case R.id.login_loginbtn:
                 if (username.length() == 0) {
@@ -210,17 +187,12 @@ public class LoginActivity extends Activity implements OnClickListener, Location
                 } else if (password.length() == 0) {
                     showToast("Please enter password");
                 } else {
-
-                    p_username = preferences.getString(CommonString.KEY_USERNAME,
-                            null);
-                    p_password = preferences.getString(CommonString.KEY_PASSWORD,
-                            null);
+                    p_username = preferences.getString(CommonString.KEY_USERNAME, null);
+                    p_password = preferences.getString(CommonString.KEY_PASSWORD, null);
                     // If no preferences are stored
                     if (p_username == null && p_password == null) {
-
                         if (CheckNetAvailability()) {
                             new AuthenticateTask().execute();
-
                         } else {
                             showToast("No Network and first login");
                         }
@@ -231,10 +203,9 @@ public class LoginActivity extends Activity implements OnClickListener, Location
                             if (CheckNetAvailability()) {
                                 new AuthenticateTask().execute();
                             } else if (password.equals(p_password)) {
-                                intent = new Intent(this, MainMenuActivity.class);
+                                intent = new Intent(this, NoticeBoardActivity.class);
                                 startActivity(intent);
                                 this.finish();
-
                                 showToast("No Network and offline login");
                             } else {
                                 showToast("Incorrect Password");
@@ -254,9 +225,7 @@ public class LoginActivity extends Activity implements OnClickListener, Location
 
         @Override
         protected void onPreExecute() {
-
             super.onPreExecute();
-
             dialog = new ProgressDialog(LoginActivity.this);
             dialog.setTitle("Login");
             dialog.setMessage("Authenticating....");
@@ -266,13 +235,8 @@ public class LoginActivity extends Activity implements OnClickListener, Location
 
         @Override
         protected String doInBackground(Void... params) {
-
-
             try {
-
-                versionCode = getPackageManager().getPackageInfo(
-                        getPackageName(), 0).versionCode;
-
+                versionCode = getPackageManager().getPackageInfo(getPackageName(), 0).versionCode;
                 String userauth_xml = "[DATA]" + "[USER_DATA][USER_ID]"
                         + username + "[/USER_ID]" + "[PASSWORD]" + password
                         + "[/PASSWORD]" + "[IN_TIME]" + getCurrentTime()
@@ -283,87 +247,55 @@ public class LoginActivity extends Activity implements OnClickListener, Location
                         + "[NETWORK_STATUS]" + "LoginStatus"
                         + "[/NETWORK_STATUS]" + "[/USER_DATA][/DATA]";
 
-                SoapObject request = new SoapObject(CommonString.NAMESPACE,
-                        CommonString.METHOD_LOGIN);
+                SoapObject request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_LOGIN);
                 request.addProperty("onXML", userauth_xml);
-
-                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                        SoapEnvelope.VER11);
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 envelope.dotNet = true;
                 envelope.setOutputSoapObject(request);
-
-                HttpTransportSE androidHttpTransport = new HttpTransportSE(
-                        CommonString.URL);
-
-                androidHttpTransport.call(CommonString.SOAP_ACTION_LOGIN,
-                        envelope);
-
+                HttpTransportSE androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                androidHttpTransport.call(CommonString.SOAP_ACTION_LOGIN, envelope);
                 Object result = (Object) envelope.getResponse();
-
-                if (result.toString()
-                        .equalsIgnoreCase(CommonString.KEY_FAILURE)) {
-
+                if (result.toString().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
                     final AlertMessage message = new AlertMessage(
                             LoginActivity.this, AlertMessage.MESSAGE_FAILURE,
                             "login", null);
                     runOnUiThread(new Runnable() {
-
                         @Override
                         public void run() {
-
                             message.showMessage();
                         }
                     });
 
-                } else if (result.toString().equalsIgnoreCase(
-                        CommonString.KEY_FALSE)) {
-
-                    final AlertMessage message = new AlertMessage(
-                            LoginActivity.this, AlertMessage.MESSAGE_FALSE,
-                            "login", null);
+                } else if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
+                    final AlertMessage message = new AlertMessage(LoginActivity.this, AlertMessage.MESSAGE_FALSE, "login", null);
                     runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
-
                             message.showMessage();
                         }
                     });
-
-                } else if (result.toString().equalsIgnoreCase(
-                        CommonString.KEY_CHANGED)) {
-
-                    final AlertMessage message = new AlertMessage(
-                            LoginActivity.this, AlertMessage.MESSAGE_CHANGED,
-                            "login", null);
+                } else if (result.toString().equalsIgnoreCase(CommonString.KEY_CHANGED)) {
+                    final AlertMessage message = new AlertMessage(LoginActivity.this, AlertMessage.MESSAGE_CHANGED, "login", null);
                     runOnUiThread(new Runnable() {
 
                         @Override
                         public void run() {
-
                             message.showMessage();
                         }
                     });
 
                 } else {
-
-                    XmlPullParserFactory factory = XmlPullParserFactory
-                            .newInstance();
+                    XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                     factory.setNamespaceAware(true);
                     XmlPullParser xpp = factory.newPullParser();
-
                     xpp.setInput(new StringReader(result.toString()));
                     xpp.next();
                     eventType = xpp.getEventType();
-                    FailureGetterSetter failureGetterSetter = XMLHandlers
-                            .failureXMLHandler(xpp, eventType);
-
-                    if (failureGetterSetter.getStatus().equalsIgnoreCase(
-                            CommonString.KEY_FAILURE)) {
+                    FailureGetterSetter failureGetterSetter = XMLHandlers.failureXMLHandler(xpp, eventType);
+                    if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
                         final AlertMessage message = new AlertMessage(
-                                LoginActivity.this, CommonString.METHOD_LOGIN
-                                + failureGetterSetter.getErrorMsg(),
-                                "login", null);
+                                LoginActivity.this, CommonString.METHOD_LOGIN + failureGetterSetter.getErrorMsg(), "login", null);
                         runOnUiThread(new Runnable() {
 
                             @Override
@@ -373,10 +305,8 @@ public class LoginActivity extends Activity implements OnClickListener, Location
                             }
                         });
                     } else {
-
                         try {
                             // For String source
-
                             xpp.setInput(new StringReader(result.toString()));
                             xpp.next();
                             eventType = xpp.getEventType();
@@ -388,25 +318,67 @@ public class LoginActivity extends Activity implements OnClickListener, Location
                             e.printStackTrace();
                         }
 
+                        request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_NAME_UNIVERSAL_DOWNLOAD);
+                        request.addProperty("UserName", username);
+                        request.addProperty("Type", "ATTENDANCE_STATUS");
+                        envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                        envelope.dotNet = true;
+                        envelope.setOutputSoapObject(request);
+                        androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                        androidHttpTransport.call(CommonString.SOAP_ACTION_UNIVERSAL, envelope);
+                        Object attendeceresult = (Object) envelope.getResponse();
+                        if (result.toString() != null) {
+                            xpp.setInput(new StringReader(attendeceresult.toString()));
+                            xpp.next();
+                            eventType = xpp.getEventType();
+                            attendenceStatus = XMLHandlers.AttendenceStatusXMLHandler(xpp, eventType);
+                        }
+
+
+                        request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_NAME_UNIVERSAL_DOWNLOAD);
+                        request.addProperty("UserName", username);
+                        request.addProperty("Type", "NOTICE_BOARD");
+                        envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                        envelope.dotNet = true;
+                        envelope.setOutputSoapObject(request);
+                        androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                        androidHttpTransport.call(CommonString.SOAP_ACTION_UNIVERSAL, envelope);
+                        attendeceresult = (Object) envelope.getResponse();
+                        if (attendeceresult.toString() != null) {
+                            xpp.setInput(new StringReader(attendeceresult.toString()));
+                            xpp.next();
+                            eventType = xpp.getEventType();
+                            noticeboardgsetter = XMLHandlers.noticeBoardXmlHandler(xpp, eventType);
+                        }
+
+
                         // PUT IN PREFERENCES
+
                         editor.putString(CommonString.KEY_USERNAME, username);
                         editor.putString(CommonString.KEY_PASSWORD, password);
                         editor.putString(CommonString.KEY_VERSION, lgs.getAPP_VERSION());
-
                         editor.putString(CommonString.KEY_PATH, lgs.getAPP_PATH());
                         editor.putString(CommonString.KEY_DATE, lgs.getCURRENTDATE());
+                        editor.putString(CommonString.KEY_ATTENDENCE_STATUS, attendenceStatus.getStaus());
 
-                        editor.commit();
+                        editor.putString(CommonString.KEY_SERVER_NOTICE_BOARD_URL, noticeboardgsetter.getNoticeBoard());
+                        editor.putString(CommonString.KEY_SERVER_QUIZ_URL, noticeboardgsetter.getQuizUrl());
+                        editor.apply();
+                        Bundle bundle = new Bundle();
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, username);
+                        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "Login Data");
+                        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "image");
+                        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+                        Crashlytics.setUserIdentifier(username);
 
                         return CommonString.KEY_SUCCESS;
-
                     }
                 }
 
                 return "";
 
             } catch (MalformedURLException e) {
-
+                Crashlytics.logException(e);
                 final AlertMessage message = new AlertMessage(
                         LoginActivity.this, AlertMessage.MESSAGE_EXCEPTION,
                         "acra_login", e);
@@ -414,7 +386,6 @@ public class LoginActivity extends Activity implements OnClickListener, Location
 
                     @Override
                     public void run() {
-
                         message.showMessage();
                     }
                 });
@@ -423,7 +394,6 @@ public class LoginActivity extends Activity implements OnClickListener, Location
                 final AlertMessage message = new AlertMessage(
                         LoginActivity.this,
                         AlertMessage.MESSAGE_SOCKETEXCEPTION, "socket_login", e);
-
                 counter++;
                 runOnUiThread(new Runnable() {
 
@@ -440,8 +410,8 @@ public class LoginActivity extends Activity implements OnClickListener, Location
                 });
             } catch (Exception e) {
                 final AlertMessage message = new AlertMessage(
-                        LoginActivity.this, AlertMessage.MESSAGE_EXCEPTION,
-                        "acra_login", e);
+                        LoginActivity.this,
+                        AlertMessage.MESSAGE_SOCKETEXCEPTION, "socket_login", e);
                 runOnUiThread(new Runnable() {
 
                     @Override
@@ -457,28 +427,19 @@ public class LoginActivity extends Activity implements OnClickListener, Location
 
         @Override
         protected void onPostExecute(String result) {
-
             super.onPostExecute(result);
-
             if (result.equals(CommonString.KEY_SUCCESS)) {
-
-//				database.open();
                 if (preferences.getString(CommonString.KEY_VERSION, "").equals(Integer.toString(versionCode))) {
-                    intent = new Intent(getBaseContext(), MainMenuActivity.class);
+                    intent = new Intent(getBaseContext(), NoticeBoardActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    intent = new Intent(getBaseContext(),
-                            AutoupdateActivity.class);
-
-                    intent.putExtra(CommonString.KEY_PATH,
-                            preferences.getString(CommonString.KEY_PATH, ""));
+                    intent = new Intent(getBaseContext(), AutoupdateActivity.class);
+                    intent.putExtra(CommonString.KEY_PATH, preferences.getString(CommonString.KEY_PATH, ""));
                     startActivity(intent);
                     finish();
                 }
-
             }
-
             dialog.dismiss();
         }
 
@@ -539,15 +500,12 @@ public class LoginActivity extends Activity implements OnClickListener, Location
 
         String intime = m_cal.get(Calendar.HOUR_OF_DAY) + ":"
                 + m_cal.get(Calendar.MINUTE) + ":" + m_cal.get(Calendar.SECOND);
-
         return intime;
 
     }
 
     @Override
     public void onBackPressed() {
-
-
         Intent startMain = new Intent(Intent.ACTION_MAIN);
         startMain.addCategory(Intent.CATEGORY_HOME);
         startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
