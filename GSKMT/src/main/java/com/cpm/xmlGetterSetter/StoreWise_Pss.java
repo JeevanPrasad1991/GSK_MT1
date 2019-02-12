@@ -16,7 +16,36 @@ public class StoreWise_Pss {
 	public ArrayList<String> pss = new ArrayList<String>();
 	public ArrayList<String> process_id = new ArrayList<String>();
 	public ArrayList<String> period = new ArrayList<String>();
-	
+	/////changesssss
+	public ArrayList<String> STOCK_SCORE = new ArrayList<String>();
+	public ArrayList<String> ASSET_SCORE = new ArrayList<String>();
+	public ArrayList<String> PROMO_SCORE = new ArrayList<String>();
+
+	public ArrayList<String> getSTOCK_SCORE() {
+		return STOCK_SCORE;
+	}
+
+	public void setSTOCK_SCORE(String STOCK_SCORE) {
+		this.STOCK_SCORE.add(STOCK_SCORE);
+	}
+
+	public ArrayList<String> getASSET_SCORE() {
+		return ASSET_SCORE;
+	}
+
+	public void setASSET_SCORE(String ASSET_SCORE) {
+		this.ASSET_SCORE.add(ASSET_SCORE);
+	}
+
+	public ArrayList<String> getPROMO_SCORE() {
+		return PROMO_SCORE;
+	}
+
+	public void setPROMO_SCORE(String PROMO_SCORE) {
+		this.PROMO_SCORE.add(PROMO_SCORE);
+	}
+
+
 	
 	public ArrayList<String> getPeriod() {
 		return period;

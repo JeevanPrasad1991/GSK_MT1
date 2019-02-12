@@ -71,8 +71,9 @@ import java.util.Calendar;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-public class GeoTagActivity extends AppCompatActivity implements OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
-
+public class GeoTagActivity extends AppCompatActivity implements
+        OnMapReadyCallback,GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, LocationListener {
     private GoogleMap mMap;
     double latitude =0.0;
     double longitude =0.0;
@@ -90,7 +91,6 @@ public class GeoTagActivity extends AppCompatActivity implements OnMapReadyCallb
     boolean enabled;
     // boolean flag to toggle periodic location updates
     private boolean mRequestingLocationUpdates = false;
-
     private LocationRequest mLocationRequest;
     private TextView percentage, message;
     // Location updates intervals in sec
@@ -116,67 +116,28 @@ public class GeoTagActivity extends AppCompatActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_geo_tag);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         username = preferences.getString(CommonString.KEY_USERNAME, null);
-
-
-         mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
         db = new GSKMTDatabase(GeoTagActivity.this);
         db.open();
-
         fab = (FloatingActionButton) findViewById(R.id.fab);
-
         fabcarmabtn = (FloatingActionButton) findViewById(R.id.camrabtn);
-
-
         storeid = getIntent().getStringExtra("Storeid");
-
         str = CommonString.FILE_PATH;
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
-                if(!img_str.equalsIgnoreCase("")){
-
+                if(!img_str.equals("")){
                     status="Y";
-
                     db.updateStatus(storeid,status, latitude, longitude);
-
-
                     db.InsertSTOREgeotag(storeid, latitude, longitude, img_str,status);
-
                     img_str="";
-
-
-
-
                     new GeoTagUpload(GeoTagActivity.this).execute();
-
-
-
-                    /*Intent intent2 = new Intent(GeoTagActivity.this,
-                            GeoTagging.class);
-
-                    startActivity(intent2);
-
-                    GeoTagActivity.this.finish();*/
-
-
-
                 }
-                else
-                {
-                    Snackbar.make(view, "Please Take Image Before Save", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-
-
+                else {
+                    Snackbar.make(view, "Please Take Image Before Save", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
                 }
 
@@ -186,13 +147,8 @@ public class GeoTagActivity extends AppCompatActivity implements OnMapReadyCallb
         fabcarmabtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 _pathforcheck = storeid + "Store" + "Image" +  getCurrentTime().replace(":","")+".jpg";
-
                 _path = CommonString.FILE_PATH + _pathforcheck;
-
-
                 startCameraActivity();
 
 
@@ -208,12 +164,9 @@ public class GeoTagActivity extends AppCompatActivity implements OnMapReadyCallb
 
 
         if (checkPlayServices()) {
-
             // Building the GoogleApi client
             buildGoogleApiClient();
         }
-
-
 
         if (checkPlayServices()) {
 
@@ -341,13 +294,6 @@ public class GeoTagActivity extends AppCompatActivity implements OnMapReadyCallb
         }*/
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
-        }
-    }
 
     @Override
     protected void onPause() {
@@ -388,8 +334,7 @@ public class GeoTagActivity extends AppCompatActivity implements OnMapReadyCallb
                 GooglePlayServicesUtil.getErrorDialog(resultCode, this,
                         PLAY_SERVICES_RESOLUTION_REQUEST).show();
             } else {
-                Toast.makeText(getApplicationContext(),
-                        "This device is not supported.", Toast.LENGTH_LONG)
+                Toast.makeText(getApplicationContext(), "This device is not supported.", Toast.LENGTH_LONG)
                         .show();
                 finish();
             }
@@ -419,45 +364,6 @@ public class GeoTagActivity extends AppCompatActivity implements OnMapReadyCallb
     protected void stopLocationUpdates() {
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
     }
-
-    /**
-     * Method to toggle periodic location updates
-     * */
-    private void togglePeriodicLocationUpdates() {
-        if (!mRequestingLocationUpdates) {
-            // Changing the button text
-          /*  btnStartLocationUpdates
-                    .setText("Stop Location Update");
-*/
-            Snackbar.make(fab, "Location Update started", Snackbar.LENGTH_SHORT).show();
-
-            //  thread.start();
-
-            mRequestingLocationUpdates = true;
-
-            // Starting the location updates
-            startLocationUpdates();
-
-            Log.d(TAG, "Periodic location updates started!");
-
-        } else {
-            // Changing the button text
-           /* btnStartLocationUpdates
-                    .setText("Start Location Update");*/
-
-            Snackbar.make(fab,"Location Update started",Snackbar.LENGTH_SHORT).show();
-
-            // thread.interrupt();
-
-            mRequestingLocationUpdates = false;
-
-            // Stopping the location updates
-            stopLocationUpdates();
-
-            Log.d(TAG, "Periodic location updates stopped!");
-        }
-    }
-
 
 
     protected void startCameraActivity() {
@@ -694,22 +600,7 @@ public class GeoTagActivity extends AppCompatActivity implements OnMapReadyCallb
             dialog.dismiss();
 
             if (result.equals(CommonString.KEY_SUCCESS)) {
-               /* AlertMessage message = new AlertMessage(
-                        GeoTagActivity.this,
-                        AlertMessage.MESSAGE_UPLOAD_DATA, "success", null);
-                message.showMessage();*/
-
                 new GeoTagActivity.GeoTagImageUpload(GeoTagActivity.this).execute();
-
-                /*Intent intent = new Intent(
-                        GeoTagActivity.this,
-                        GeoTagging.class);
-
-                startActivity(intent);
-
-                GeoTagActivity.this.finish()
-                ;*/
-
             } else if (!result.equals("")) {
                 AlertMessage message = new AlertMessage(
                         GeoTagActivity.this, AlertMessage.MESSAGE_ERROR

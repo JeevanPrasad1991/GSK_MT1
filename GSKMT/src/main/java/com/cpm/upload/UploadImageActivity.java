@@ -31,6 +31,7 @@ import com.cpm.message.AlertMessage;
 import com.cpm.xmlGetterSetter.FailureGetterSetter;
 import com.cpm.xmlHandler.FailureXMLHandler;
 
+import com.crashlytics.android.Crashlytics;
 import com.example.gsk_mtt.R;
 
 import android.app.Activity;
@@ -133,9 +134,11 @@ public class UploadImageActivity extends Activity {
                     if (coverageBeanlist.get(i).getStatus().equalsIgnoreCase(CommonString.KEY_D)) {
                         database.open();
                         storestatus = database.getStoreStatus(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-                        if (storestatus.getUPLOAD_STATUS().equalsIgnoreCase(
-                                CommonString.STORE_STATUS_LEAVE) || storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(
-                                CommonString.STORE_STATUS_LEAVE) || storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_C)) {
+                        if (storestatus.getUPLOAD_STATUS().equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE) ||
+                                storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE)
+                                || storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_C)
+                                || storestatus.getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_D)
+                                || storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_D)) {
 
                             runOnUiThread(new Runnable() {
 
@@ -204,14 +207,8 @@ public class UploadImageActivity extends Activity {
                                 }
 
 
-                                if (stockimages.get(j).getImage6() != null
-                                        && !stockimages.get(j).getImage6()
-                                        .equals("")) {
-
-                                    if (new File(
-                                            Environment.getExternalStorageDirectory() + "/MT_GSK_Images/"
-                                                    + stockimages.get(j).getImage6()).exists()) {
-
+                                if (stockimages.get(j).getImage6() != null && !stockimages.get(j).getImage6().equals("")) {
+                                    if (new File(Environment.getExternalStorageDirectory() + "/MT_GSK_Images/" + stockimages.get(j).getImage6()).exists()) {
                                         result = UploadPOSMImage(stockimages.get(j).getImage6(), "StockImage");
                                         if (result.equalsIgnoreCase(CommonString.KEY_FAILURE)) {
                                             return CommonString.METHOD_UPLOAD_PRIMARY_WINDOW_IMAGES + "," + errormsg;
@@ -257,12 +254,9 @@ public class UploadImageActivity extends Activity {
                                 if (stockimages.get(j).getImage8() != null && !stockimages.get(j).getImage8().equals("")) {
                                     if (new File(Environment.getExternalStorageDirectory() + "/MT_GSK_Images/" + stockimages.get(j).getImage8()).exists()) {
 
-                                        result = UploadPOSMImage(
-                                                stockimages.get(j).getImage8(), "StockImage");
-                                        if (result
-                                                .equalsIgnoreCase(CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_PRIMARY_WINDOW_IMAGES
-                                                    + "," + errormsg;
+                                        result = UploadPOSMImage(stockimages.get(j).getImage8(), "StockImage");
+                                        if (result.equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_PRIMARY_WINDOW_IMAGES + "," + errormsg;
                                         }
 
                                         runOnUiThread(new Runnable() {
@@ -283,30 +277,19 @@ public class UploadImageActivity extends Activity {
 
                             // Stock Shelf Images
                             database.open();
-                            shelfdata = database
-                                    .getInsertedShelfDataForUpload(coverageBeanlist.get(i).getStoreId(),
-                                            coverageBeanlist.get(i).getProcess_id());
+                            shelfdata = database.getInsertedShelfFacingStockDataForUpload(coverageBeanlist.get(i).getStoreId(),
+                                    coverageBeanlist.get(i).getProcess_id());
 
 
                             for (int j = 0; j < shelfdata.size(); j++) {
+                                if (shelfdata.get(j).getImage() != null && !shelfdata.get(j).getImage().equals("")) {
 
+                                    if (new File(Environment.getExternalStorageDirectory() + "/MT_GSK_Images/"
+                                            + shelfdata.get(j).getImage()).exists()) {
 
-                                if (shelfdata.get(j).getImage() != null
-                                        && !shelfdata.get(j).getImage()
-                                        .equals("")) {
+                                        result = UploadPOSMImage(shelfdata.get(j).getImage(), "ShelfImages");
 
-                                    if (new File(
-                                            Environment.getExternalStorageDirectory() + "/MT_GSK_Images/"
-
-                                                    + shelfdata.get(j).getImage())
-                                            .exists()) {
-
-                                        result = UploadPOSMImage(
-
-                                                shelfdata.get(j).getImage(), "ShelfImages");
-
-                                        if (result
-                                                .equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                        if (result.equalsIgnoreCase(CommonString.KEY_FAILURE)) {
 
                                             return CommonString.METHOD_UPLOAD_PRIMARY_WINDOW_IMAGES
                                                     + "," + errormsg;
@@ -318,7 +301,6 @@ public class UploadImageActivity extends Activity {
                                                 // TODO Auto-generated
                                                 // method
                                                 // stub
-
                                                 message.setText("Shelf image images Uploaded");
                                             }
                                         });
@@ -387,16 +369,8 @@ public class UploadImageActivity extends Activity {
                             for (int j = 0; j < promotionData.size(); j++) {
 
 
-                                if (promotionData.get(j).getPop_img() != null
-                                        && !promotionData.get(j).getPop_img()
-                                        .equals("")) {
-
-                                    if (new File(
-                                            CommonString.FILE_PATH
-
-                                                    + promotionData.get(j).getPop_img())
-                                            .exists()) {
-
+                                if (promotionData.get(j).getPop_img() != null && !promotionData.get(j).getPop_img().equals("")) {
+                                    if (new File(CommonString.FILE_PATH + promotionData.get(j).getPop_img()).exists()) {
                                         result = UploadPOSMImage(promotionData.get(j).getPop_img(), "PromotionImages");
                                         if (result
                                                 .equalsIgnoreCase(CommonString.KEY_FAILURE)) {
@@ -494,29 +468,16 @@ public class UploadImageActivity extends Activity {
                                 }
 
 
-                                if (afterTOTData.get(j).getImage3() != null
-                                        && !afterTOTData.get(j).getImage3()
-                                        .equals("")) {
-
-                                    if (new File(
-                                            Environment.getExternalStorageDirectory() + "/MT_GSK_Images/"
-
-                                                    + afterTOTData.get(j).getImage3())
-                                            .exists()) {
-
+                                if (afterTOTData.get(j).getImage3() != null && !afterTOTData.get(j).getImage3().equals("")) {
+                                    if (new File(Environment.getExternalStorageDirectory() + "/MT_GSK_Images/" + afterTOTData.get(j).getImage3()).exists()) {
                                         result = UploadPOSMImage(afterTOTData.get(j).getImage3(), "TOTImage");
-                                        if (result
-                                                .equalsIgnoreCase(CommonString.KEY_FAILURE)) {
-
-                                            return CommonString.METHOD_Upload_StoreDeviationImage
-                                                    + "," + errormsg;
+                                        if (result.equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_Upload_StoreDeviationImage + "," + errormsg;
                                         }
 
                                         runOnUiThread(new Runnable() {
 
                                             public void run() {
-
-
                                                 message.setText("After TOT image 3 Uploaded");
                                             }
                                         });
@@ -662,7 +623,7 @@ public class UploadImageActivity extends Activity {
 
                 return CommonString.KEY_SUCCESS;
             } catch (MalformedURLException e) {
-
+                Crashlytics.logException(e);
                 final AlertMessage message = new AlertMessage(
                         UploadImageActivity.this,
                         AlertMessage.MESSAGE_EXCEPTION, "download", e);
@@ -690,6 +651,7 @@ public class UploadImageActivity extends Activity {
                     }
                 });
             } catch (Exception e) {
+                Crashlytics.logException(e);
                 final AlertMessage message = new AlertMessage(
                         UploadImageActivity.this,
                         AlertMessage.MESSAGE_EXCEPTION, "download", e);
@@ -743,21 +705,20 @@ public class UploadImageActivity extends Activity {
         while (true) {
             if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE)
                 break;
-            width_tmp /= 2;
-            height_tmp /= 2;
-            scale *= 2;
+            width_tmp /= 2.1;
+            height_tmp /= 2.1;
+            scale *= 2.1;
         }
         // Decode with inSampleSize
         BitmapFactory.Options o2 = new BitmapFactory.Options();
         o2.inSampleSize = scale;
         Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/MT_GSK_Images/" + path, o2);
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
         byte[] ba = bao.toByteArray();
         String ba1 = Base64.encodeBytes(ba);
 
-        SoapObject request = new SoapObject(CommonString.NAMESPACE,
-                CommonString.METHOD_Get_DR_POSM_IMAGES);
+        SoapObject request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_Get_DR_POSM_IMAGES);
 
         request.addProperty("img", ba1);
         request.addProperty("name", path);
@@ -793,9 +754,9 @@ public class UploadImageActivity extends Activity {
         while (true) {
             if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE)
                 break;
-            width_tmp /= 2;
-            height_tmp /= 2;
-            scale *= 2;
+            width_tmp /= 2.1;
+            height_tmp /= 2.1;
+            scale *= 2.1;
         }
 
         // Decode with inSampleSize
@@ -804,7 +765,7 @@ public class UploadImageActivity extends Activity {
         Bitmap bitmap = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory() + "/MT_GSK_Images/" + path, o2);
 
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, bao);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bao);
         byte[] ba = bao.toByteArray();
         String ba1 = Base64.encodeBytes(ba);
 

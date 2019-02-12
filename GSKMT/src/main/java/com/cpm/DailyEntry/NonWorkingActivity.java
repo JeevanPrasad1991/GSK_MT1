@@ -5,13 +5,15 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.cpm.Constants.CommonFunctions;
 import com.cpm.Constants.CommonString;
 
 import com.cpm.database.GSKMTDatabase;
 import com.cpm.delegates.CoverageBean;
 import com.cpm.delegates.ReasonModel;
 import com.cpm.delegates.StoreBean;
-import com.cpm.xmlHandler.FailureXMLHandler;
+
+import com.crashlytics.android.Crashlytics;
 import com.example.gsk_mtt.R;
 
 import android.app.Activity;
@@ -70,18 +72,20 @@ public class NonWorkingActivity extends Activity implements OnItemSelectedListen
     AlertDialog alert;
     ImageView img;
     SharedPreferences preferences;
-    String process_id, username, app_version, date, store_id, lat = "0.0", longi = "0.0", meetingstatus;
+    String process_id, username, app_version, date, store_id, lat = "0.0", longi = "0.0", meetingstatus, storename;
     TextView percentage, message;
     private String image1 = "";
     String str, errormesg;
     Data data;
     ProgressBar pb;
     Dialog dialog;
-    boolean upload_status=false;
+    boolean upload_status = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.non_working);
+
         reason = (Spinner) findViewById(R.id.reason_spinner);
         sub_reason = (Spinner) findViewById(R.id.sub_reason);
         save = (Button) findViewById(R.id.save);
@@ -95,7 +99,7 @@ public class NonWorkingActivity extends Activity implements OnItemSelectedListen
         meetingstatus = preferences.getString("EmpMeetingStatus", null);
         date = preferences.getString(CommonString.KEY_DATE, null);
         store_id = preferences.getString(CommonString.KEY_STORE_ID, null);
-
+        storename = preferences.getString(CommonString.KEY_STORE_NAME, "");
         if ((new File(Environment.getExternalStorageDirectory() + "/MT_GSK_Images/")).exists()) {
             Log.i("directory is created", "directory is created");
         } else {
@@ -105,21 +109,27 @@ public class NonWorkingActivity extends Activity implements OnItemSelectedListen
         db = new GSKMTDatabase(NonWorkingActivity.this);
         db.open();
         storelist = db.getStoreData(date);
-        if (storelist.size()>0){
-           for (int i=0;i<storelist.size();i++){
-               if (storelist.get(i).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_D)||storelist.get(i).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_U)||
-                       storelist.get(i).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_P)){
-                   upload_status=true;
-                   break;
+        if (storelist.size() > 0) {
+            for (int i = 0; i < storelist.size(); i++) {
+                if (storelist.get(i).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_D) ||
+                        storelist.get(i).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_U) ||
+                        storelist.get(i).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_P)) {
+                    upload_status = true;
+                    break;
 
-               }
-           }
+                }
+            }
         }
 
-        reasonData = db.getNonWorkingReason(meetingstatus,upload_status);
+        reasonData = db.getNonWorkingReason(upload_status);
         for (int i = 0; i < reasonData.size(); i++) {
             if (reasonData.get(i).getReason().equalsIgnoreCase("pjp deviation")) {
                 reasonData.remove(i);
+            }
+            if (!meetingstatus.equalsIgnoreCase("N")) {
+                if (reasonData.get(i).getReason().equalsIgnoreCase("Meeting")) {
+                    reasonData.remove(i);
+                }
             }
         }
 
@@ -154,6 +164,7 @@ public class NonWorkingActivity extends Activity implements OnItemSelectedListen
                                             ///////changes by jeevan for holidays
                                             if (reasonid.equals("2") || reasonid.equals("7")) {
                                                 CoverageBean data = new CoverageBean();
+                                                data.setStoreId(store_id);
                                                 data.setImage(image1);
                                                 data.setLatitude(lat);
                                                 data.setLongitude(longi);
@@ -169,11 +180,8 @@ public class NonWorkingActivity extends Activity implements OnItemSelectedListen
                                                 data.setSub_reasonId(sub_reason_id);
                                                 data.setStatus(CommonString.STORE_STATUS_LEAVE);
                                                 data.setCHECKOUT_IMG(image1);
-                                                db.InsertCoverageInLeaveCase(data, storelist);
-                                                db.updateStoreStatusOnLeaveOrHoliday(storelist, date, CommonString.STORE_STATUS_LEAVE);
-                                                Intent in = new Intent(NonWorkingActivity.this, CopyOfStorelistActivity.class);
-                                                startActivity(in);
-                                                NonWorkingActivity.this.finish();
+                                                // db.InsertCoverageInLeaveCase(data, storelist);
+                                                new UploadNonworkingData(NonWorkingActivity.this, data).execute();
                                             } else {
                                                 ArrayList<CoverageBean> coverageBeanlist = new ArrayList<CoverageBean>();
                                                 coverageBeanlist = db.getCoverageData(date, null, process_id);
@@ -206,6 +214,7 @@ public class NonWorkingActivity extends Activity implements OnItemSelectedListen
                                                 new UploadNonworkingData(NonWorkingActivity.this, data).execute();
                                             }
                                         } catch (Exception e) {
+                                            Crashlytics.logException(e);
                                             e.printStackTrace();
                                         }
                                     }
@@ -334,10 +343,8 @@ public class NonWorkingActivity extends Activity implements OnItemSelectedListen
             _pathforcheck = store_id + "NonWorking" + username + tempDate + "image1" + ".jpg";
             _path = Environment.getExternalStorageDirectory() + "/MT_GSK_Images/" + _pathforcheck;
             Log.i("MakeMachine", "ButtonClickHandler.onClick()");
-            startCameraActivity();
+            CommonFunctions.startAnncaCameraActivity(NonWorkingActivity.this, _path);
         }
-
-
     }
 
     protected void startCameraActivity() {
@@ -362,28 +369,39 @@ public class NonWorkingActivity extends Activity implements OnItemSelectedListen
                 Log.i("MakeMachine", "User cancelled");
                 break;
             case -1:
-                if (_pathforcheck != null && !_pathforcheck.equals("")) {
-                    if (new File(str + _pathforcheck).exists()) {
-                        img.setBackgroundResource(R.drawable.camera_tick_ico);
-                        image1 = _pathforcheck;
+                try {
+                    if (_pathforcheck != null && !_pathforcheck.equals("")) {
+                        if (new File(str + _pathforcheck).exists()) {
+                            String metadata = CommonFunctions.setMetadataAtImages(storename, store_id, "NONWORKING IMAGE", username);
+                            CommonFunctions.addMetadataAndTimeStampToImage(NonWorkingActivity.this, _path, metadata, date);
+                            img.setBackgroundResource(R.drawable.camera_tick_ico);
+                            image1 = _pathforcheck;
+                        }
                     }
+                } catch (Exception e) {
+                    Crashlytics.logException(e);
+                    e.printStackTrace();
                 }
 
                 break;
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
     private class Data {
         String name;
         int value;
     }
+
     private class UploadNonworkingData extends AsyncTask<Void, Data, String> {
         CoverageBean coverageBean;
         Context context;
+
         UploadNonworkingData(Context context, CoverageBean coverageBean) {
             this.context = context;
             this.coverageBean = coverageBean;
         }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -414,78 +432,139 @@ public class NonWorkingActivity extends Activity implements OnItemSelectedListen
         @Override
         protected String doInBackground(Void... strings) {
             try {
+
                 data = new Data();
                 data.value = 20;
                 data.name = "Data Uploading";
                 publishProgress(data);
                 ///////////////////////for coverage upload...............Service...........
-                String onXMLCOV = "[DATA][USER_DATA][STORE_ID]"
-                        + coverageBean.getStoreId()
-                        + "[/STORE_ID]"
-                        + "[VISIT_DATE]"
-                        + coverageBean.getVisitDate()
-                        + "[/VISIT_DATE]"
-                        + "[LATITUDE]"
-                        + coverageBean.getLatitude()
-                        + "[/LATITUDE]"
-                        + "[STORE_IMAGE]"
-                        + coverageBean.getImage()
-                        + "[/STORE_IMAGE]"
-                        + "[LONGITUDE]"
-                        + coverageBean.getLongitude()
-                        + "[/LONGITUDE]"
-                        + "[IN_TIME]"
-                        + intime
-                        + "[/IN_TIME][OUT_TIME]"
-                        + getCurrentTime()
-                        + "[/OUT_TIME][UPLOAD_STATUS] L"
-                        + "[/UPLOAD_STATUS][CREATED_BY]" + username
-                        + "[/CREATED_BY][REASON_REMARK]"
-                        + coverageBean.getRemark()
-                        + "[/REASON_REMARK][REASON_ID]"
-                        + coverageBean.getReasonid()
-                        + "[/REASON_ID][SUB_REASON_ID]"
-                        + "0"
-                        + "[/SUB_REASON_ID][APP_VERSION]" + app_version
-                        + "[/APP_VERSION] [IMAGE_ALLOW]" + "0"
-                        + "[/IMAGE_ALLOW]" + "[USER_ID]" + username
-                        + "[/USER_ID]" + "[PROCESS_ID]" + process_id
-                        + "[/PROCESS_ID]"
-                        + "[CHECKOUT_IMAGE]"
-                        + coverageBean.getImage()
-                        + "[/CHECKOUT_IMAGE]"
-                        + "[/USER_DATA][/DATA]";
+                if (reasonid != null && reasonid.equals("2") || reasonid != null && reasonid.equals("7")) {
+                    String onXMLCOV = "[DATA][USER_DATA][STORE_ID]"
+                            + coverageBean.getStoreId()
+                            + "[/STORE_ID]"
+                            + "[VISIT_DATE]"
+                            + coverageBean.getVisitDate()
+                            + "[/VISIT_DATE]"
+                            + "[LATITUDE]"
+                            + coverageBean.getLatitude()
+                            + "[/LATITUDE]"
+                            + "[STORE_IMAGE]"
+                            + coverageBean.getImage()
+                            + "[/STORE_IMAGE]"
+                            + "[LONGITUDE]"
+                            + coverageBean.getLongitude()
+                            + "[/LONGITUDE]"
+                            + "[REASON_REMARK]"
+                            + coverageBean.getRemark()
+                            + "[/REASON_REMARK][REASON_ID]"
+                            + coverageBean.getReasonid()
+                            + "[/REASON_ID][SUB_REASON_ID]"
+                            + "0"
+                            + "[/SUB_REASON_ID][APP_VERSION]" + app_version
+                            + "[/APP_VERSION] [IMAGE_ALLOW]" + "0"
+                            + "[/IMAGE_ALLOW]" + "[USER_ID]" + username
+                            + "[/USER_ID]" + "[PROCESS_ID]" + process_id
+                            + "[/PROCESS_ID]"
+                            + "[CHECKOUT_IMAGE]"
+                            + coverageBean.getImage()
+                            + "[/CHECKOUT_IMAGE]"
+                            + "[/USER_DATA][/DATA]";
 
-                SoapObject request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_DR_STORE_COVERAGE_LOC);
-                request.addProperty("onXML", onXMLCOV);
-                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-                envelope.dotNet = true;
-                envelope.setOutputSoapObject(request);
-                HttpTransportSE androidHttpTransport = new HttpTransportSE(CommonString.URL);
-                androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_DR_STORE_COVERAGE, envelope);
-                Object result = (Object) envelope.getResponse();
-                if (result.toString().contains(CommonString.KEY_SUCCESS)) {
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putString(CommonString.KEY_STOREVISITED, "none");
-                    editor.putString(CommonString.KEY_STOREVISITED_STATUS, "");
-                    editor.putString(CommonString.KEY_STORE_IN_TIME, "");
-                    editor.commit();
-                    db.open();
-                    db.InsertCoverage(coverageBean, store_id, date, process_id);
-                    db.updateStoreStatusOnLeave(coverageBean.getStoreId(), coverageBean.getVisitDate(), CommonString.STORE_STATUS_LEAVE,
-                            coverageBean.getProcess_id());
-                    data.value = 100;
-                    data.name = "NonWorking data uploaded";
-                    publishProgress(data);
-                    errormesg = CommonString.KEY_SUCCESS;
+                    SoapObject request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_COVERAGE_NONWORKING_DATA);
+                    request.addProperty("onXML", onXMLCOV);
+                    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                    envelope.dotNet = true;
+                    envelope.setOutputSoapObject(request);
+                    HttpTransportSE androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                    androidHttpTransport.call(CommonString.SOAP_ACTION_METHOD_UPLOAD_COVERAGE_NONWORKING_DATA, envelope);
+                    Object result = (Object) envelope.getResponse();
+                    if (result.toString().contains(CommonString.KEY_SUCCESS)) {
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString(CommonString.KEY_STOREVISITED, "none");
+                        editor.putString(CommonString.KEY_STOREVISITED_STATUS, "");
+                        editor.putString(CommonString.KEY_STORE_IN_TIME, "");
+                        editor.commit();
+                        db.open();
+                        db.updateStoreStatusOnLeaveOrHoliday(storelist, date, CommonString.KEY_U);
+                        data.value = 100;
+                        data.name = "NonWorking data uploaded";
+                        publishProgress(data);
+                        errormesg = CommonString.KEY_SUCCESS;
+                    } else {
+                        if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                            errormesg = CommonString.METHOD_UPLOAD_COVERAGE_NONWORKING_DATA + "," + result.toString().trim();
+                        }
+                    }
                 } else {
-                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
-                        errormesg = CommonString.METHOD_UPLOAD_DR_STORE_COVERAGE_LOC + "," + result.toString().trim();
+                    String onXMLCOV = "[DATA][USER_DATA][STORE_ID]"
+                            + coverageBean.getStoreId()
+                            + "[/STORE_ID]"
+                            + "[VISIT_DATE]"
+                            + coverageBean.getVisitDate()
+                            + "[/VISIT_DATE]"
+                            + "[LATITUDE]"
+                            + coverageBean.getLatitude()
+                            + "[/LATITUDE]"
+                            + "[STORE_IMAGE]"
+                            + coverageBean.getImage()
+                            + "[/STORE_IMAGE]"
+                            + "[LONGITUDE]"
+                            + coverageBean.getLongitude()
+                            + "[/LONGITUDE]"
+                            + "[IN_TIME]"
+                            + intime
+                            + "[/IN_TIME][OUT_TIME]"
+                            + getCurrentTime()
+                            + "[/OUT_TIME][UPLOAD_STATUS]L"
+                            + "[/UPLOAD_STATUS][CREATED_BY]" + username
+                            + "[/CREATED_BY][REASON_REMARK]"
+                            + coverageBean.getRemark()
+                            + "[/REASON_REMARK][REASON_ID]"
+                            + coverageBean.getReasonid()
+                            + "[/REASON_ID][SUB_REASON_ID]"
+                            + "0"
+                            + "[/SUB_REASON_ID][APP_VERSION]" + app_version
+                            + "[/APP_VERSION] [IMAGE_ALLOW]" + "0"
+                            + "[/IMAGE_ALLOW]" + "[USER_ID]" + username
+                            + "[/USER_ID]" + "[PROCESS_ID]" + process_id
+                            + "[/PROCESS_ID]"
+                            + "[CHECKOUT_IMAGE]"
+                            + coverageBean.getImage()
+                            + "[/CHECKOUT_IMAGE]"
+                            + "[/USER_DATA][/DATA]";
+
+                    SoapObject request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_DR_STORE_COVERAGE_LOC);
+                    request.addProperty("onXML", onXMLCOV);
+                    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                    envelope.dotNet = true;
+                    envelope.setOutputSoapObject(request);
+                    HttpTransportSE androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_DR_STORE_COVERAGE, envelope);
+                    Object result = (Object) envelope.getResponse();
+                    if (result.toString().contains(CommonString.KEY_SUCCESS)) {
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString(CommonString.KEY_STOREVISITED, "none");
+                        editor.putString(CommonString.KEY_STOREVISITED_STATUS, "");
+                        editor.putString(CommonString.KEY_STORE_IN_TIME, "");
+                        editor.commit();
+                        db.open();
+                        db.InsertCoverage(coverageBean, store_id, date, process_id);
+                        db.updateStoreStatusOnLeave(coverageBean.getStoreId(), coverageBean.getVisitDate(), CommonString.STORE_STATUS_LEAVE,
+                                coverageBean.getProcess_id());
+                        data.value = 100;
+                        data.name = "NonWorking data uploaded";
+                        publishProgress(data);
+                        errormesg = CommonString.KEY_SUCCESS;
+                    } else {
+                        if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                            errormesg = CommonString.METHOD_UPLOAD_DR_STORE_COVERAGE_LOC + "," + result.toString().trim();
+                        }
                     }
                 }
-                return errormesg;
 
+                return errormesg;
             } catch (Exception e) {
+                Crashlytics.logException(e);
                 errormesg = e.toString();
                 return errormesg;
             }

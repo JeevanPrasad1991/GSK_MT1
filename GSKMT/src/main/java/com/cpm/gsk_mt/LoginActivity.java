@@ -86,20 +86,14 @@ public class LoginActivity extends Activity implements OnClickListener, Location
         ContentResolver.setMasterSyncAutomatically(false);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         // login_version = (TextView) findViewById(R.id.login_versiontext);
-
         mUsername = (EditText) findViewById(R.id.login_usertextbox);
         mPassword = (EditText) findViewById(R.id.login_locktextbox);
-        // login_remember = (RelativeLayout)
-        // findViewById(R.id.login_rememberme);
-        // login_remembericon = (ImageView)
-        // findViewById(R.id.login_remembermeicon);
 //        mUsername.setText("testhfd");
-//      mUsername.setText("bijender.singh");
+//      mUsername.setText("rajiv.yadav");
 //       mPassword.setText("cpm@5678");
 
-//        mUsername.setText("test.six");
-//        mPassword.setText("cpm@5678");
-
+        mUsername.setText("susanta.roy");
+       mPassword.setText("cpm@5678");
 
         mLogin = (Button) findViewById(R.id.login_loginbtn);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -136,31 +130,22 @@ public class LoginActivity extends Activity implements OnClickListener, Location
             // Setting Dialog Message
             alertDialog.setMessage("Click ok to enable GPS.");
             // Setting Positive "Yes" Button
-            alertDialog.setPositiveButton("YES",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                            startActivity(intent);
-                        }
-                    });
+            alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(intent);
+                }
+            });
 
             // Setting Negative "NO" Button
-            alertDialog.setNegativeButton("NO",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            // Write your code here to invoke NO event
-                            dialog.cancel();
-                        }
-                    });
-
+            alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    // Write your code here to invoke NO event
+                    dialog.cancel();
+                }
+            });
             // Showing Alert Message
             alertDialog.show();
-        }
-
-        // Create a Folder for Images
-        File file = new File(Environment.getExternalStorageDirectory(), "MT_GSK_Images");
-        if (!file.isDirectory()) {
-            file.mkdir();
         }
 
     }
@@ -168,6 +153,11 @@ public class LoginActivity extends Activity implements OnClickListener, Location
     @Override
     protected void onResume() {
         super.onResume();
+        // Create a Folder for Images
+        File file = new File(Environment.getExternalStorageDirectory(), "MT_GSK_Images");
+        if (!file.isDirectory()) {
+            file.mkdir();
+        }
     }
 
     @Override

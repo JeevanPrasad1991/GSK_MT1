@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import com.cpm.CompleteDownload.CompleteDownloadActivity;
 import com.cpm.Constants.CommonString;
 import com.cpm.DailyEntry.CopyOfStorelistActivity;
+import com.cpm.DailyEntry.MerchandisingAttendenceActivity;
 import com.cpm.autoupdate.AutoupdateActivity;
 import com.cpm.database.GSKMTDatabase;
 import com.cpm.delegates.CoverageBean;
@@ -16,6 +17,8 @@ import com.cpm.delegates.StoreBean;
 import com.cpm.geotagging.GeoTagging;
 import com.cpm.message.AlertMessage;
 import com.cpm.upload.UploadOptionActivity;
+import com.crashlytics.android.Crashlytics;
+import com.example.gsk_mtt.BuildConfig;
 import com.example.gsk_mtt.R;
 
 import android.app.Activity;
@@ -29,6 +32,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,7 +44,7 @@ import android.widget.Toast;
 
 public class MainMenuActivity extends Activity {
     Button download, daily_entry, upload, exit, geotag, auto_update;
-    String date;
+    String date, ATTENDENCE_STATUS;
     SharedPreferences preferences;
     GSKMTDatabase db;
     ArrayList<StoreBean> storelist;
@@ -63,6 +67,8 @@ public class MainMenuActivity extends Activity {
         db = new GSKMTDatabase(MainMenuActivity.this);
         storelist = new ArrayList<StoreBean>();
         date = preferences.getString(CommonString.KEY_DATE, null);
+        ATTENDENCE_STATUS = preferences.getString(CommonString.KEY_ATTENDENCE_STATUS, null);
+
         daily_entry.setOnClickListener(new OnClickListener() {
 
             @Override
@@ -70,8 +76,27 @@ public class MainMenuActivity extends Activity {
                 db.open();
                 storelist = db.getJCP(date);
                 if (storelist.size() > 0) {
-                    Intent in = new Intent(MainMenuActivity.this, CopyOfStorelistActivity.class);
-                    startActivity(in);
+                    db.open();
+                    if (ATTENDENCE_STATUS != null && ATTENDENCE_STATUS.equals("0")) {
+                        Intent in = new Intent(MainMenuActivity.this, MerchandisingAttendenceActivity.class);
+                        startActivity(in);
+                    } else if (ATTENDENCE_STATUS != null && ATTENDENCE_STATUS.equals("1")) {
+                        Intent in = new Intent(MainMenuActivity.this, CopyOfStorelistActivity.class);
+                        startActivity(in);
+                    } else {
+                        if (ATTENDENCE_STATUS != null && ATTENDENCE_STATUS.equals("2")) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(MainMenuActivity.this).setTitle("Parinaam").setMessage("You have not selected Present. So you can not work in this store.");
+                            builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(MainMenuActivity.this, LoginActivity.class));
+                                    MainMenuActivity.this.finish();
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.show();
+                        }
+                    }
                 } else {
                     Toast.makeText(MainMenuActivity.this, "Please download the data first", Toast.LENGTH_LONG).show();
                 }
@@ -83,7 +108,7 @@ public class MainMenuActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (CheckNetAvailability()) {
-                    if (!preferences.getString(CommonString.KEY_VERSION, "").equals(Integer.toString(versionCode))) {
+                    if (!preferences.getString(CommonString.KEY_VERSION, "").equals(Integer.toString(BuildConfig.VERSION_CODE))) {
                         Intent intent = new Intent(getBaseContext(), AutoupdateActivity.class);
                         intent.putExtra(CommonString.KEY_PATH, preferences.getString(CommonString.KEY_PATH, ""));
                         intent.putExtra(CommonString.KEY_STATUS, true);
@@ -92,11 +117,9 @@ public class MainMenuActivity extends Activity {
                     } else {
                         Toast.makeText(getBaseContext(), "No Updates", Toast.LENGTH_LONG).show();
                     }
-
                 } else {
                     showToast("No Network Available");
                 }
-
             }
         });
 
@@ -108,8 +131,7 @@ public class MainMenuActivity extends Activity {
                 db.open();
                 temp = db.getGeoStores();
                 if (temp.size() == 0) {
-                    Toast.makeText(getBaseContext(), "Please Download Data First",
-                            Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "No data availeble for Geo Tag .", Toast.LENGTH_LONG).show();
                 } else {
                     if (CheckNetAvailability()) {
                         Intent intent = new Intent(getBaseContext(), GeoTagging.class);
@@ -128,18 +150,25 @@ public class MainMenuActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (CheckNetAvailability()) {
-                    if (Validation()) {
-                        Intent in = new Intent(MainMenuActivity.this, UploadOptionActivity.class);
-                        startActivity(in);
-                        MainMenuActivity.this.finish();
+                    db.open();
+                    if (db.getJCP(date).size() > 0) {
+                        if (db.isCoverageDataFilledfor(date)){
+                            if (Validation()) {
+                                Intent in = new Intent(MainMenuActivity.this, UploadOptionActivity.class);
+                                startActivity(in);
+                                MainMenuActivity.this.finish();
+                            } else {
+                                showToast("First Checkout");
+                            }
+                        }else {
+                            showToast("No data for upload");
+                        }
                     } else {
-                        showToast("First Checkout");
+                        showToast("Please download the data first");
                     }
                 } else {
                     showToast("No Network Available");
                 }
-
-
             }
         });
 
@@ -160,7 +189,7 @@ public class MainMenuActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (CheckNetAvailability()) {
-                    if (AllowDownload()) {
+                    if (db.isCoverageDataFilled(date)) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(
                                 MainMenuActivity.this);
                         builder.setMessage("Please Upload Previous Data First")
@@ -171,7 +200,6 @@ public class MainMenuActivity extends Activity {
                                                     DialogInterface dialog, int id) {
                                                 Intent intent = new Intent(getBaseContext(), UploadOptionActivity.class);
                                                 startActivity(intent);
-
                                             }
                                         });
 
@@ -180,6 +208,13 @@ public class MainMenuActivity extends Activity {
 
 
                     } else {
+                        try {
+                            db.open();
+                            db.deletePreviousUploadedData(date);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                         storelist = db.getJCP(date);
                         if (storelist.size() > 0) {
                             alertMessage("Do you want to download jcp again?", CompleteDownloadActivity.class);
@@ -193,8 +228,6 @@ public class MainMenuActivity extends Activity {
                 }
             }
         });
-
-
     }
 
 
@@ -208,7 +241,6 @@ public class MainMenuActivity extends Activity {
                             public void onClick(DialogInterface dialog,
                                                 int id) {
                                 alert.getButton(AlertDialog.BUTTON_POSITIVE).setEnabled(false);
-                                db.deleteAllTables();
                                 Intent startDownload = new Intent(MainMenuActivity.this, class1);
                                 startActivity(startDownload);
                                 MainMenuActivity.this.finish();
@@ -233,19 +265,22 @@ public class MainMenuActivity extends Activity {
         boolean result = false;
         db.open();
         storelist = db.getJCP(date);
-        for (int i = 0; i < storelist.size(); i++) {
-            if (storelist.get(i).getCHECKOUT_STATUS()
-                    .equalsIgnoreCase(CommonString.KEY_C)
-                    || storelist.get(i).getUPLOAD_STATUS()
-                    .equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE)
-                    || storelist.get(i).getUPLOAD_STATUS()
-                    .equalsIgnoreCase(CommonString.KEY_D) || storelist
-                    .get(i).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_P)) {
-                result = true;
-                break;
-
+        try {
+            for (int i = 0; i < storelist.size(); i++) {
+                if (storelist.get(i).getCHECKOUT_STATUS()
+                        .equalsIgnoreCase(CommonString.KEY_C)
+                        || storelist.get(i).getUPLOAD_STATUS()
+                        .equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE)
+                        || storelist.get(i).getUPLOAD_STATUS()
+                        .equalsIgnoreCase(CommonString.KEY_D) || storelist
+                        .get(i).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_P)) {
+                    result = true;
+                    break;
+                }
             }
-
+        } catch (Exception e) {
+            Crashlytics.logException(e);
+            e.printStackTrace();
         }
 
         return result;
@@ -256,29 +291,11 @@ public class MainMenuActivity extends Activity {
         Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
     }
 
-    public boolean AllowDownload() {
-        boolean result = true;
-        db.open();
-        coverageBeanlist = db.getCoverageData(null, null, null);
-        if (coverageBeanlist.size() == 0) {
-            result = false;
-        }
-        for (int i = 0; i < coverageBeanlist.size(); i++) {
-            if (!(coverageBeanlist.get(i).getVisitDate().equalsIgnoreCase(date))) {
-                result = false;
-                break;
-            }
-        }
-        return result;
-    }
-
 
     public boolean CheckNetAvailability() {
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-                .getState() == NetworkInfo.State.CONNECTED
-                || connectivityManager.getNetworkInfo(
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(
                 ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
             // we are connected to a network
             connected = true;
@@ -297,52 +314,45 @@ public class MainMenuActivity extends Activity {
     @Override
     public boolean onKeyLongPress(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(
-                    MainMenuActivity.this);
-            builder1.setMessage(
-                    "Are you sure you want to take the backup of your data")
-                    .setCancelable(false)
-                    .setPositiveButton("OK",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                    try {
-                                        File file = new File(Environment.getExternalStorageDirectory().getPath(), "DroidSystem");
-                                        if (!file.isDirectory()) {
-                                            file.mkdir();
-                                        }
-                                        File sd = Environment.getExternalStorageDirectory();
-                                        File data = Environment.getDataDirectory();
-                                        if (sd.canWrite()) {
-                                            String currentDBPath = "//data//com.example.gsk_mtt//databases//" + GSKMTDatabase.DATABASE_NAME;
-                                            String backupDBPath = "gsk_backup" + date.replace('/', '-');
-                                            File currentDB = new File(data, currentDBPath);
-                                            File backupDB = new File(Environment.getExternalStorageDirectory().getPath() + "/DroidSystem/", backupDBPath);
-                                            if (currentDB.exists()) {
-                                                FileChannel src = new FileInputStream(currentDB).getChannel();
-                                                FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                                                dst.transferFrom(src, 0, src.size());
-                                                src.close();
-                                                dst.close();
-                                                Toast.makeText(getApplicationContext(), "Backup Successfully", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
-                                    } catch (Exception e) {
-                                        System.out.println(e.getMessage());
-                                    }
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(MainMenuActivity.this);
+            builder1.setMessage("Are you sure you want to take the backup of your data").setCancelable(false).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog,
+                                    int id) {
+                    try {
+                        File file = new File(Environment.getExternalStorageDirectory().getPath(), "DroidSystem");
+                        if (!file.isDirectory()) {
+                            file.mkdir();
+                        }
+                        File sd = Environment.getExternalStorageDirectory();
+                        File data = Environment.getDataDirectory();
+                        if (sd.canWrite()) {
+                            String currentDBPath = "//data//com.example.gsk_mtt//databases//" + GSKMTDatabase.DATABASE_NAME;
+                            String backupDBPath = "gsk_backup" + date.replace('/', '-');
+                            File currentDB = new File(data, currentDBPath);
+                            File backupDB = new File(Environment.getExternalStorageDirectory().getPath() + "/DroidSystem/", backupDBPath);
+                            if (currentDB.exists()) {
+                                FileChannel src = new FileInputStream(currentDB).getChannel();
+                                FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                                dst.transferFrom(src, 0, src.size());
+                                src.close();
+                                dst.close();
+                                Toast.makeText(getApplicationContext(), "Backup Successfully", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
 
-                                }
-                            })
-                    .setNegativeButton("Cancel",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int id) {
-                                    dialog.cancel();
-                                }
-                            });
+                }
+            })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,
+                                            int id) {
+                            dialog.cancel();
+                        }
+                    });
             AlertDialog alert1 = builder1.create();
             alert1.show();
-            // do your stuff here
             return true;
         }
         return super.onKeyLongPress(keyCode, event);
@@ -352,54 +362,47 @@ public class MainMenuActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.backup:
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(
-                        MainMenuActivity.this);
-                builder1.setMessage(
-                        "Are you sure you want to take the backup of your data")
-                        .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                                        int id) {
-                                        try {
-                                            File file = new File(Environment.getExternalStorageDirectory().getPath(),
-                                                    "DroidSystem");
-                                            if (!file.isDirectory()) {
-                                                file.mkdir();
-                                            }
-                                            File sd = Environment.getExternalStorageDirectory();
-                                            File data = Environment.getDataDirectory();
-                                            if (sd.canWrite()) {
-                                                String currentDBPath = "//data//com.example.gsk_mtt//databases//" + GSKMTDatabase.DATABASE_NAME;
-                                                String backupDBPath = "gsk_backup"
-                                                        + date.replace('/', '-');
-
-                                                File currentDB = new File(data, currentDBPath);
-                                                File backupDB = new File(Environment.getExternalStorageDirectory().getPath() + "/DroidSystem/", backupDBPath);
-                                                if (currentDB.exists()) {
-                                                    FileChannel src = new FileInputStream(currentDB).getChannel();
-                                                    FileChannel dst = new FileOutputStream(backupDB).getChannel();
-                                                    dst.transferFrom(src, 0, src.size());
-                                                    src.close();
-                                                    dst.close();
-                                                }
-                                            }
-                                        } catch (Exception e) {
-                                            System.out.println(e.getMessage());
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(MainMenuActivity.this);
+                builder1.setMessage("Are you sure you want to take the backup of your data").setCancelable(false).setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                try {
+                                    File file = new File(Environment.getExternalStorageDirectory().getPath(), "DroidSystem");
+                                    if (!file.isDirectory()) {
+                                        file.mkdir();
+                                    }
+                                    File sd = Environment.getExternalStorageDirectory();
+                                    File data = Environment.getDataDirectory();
+                                    if (sd.canWrite()) {
+                                        String currentDBPath = "//data//com.example.gsk_mtt//databases//" + GSKMTDatabase.DATABASE_NAME;
+                                        String backupDBPath = "gsk_backup" + date.replace('/', '-');
+                                        File currentDB = new File(data, currentDBPath);
+                                        File backupDB = new File(Environment.getExternalStorageDirectory().getPath() + "/DroidSystem/", backupDBPath);
+                                        if (currentDB.exists()) {
+                                            FileChannel src = new FileInputStream(currentDB).getChannel();
+                                            FileChannel dst = new FileOutputStream(backupDB).getChannel();
+                                            dst.transferFrom(src, 0, src.size());
+                                            src.close();
+                                            dst.close();
                                         }
+                                    }
 
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,
-                                                        int id) {
-                                        dialog.cancel();
-                                    }
-                                });
+                                } catch (Exception e) {
+                                    Crashlytics.logException(e);
+                                    System.out.println(e.getMessage());
+                                }
+
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int id) {
+                                dialog.cancel();
+                            }
+                        });
                 AlertDialog alert1 = builder1.create();
                 alert1.show();
-
                 break;
         }
         return true;
@@ -407,6 +410,5 @@ public class MainMenuActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        //super.onBackPressed();
     }
 }

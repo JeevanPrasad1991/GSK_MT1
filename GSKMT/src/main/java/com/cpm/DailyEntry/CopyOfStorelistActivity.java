@@ -2,9 +2,11 @@ package com.cpm.DailyEntry;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.cpm.Constants.CommonString;
 
@@ -15,8 +17,10 @@ import com.cpm.delegates.PromotionBean;
 import com.cpm.delegates.SkuBean;
 import com.cpm.delegates.StoreBean;
 import com.cpm.delegates.TOTBean;
+import com.cpm.gsk_mt.LoginActivity;
 import com.cpm.gsk_mt.MainMenuActivity;
 import com.cpm.message.AlertMessage;
+import com.crashlytics.android.Crashlytics;
 import com.example.gsk_mtt.R;
 
 import android.app.Activity;
@@ -70,8 +74,6 @@ public class CopyOfStorelistActivity extends Activity {
     String visit_process_id, key_id;
     StoreBean storestatus = new StoreBean();
     ProgressDialog loading;
-    boolean flagTOT = false;
-    boolean Promo = false;
     String visit_status;
     GSKMTDatabase db;
     String date, user_id;
@@ -87,26 +89,9 @@ public class CopyOfStorelistActivity extends Activity {
         db.open();
         date = preferences.getString(CommonString.KEY_DATE, null);
         visit_status = preferences.getString(CommonString.KEY_STOREVISITED_STATUS, "");
-        String visit_storeid = preferences.getString(CommonString.KEY_STOREVISITED, "");
         visit_process_id = preferences.getString(CommonString.KEY_PROCESS_ID, "");
         key_id = preferences.getString(CommonString.KEY_ID, null);
         user_id = preferences.getString(CommonString.KEY_USERNAME, "");
-
-/*
-        if (!visit_status.equals("")) {
-            if (visit_storeid != null && !visit_storeid.equals("")) {
-                storestatus = db.getStoreStatus(visit_storeid, visit_process_id);
-                ///////////////changed by jeevannnnnnnnnnnnnnn
-                if (storestatus.getUPLOAD_STATUS() != null) {
-                    if (storestatus.getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_VALID) ||
-                            storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_C)) {
-                    } else {
-                        db.updateStoreStatusOnLeave(visit_storeid, date, CommonString.KEY_CHECK_IN, visit_process_id);
-                    }
-                }
-            }
-        }
-*/
         fillData();
         storelist = db.getStoreData(date);
         if (storelist.size() > 0) {
@@ -116,14 +101,40 @@ public class CopyOfStorelistActivity extends Activity {
         lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                storelist = db.getStoreData(date);
-                StoreBean sb = storelist.get(position);
-                if (sb.getUPLOAD_STATUS().equals(CommonString.KEY_U)) {
-                    if (sb.getUPLOAD_STATUS().equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE)) {
-                        if (preferences.getString(CommonString.KEY_STOREVISITED_STATUS, "").equalsIgnoreCase("yes")) {
-                            if (preferences.getString(CommonString.KEY_STOREVISITED, "")
-                                    .equalsIgnoreCase(sb.getSTORE_ID()) && preferences.getString(
-                                    CommonString.KEY_PROCESS_ID, "").equals(sb.getPROCESS_ID())) {
+                try {
+                    DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                    Date date_device = new Date();
+                    if (dateFormat.format(date_device).equalsIgnoreCase(date)) {
+                        storelist = db.getStoreData(date);
+                        StoreBean sb = storelist.get(position);
+                        if (sb.getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_U)) {
+                            showToast(AlertMessage.MESSAGE_UPLOAD);
+                        } else if (sb.getUPLOAD_STATUS().equals(CommonString.KEY_D)) {
+                            showToast(AlertMessage.MESSAGE_DATA_UPLOAD);
+                        } else if (sb.getUPLOAD_STATUS().equals(CommonString.KEY_P)) {
+                            showToast(AlertMessage.MESSAGE_PARTIAL_UPLOAD);
+                        } else if (sb.getCHECKOUT_STATUS().equals(CommonString.KEY_C)) {
+                            showToast(AlertMessage.MESSAGE_CHECKOUT_UPLOAD);
+                        } else {
+                            boolean entry_flag = true;
+                            for (int j = 0; j < storelist.size(); j++) {
+                                if (!storelist.get(j).getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_C) &&
+                                        storelist.get(j).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_CHECK_IN) ||
+                                        !storelist.get(j).getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_C) &&
+                                                storelist.get(j).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_VALID)) {
+
+                                    if (sb.getSTORE() != storelist.get(j).getSTORE()) {
+                                        entry_flag = false;
+                                        break;
+                                    } else {
+                                        break;
+
+                                    }
+                                }
+                            }
+                            if (!entry_flag) {
+                                showToast(AlertMessage.title_store_list_checkout_current);
+                            } else {
                                 editor = preferences.edit();
                                 editor.putString(CommonString.KEY_STORE_ID, sb.getSTORE_ID());
                                 editor.putString(CommonString.KEY_STORE_NAME, sb.getSTORE());
@@ -134,6 +145,8 @@ public class CopyOfStorelistActivity extends Activity {
                                 editor.putString(CommonString.KEY_ID, sb.getKey_id());
                                 editor.putString(CommonString.KEY_PACKED_KEY, sb.getPkdKey());
                                 editor.putString(CommonString.KEY_STATE_ID, sb.getSTATE_ID());
+                                editor.putString(CommonString.KEY_CLASS_ID, sb.getCLASS_ID());
+                                editor.putString(CommonString.KEY_COMPETITION_PROMOTION, sb.getCOMP_ENABLE());
                                 editor.commit();
                                 if (sb.getPROCESS_ID().equals("3")) {
                                     Intent intent = new Intent(getBaseContext(), StoreWisePerformance.class);
@@ -144,83 +157,26 @@ public class CopyOfStorelistActivity extends Activity {
                                     startActivity(intent);
                                     CopyOfStorelistActivity.this.finish();
                                 }
-                            } else {
-                                Toast.makeText(CopyOfStorelistActivity.this, "You Cant Checkin,First Checkout the Previous Store", Toast.LENGTH_SHORT).show();
                             }
-
-                        } else {
-                            editor = preferences.edit();
-                            editor.putString(CommonString.KEY_STORE_ID, sb.getSTORE_ID());
-                            editor.putString(CommonString.KEY_STORE_NAME, sb.getSTORE());
-                            editor.putString(CommonString.KEY_VISIT_DATE, sb.getVISIT_DATE());
-                            editor.putString(CommonString.storetype_id, sb.getStoreType_id());
-                            editor.putString(CommonString.region_id, sb.getREGION_ID());
-                            editor.putString(CommonString.KEY_PROCESS_ID, sb.getPROCESS_ID());
-                            editor.putString(CommonString.KEY_ID, sb.getKey_id());
-                            editor.putString(CommonString.KEY_PACKED_KEY, sb.getPkdKey());
-                            editor.putString(CommonString.KEY_STATE_ID, sb.getSTATE_ID());
-                            editor.commit();
                         }
                     } else {
-                        showToast(AlertMessage.MESSAGE_UPLOAD);
-                    }
-                } else if (sb.getUPLOAD_STATUS().equals(CommonString.KEY_D)) {
-                    showToast(AlertMessage.MESSAGE_DATA_UPLOAD);
-                } else if (sb.getCHECKOUT_STATUS().equals(CommonString.KEY_C)) {
-                    showToast(AlertMessage.MESSAGE_CHECKOUT_UPLOAD);
-                } else {
-                    if (preferences.getString(CommonString.KEY_STOREVISITED_STATUS, "").equalsIgnoreCase("yes")) {
-
-                        if (preferences.getString(CommonString.KEY_STOREVISITED, "").equals(sb.getSTORE_ID())
-                                && preferences.getString(
-                                CommonString.KEY_PROCESS_ID, "").equals(sb.getPROCESS_ID())) {
-                            editor = preferences.edit();
-                            editor.putString(CommonString.KEY_STORE_ID, sb.getSTORE_ID());
-                            editor.putString(CommonString.KEY_STORE_NAME, sb.getSTORE());
-                            editor.putString(CommonString.KEY_VISIT_DATE, sb.getVISIT_DATE());
-                            editor.putString(CommonString.storetype_id, sb.getStoreType_id());
-                            editor.putString(CommonString.region_id, sb.getREGION_ID());
-                            editor.putString(CommonString.KEY_PROCESS_ID, sb.getPROCESS_ID());
-                            editor.putString(CommonString.KEY_ID, sb.getKey_id());
-                            editor.putString(CommonString.KEY_PACKED_KEY, sb.getPkdKey());
-                            editor.putString(CommonString.KEY_STATE_ID, sb.getSTATE_ID());
-                            editor.commit();
-                            if (sb.getPROCESS_ID().equals("3")) {
-                                Intent intent = new Intent(getBaseContext(),
-                                        StoreWisePerformance.class);
-                                startActivity(intent);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CopyOfStorelistActivity.this).setTitle("Alert Dialog");
+                        builder.setMessage("Your Device date does not match login Date. You will be logged out now");
+                        builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(CopyOfStorelistActivity.this, LoginActivity.class));
                                 CopyOfStorelistActivity.this.finish();
-                            } else {
-                                Intent intent = new Intent(getBaseContext(), StoreVisitedActivity.class);
-                                startActivity(intent);
-                                CopyOfStorelistActivity.this.finish();
+                                dialog.dismiss();
                             }
-                        } else {
-                            Toast.makeText(CopyOfStorelistActivity.this, "You Cant Checkin,First Checkout the Previous Store", Toast.LENGTH_SHORT).show();
-                        }
-                    } else {
-                        // PUT IN PREFERENCES
-                        editor = preferences.edit();
-                        editor.putString(CommonString.KEY_STORE_ID, sb.getSTORE_ID());
-                        editor.putString(CommonString.KEY_STORE_NAME, sb.getSTORE());
-                        editor.putString(CommonString.KEY_VISIT_DATE, sb.getVISIT_DATE());
-                        editor.putString(CommonString.storetype_id, sb.getStoreType_id());
-                        editor.putString(CommonString.region_id, sb.getREGION_ID());
-                        editor.putString(CommonString.KEY_PROCESS_ID, sb.getPROCESS_ID());
-                        editor.putString(CommonString.KEY_ID, sb.getKey_id());
-                        editor.putString(CommonString.KEY_PACKED_KEY, sb.getPkdKey());
-                        editor.putString(CommonString.KEY_STATE_ID, sb.getSTATE_ID());
-                        editor.commit();
-                        if (sb.getPROCESS_ID().equals("3")) {
-                            Intent intent = new Intent(getBaseContext(), StoreWisePerformance.class);
-                            startActivity(intent);
-                            CopyOfStorelistActivity.this.finish();
-                        }
-                        Intent intent = new Intent(getBaseContext(), StoreVisitedActivity.class);
-                        startActivity(intent);
-                        CopyOfStorelistActivity.this.finish();
+                        });
+                        builder.show();
                     }
+                } catch (Exception e) {
+                    Crashlytics.logException(e);
+                    e.printStackTrace();
                 }
+
             }
         });
     }
@@ -232,31 +188,57 @@ public class CopyOfStorelistActivity extends Activity {
         startActivity(in);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date_device = new Date();
+        if (!dateFormat.format(date_device).equalsIgnoreCase(date)) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(CopyOfStorelistActivity.this).setTitle("Alert Dialog");
+            builder.setMessage("Your Device date does not match login Date. You will be logged out now");
+            builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(CopyOfStorelistActivity.this, LoginActivity.class));
+                    CopyOfStorelistActivity.this.finish();
+                    dialog.dismiss();
+                }
+            });
+            builder.show();
+        }
+    }
+
 
     private void fillData() {
         ArrayList<CoverageBean> coverageBeanlist = new ArrayList<CoverageBean>();
         coverageBeanlist = db.getCoverageData(date, null, null);
         for (int i = 0; i < coverageBeanlist.size(); i++) {
-            boolean before_tot = false, after_tot = false;
+            boolean before_tot = false, after_tot = false, flagTOT = false, Promo = false, competitionpromotionflag = false;
             boolean flagCheckout = false;
+            ///change by jeevan RAna
             storestatus = db.getStoreStatus(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-            if (storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(
-                    CommonString.STORE_STATUS_LEAVE) || storestatus.getUPLOAD_STATUS().equalsIgnoreCase(
-                    CommonString.STORE_STATUS_LEAVE) || storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_C)) {
+            if (storestatus.getCHECKOUT_STATUS() != null && storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE) ||
+                    storestatus.getUPLOAD_STATUS() != null && storestatus.getUPLOAD_STATUS().equalsIgnoreCase(
+                            CommonString.STORE_STATUS_LEAVE) || storestatus.getCHECKOUT_STATUS() != null && storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_C)) {
             } else {
-                category_list = db.getCategoryList(coverageBeanlist.get(i).getProcess_id());
+                category_list = db.getCategoryList(coverageBeanlist.get(i).getProcess_id(), storestatus.getKey_id(), storestatus.getSTATE_ID(), storestatus.getCLASS_ID());
                 if (category_list.size() > 0) {
                     for (int j = 0; j < category_list.size(); j++) {
                         afterStockData = db.getAfterStockData(coverageBeanlist.get(i).getStoreId(), category_list.get(j).getCategory_id(),
                                 coverageBeanlist.get(i).getProcess_id());
+
                         additionalData = db.getProductEntryDetail(coverageBeanlist.get(i).getStoreId(), category_list.get(j).getCategory_id(),
                                 coverageBeanlist.get(i).getProcess_id());
+
                         totMappingData = db.getTOTData(coverageBeanlist.get(i).getStoreId(), coverageBeanlist
                                 .get(i).getProcess_id(), category_list.get(j).getCategory_id());
+
                         salesData = db.getSalesStockData(coverageBeanlist.get(i).getStoreId(), category_list.get(j).getCategory_id(),
                                 coverageBeanlist.get(i).getProcess_id());
+
                         mappingPromotion = db.getPromoComplianceData(key_id, coverageBeanlist.get(i).getProcess_id(),
                                 category_list.get(j).getCategory_id());
+
                         if (mappingPromotion.size() > 0) {
                             mappingPromotion1 = db.getInsertedPromoCompliance(coverageBeanlist.get(i).getStoreId(),
                                     category_list.get(j).getCategory_id(), coverageBeanlist.get(i).getProcess_id());
@@ -268,6 +250,7 @@ public class CopyOfStorelistActivity extends Activity {
                         } else {
                             Promo = true;
                         }
+
                         TOTdata = db.getTOTData(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id(), category_list.get(j).getCategory_id());
                         if (TOTdata.size() > 0) {
                             TOTInsertdata = db.getInsertedAfterTOTData(coverageBeanlist.get(i).getStoreId(), category_list.get(j).getCategory_id(), coverageBeanlist.get(i).getProcess_id());
@@ -275,11 +258,11 @@ public class CopyOfStorelistActivity extends Activity {
                                 flagTOT = true;
                             } else {
                                 flagTOT = false;
-
                             }
                         } else {
                             flagTOT = true;
                         }
+
                         if (totMappingData.size() > 0) {
                             aftertotData = db.getAfterTOTData(coverageBeanlist.get(i).getStoreId(), category_list.get(j).getCategory_id(), coverageBeanlist.get(i).getProcess_id());
                             if (aftertotData.size() > 0) {
@@ -290,9 +273,30 @@ public class CopyOfStorelistActivity extends Activity {
                             before_tot = true;
                             after_tot = true;
                         }
-                        if (coverageBeanlist.get(i).getProcess_id().equalsIgnoreCase("2")) {
-                            if (before_tot == true && after_tot == true && afterStockData.size() > 0
-                                    && additionalData.size() > 0 && Promo && flagTOT) {
+
+                        if (category_list.get(j).getCategory_id().equals("1") || category_list.get(j).getCategory_id().equals("3")) {
+                            if (storestatus != null && storestatus.getCOMP_ENABLE() != null && storestatus.getCOMP_ENABLE().equalsIgnoreCase("Y")) {
+                                if (db.getcomptitiondataforpromotion(category_list.get(j).getCategory_id()).size() > 0) {
+                                    if (db.getcompetitionPromotionfromDatabase(coverageBeanlist.get(i).getStoreId(),
+                                            category_list.get(j).getCategory_id(), coverageBeanlist.get(i).getProcess_id()).size() > 0) {
+                                        competitionpromotionflag = true;
+                                    } else {
+                                        competitionpromotionflag = false;
+                                    }
+                                } else {
+                                    competitionpromotionflag = true;
+                                }
+                            } else {
+                                competitionpromotionflag = true;
+                            }
+                        } else {
+                            competitionpromotionflag = true;
+                        }
+
+                        if (coverageBeanlist.get(i).getProcess_id().equals("2")) {
+                            if (before_tot == true && after_tot == true && afterStockData.size() > 0 && additionalData.size() > 0 && Promo
+                                    && flagTOT && db.getEnteredCompetitionDetail(coverageBeanlist.get(i).getStoreId(),
+                                    category_list.get(j).getCategory_id(), coverageBeanlist.get(i).getProcess_id()).size() > 0 && competitionpromotionflag == true) {
                                 flagCheckout = true;
                             } else {
                                 flagCheckout = false;
@@ -300,7 +304,9 @@ public class CopyOfStorelistActivity extends Activity {
                             }
                         } else {
                             if (before_tot == true && after_tot == true && afterStockData.size() > 0
-                                    && additionalData.size() > 0 && Promo && flagTOT) {
+                                    && additionalData.size() > 0 && Promo && flagTOT
+                                    && db.getEnteredCompetitionDetail(coverageBeanlist.get(i).getStoreId(),
+                                    category_list.get(j).getCategory_id(), coverageBeanlist.get(i).getProcess_id()).size() > 0 && competitionpromotionflag == true) {
                                 flagCheckout = true;
                             } else {
                                 flagCheckout = false;
@@ -309,6 +315,8 @@ public class CopyOfStorelistActivity extends Activity {
                         }
                     }
                 }
+
+
                 if (flagCheckout) {
                     db.updateStoreStatusOnLeave(coverageBeanlist.get(i).getStoreId(), date, CommonString.KEY_VALID, visit_process_id);
                     db.updateCoverageStatus(coverageBeanlist.get(i).getStoreId(), CommonString.KEY_VALID, visit_process_id);
@@ -324,7 +332,6 @@ public class CopyOfStorelistActivity extends Activity {
         Button checkout;
         Button checkin_cancel;
         RelativeLayout l1;
-
     }
 
     public String getCurrentTime() {
@@ -332,7 +339,6 @@ public class CopyOfStorelistActivity extends Activity {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
         String intime = formatter.format(m_cal.getTime());
         return intime;
-
     }
 
     private void showToast(String message) {
@@ -401,33 +407,26 @@ public class CopyOfStorelistActivity extends Activity {
                                         public void onClick(
                                                 DialogInterface dialog,
                                                 int id) {
-                                            editor = preferences.edit();
-                                            editor.putString(CommonString.KEY_STOREVISITED, "none");
-                                            editor.putString(CommonString.KEY_STOREVISITED_STATUS, "");
-                                            editor.putString(CommonString.KEY_STORE_IN_TIME, "");
-                                            editor.putString(CommonString.KEY_LATITUDE, "");
-                                            editor.putString(CommonString.KEY_LONGITUDE, "");
-                                            editor.commit();
-                                            runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    new deletecoveragedata(CopyOfStorelistActivity.this,
-                                                            user_id, storelist.get(position).getSTORE_ID(), date,
-                                                            "N", storelist.get(position).getPROCESS_ID()).execute();
-                                                    storelist.get(position).setUPLOAD_STATUS("N");
-                                                }
-                                            });
-                                           /* db.updateStoreStatusOnLeave(storelist.get(position).getSTORE_ID(), date, "N", visit_process_id);
-                                            db.deleteCoverage(storelist.get(position).getSTORE_ID());
-                                            db.deleteAllTables(storelist.get(position).getSTORE_ID(), storelist.get(position).getPROCESS_ID());*/
+                                            try {
+                                                editor = preferences.edit();
+                                                editor.putString(CommonString.KEY_STOREVISITED, "none");
+                                                editor.putString(CommonString.KEY_STOREVISITED_STATUS, "");
+                                                editor.putString(CommonString.KEY_STORE_IN_TIME, "");
+                                                editor.putString(CommonString.KEY_LATITUDE, "");
+                                                editor.putString(CommonString.KEY_LONGITUDE, "");
+                                                editor.commit();
+                                                new deletecoveragedata(CopyOfStorelistActivity.this, user_id, storelist.get(position).getSTORE_ID(), date,
+                                                        "N", storelist.get(position).getPROCESS_ID()).execute();
+                                                storelist.get(position).setUPLOAD_STATUS("N");
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+
                                         }
                                     })
-                            .setNegativeButton(
-                                    "Cancel",
+                            .setNegativeButton("Cancel",
                                     new DialogInterface.OnClickListener() {
-                                        public void onClick(
-                                                DialogInterface dialog,
-                                                int id) {
+                                        public void onClick(DialogInterface dialog, int id) {
                                             dialog.cancel();
                                         }
                                     });
@@ -476,6 +475,7 @@ public class CopyOfStorelistActivity extends Activity {
             });
 
             boolean checkoutdisableflag = false;
+
             if (storelist.get(position).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_P) &&
                     storelist.get(position).getCHECKOUT_STATUS().equals(CommonString.KEY_C)) {
                 holder.checkout.setBackgroundResource(R.drawable.tick_c);
@@ -561,7 +561,7 @@ public class CopyOfStorelistActivity extends Activity {
                     }
 
                 }
-            }else {
+            } else {
                 holder.imgtick.setBackgroundResource(R.drawable.store);
             }
 
@@ -578,7 +578,7 @@ public class CopyOfStorelistActivity extends Activity {
                 holder.imgtick.setVisibility(View.VISIBLE);
                 holder.checkout.setVisibility(View.INVISIBLE);
                 holder.imgtick.setBackgroundResource(R.drawable.tick_d);
-            }else if (storelist.get(position).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_P)){
+            } else if (storelist.get(position).getUPLOAD_STATUS().equalsIgnoreCase(CommonString.KEY_P)) {
                 holder.imgtick.setBackgroundResource(R.drawable.tick_p);
                 holder.imgtick.setVisibility(View.VISIBLE);
                 holder.checkout.setVisibility(View.INVISIBLE);
@@ -626,14 +626,14 @@ public class CopyOfStorelistActivity extends Activity {
                         + "[/COVERAGE_STATUS]";
                 final_xml = final_xml + onXML;
                 sos_xml = "[DATA]" + final_xml + "[/DATA]";
-                SoapObject request1 = new SoapObject(CommonString.NAMESPACE, CommonString.MEHTOD_DELETE_COVERAGE);
-                request1.addProperty("onXML", sos_xml);
-                SoapSerializationEnvelope envelope1 = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-                envelope1.dotNet = true;
-                envelope1.setOutputSoapObject(request1);
+                SoapObject request = new SoapObject(CommonString.NAMESPACE, CommonString.MEHTOD_DELETE_COVERAGE);
+                request.addProperty("onXML", sos_xml);
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                envelope.dotNet = true;
+                envelope.setOutputSoapObject(request);
                 HttpTransportSE androidHttpTransport1 = new HttpTransportSE(CommonString.URL);
-                androidHttpTransport1.call(CommonString.SOAP_ACTION + CommonString.MEHTOD_DELETE_COVERAGE, envelope1);
-                Object result1 = (Object) envelope1.getResponse();
+                androidHttpTransport1.call(CommonString.SOAP_ACTION + CommonString.MEHTOD_DELETE_COVERAGE, envelope);
+                Object result1 = (Object) envelope.getResponse();
                 if (result1.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
                     db.open();
                     db.updateStoreStatusOnLeave(store_cd, visit_date, status, PROCESS_ID);
@@ -650,6 +650,7 @@ public class CopyOfStorelistActivity extends Activity {
                     }
                 });
             } catch (final IOException e) {
+                Crashlytics.logException(e);
                 runOnUiThread(new Runnable() {
                     public void run() {
                         ShowAlert2(e.toString());

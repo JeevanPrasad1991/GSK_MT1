@@ -1,7 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gsk_mtt"
-    android:versionCode="36"
-    android:versionName="3.9">
+    android:versionCode="46"
+    android:versionName="4.9">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -14,25 +15,30 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE">
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
-    </uses-permission>
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
 
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true" />
-
-    <!-- <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
 
     <application
         android:name="com.cpm.DailyEntry.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
             android:name="com.cpm.gsk_mt.LoginActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +53,6 @@
             android:name="com.cpm.CompleteDownload.CompleteDownloadActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.cpm.DailyEntry.CopyOfStorelistActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
@@ -56,7 +61,6 @@
             android:name="com.cpm.DailyEntry.StoreInformationActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-
         <activity
             android:name="com.cpm.geotagging.LocationActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
@@ -112,8 +116,6 @@
             android:configChanges="screenSize|orientation"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-
-
         <activity
             android:name="com.cpm.DailyEntry.BeforeStock"
             android:configChanges="screenSize|orientation|keyboardHidden"
@@ -133,8 +135,6 @@
             android:name="com.cpm.DailyEntry.BeforeAdditionalDisplay"
             android:configChanges="screenSize|orientation|keyboardHidden"
             android:screenOrientation="portrait" />
-
-
         <activity
             android:name="com.cpm.DailyEntry.StoreWisePerformance"
             android:configChanges="screenSize|orientation|keyboardHidden"
@@ -146,8 +146,8 @@
         <activity
             android:name="com.cpm.DailyEntry.PromoCompliance"
             android:configChanges="screenSize|orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustPan|adjustResize"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|adjustResize" />
         <activity
             android:name="com.cpm.DailyEntry.CheckOutStoreActivity"
             android:configChanges="screenSize|orientation|keyboardHidden"
@@ -174,27 +174,24 @@
             android:screenOrientation="portrait" />
 
         <uses-library android:name="com.google.android.maps" />
-
         App Indexing. See https://g.co/AppIndexing/AndroidStudio for more information. -->
 
 
-
         //signed
-
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyB0jbPbIdqYps3O3mEvJ15myZFtPH1Dj5I" />
         // AIzaSyBunnuzSc_LddBUutCvQCh8Of12OVmTzTw
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         //debug
-        <!-- <meta-data
+        <!--
+             <meta-data
              android:name="com.google.android.maps.v2.API_KEY"
              android:value="AIzaSyCIOZnFYo6Mo9BLRoiyS5pjN4w99LPkWz0"
-             />-->
-
+             />
+        -->
 
         <activity
             android:name="com.cpm.geotagging.GeoTagActivity"
@@ -202,8 +199,41 @@
             android:label="@string/title_activity_geo_tag"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan" />
 
-        </activity>
+        <activity
+            android:name="com.cpm.DailyEntry.MerchandisingAttendenceActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name="com.cpm.gsk_mt.NoticeBoardActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name="com.cpm.DailyEntry.CompetitionPromotionActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:label="Competition Promotion"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <!-- ///for custom camera -->
+        <activity
+            android:name="io.github.memfis19.annca.internal.ui.camera.Camera1Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeFullscreen" />
+        <activity
+            android:name="io.github.memfis19.annca.internal.ui.camera2.Camera2Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeFullscreen" />
+        <activity
+            android:name="io.github.memfis19.annca.internal.ui.preview.PreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeFullscreen" />
+
     </application>
+
 </manifest>

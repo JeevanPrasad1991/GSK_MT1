@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "E:\\GSK_MT1\\GSKMT\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-v23\\values-v23.xml",
+            "outputFile": "F:\\jeevanAndroidProject\\androidProject\\gskMT 7 March\\GSK_MT1\\GSKMT\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-v23\\values-v23.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\yadavendras.CPMIN\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.1.0.aar\\807dc4f2cd64774b22e6dc412949659d\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\jeevanp\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.1.0.aar\\ef40e8251cf87767411bfb375a4a1474\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,19,32,33,34,35,36",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\yadavendras.CPMIN\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-v7-26.1.0.aar\\786251110230f6e2133748f42217d007\\res\\values-v23\\values-v23.xml",
+                    "source": "C:\\Users\\jeevanp\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-v7-27.1.0.aar\\8b7db947ea36d271a0d47f5d8a30ab60\\res\\values-v23\\values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

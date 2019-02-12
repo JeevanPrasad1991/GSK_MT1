@@ -18,12 +18,14 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
+import com.cpm.Constants.CommonFunctions;
 import com.cpm.Constants.CommonString;
 import com.cpm.database.GSKMTDatabase;
 import com.cpm.delegates.CoverageBean;
 import com.cpm.message.AlertMessage;
 import com.cpm.xmlGetterSetter.FailureGetterSetter;
 import com.cpm.xmlHandler.FailureXMLHandler;
+import com.crashlytics.android.Crashlytics;
 import com.example.gsk_mtt.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -33,11 +35,13 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
@@ -71,12 +75,12 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
     private FailureGetterSetter failureGetterSetter = null;
     ArrayList<CoverageBean> coveragelist = new ArrayList<>();
     private SharedPreferences.Editor editor = null;
-    private TextView percentage, message;
     private SharedPreferences preferences;
     private LocationManager locmanager = null;
     boolean enabled;
     ArrayAdapter<String> dataAdapter;
     GoogleApiClient mGoogleApiClient;
+    ProgressDialog loading;
     ImageView img;
     Spinner spin;
     Button save;
@@ -84,20 +88,19 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
     int pos = 0;
     TextView store_name;
     boolean flag = false;
-    private Dialog dialog;
-    private ProgressBar pb;
-    private Data data;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.store_info);
+        context = this;
         img = (ImageView) findViewById(R.id.store_image);
         spin = (Spinner) findViewById(R.id.spinner1);
         save = (Button) findViewById(R.id.save_btn);
         store_name = (TextView) findViewById(R.id.storename);
         str = Environment.getExternalStorageDirectory() + "/MT_GSK_Images/";
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
         process_id = preferences.getString(CommonString.KEY_PROCESS_ID, null);
         username = preferences.getString(CommonString.KEY_USERNAME, null);
         app_version = preferences.getString(CommonString.KEY_VERSION, null);
@@ -106,7 +109,7 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
         store_id = preferences.getString(CommonString.KEY_STORE_ID, null);
         imgDate = date.replace("/", "-");
         store_name.setText("Store - " + storename);
-        db = new GSKMTDatabase(StoreInformationActivity.this);
+        db = new GSKMTDatabase(context);
         db.open();
         img.setOnClickListener(new OnClickListener() {
 
@@ -114,14 +117,15 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
             public void onClick(View v) {
                 _pathforcheck = store_id + "storeImage" + imgDate + ".jpg";
                 _path = str + _pathforcheck;
-                startCameraActivity();
+                CommonFunctions.startAnncaCameraActivity(context, _path);
+                // startCameraActivity();
             }
         });
         List<String> list = new ArrayList<String>();
         list.add("Select");
         list.add("Allowed");
         list.add("NOT Allowed");
-        dataAdapter = new ArrayAdapter<String>(this,
+        dataAdapter = new ArrayAdapter<String>(context,
                 android.R.layout.simple_spinner_item, list);
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(dataAdapter);
@@ -166,7 +170,7 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
             public void onClick(View v) {
                 if (CheckNetAvailability()) {
                     if (!picStatus.equalsIgnoreCase("Select") && !image1.equalsIgnoreCase("")) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(StoreInformationActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(context);
                         builder.setMessage("Are you sure you want to save").setCancelable(false).setPositiveButton("Yes",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
@@ -203,14 +207,11 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                         AlertDialog alert = builder.create();
                         alert.show();
                     } else {
-                        Toast.makeText(getBaseContext(), "Please click image"
-                                , Toast.LENGTH_LONG).show();
+                        Toast.makeText(getBaseContext(), "Please click image", Toast.LENGTH_LONG).show();
                     }
-
                 } else {
                     Toast.makeText(getBaseContext(), "No internet Connection ! Please connect to network", Toast.LENGTH_LONG).show();
                 }
-
             }
         });
 
@@ -228,6 +229,7 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+
         locmanager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         enabled = locmanager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         // Check if enabled and if not send user to the GSP settings
@@ -287,13 +289,8 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
         StoreInformationActivity.this.finish();
     }
 
-    class Data {
-        int value;
-        String name;
-    }
 
-
-    public class InstantUpload extends AsyncTask<Void, Data, String> {
+    public class InstantUpload extends AsyncTask<Void, String, String> {
         private Context context;
         String errormesg;
 
@@ -305,30 +302,13 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialog = new Dialog(context);
-            dialog.setContentView(R.layout.custom);
-            dialog.setTitle("Uploading store check in info ");
-            dialog.setCancelable(false);
-            pb = (ProgressBar) dialog.findViewById(R.id.progressBar1);
-            percentage = (TextView) dialog.findViewById(R.id.percentage);
-            message = (TextView) dialog.findViewById(R.id.message);
-            final TextView tv_title = dialog.findViewById(R.id.tv_title);
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    tv_title.setText("Uploading store check in info");
-                }
-            });
-            dialog.show();
+            loading = ProgressDialog.show(context, "Uploading store check in info", "Please wait...", false, false);
         }
 
         @Override
         protected String doInBackground(Void... params) {
             try {
-                data = new Data();
-                data.value = 20;
-                data.name = "Uploading store check in info";
-                publishProgress(data);
+
                 SAXParserFactory saxPF = SAXParserFactory.newInstance();
                 SAXParser saxP = saxPF.newSAXParser();
                 XMLReader xmlR = saxP.getXMLReader();
@@ -343,16 +323,10 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                 envelope.dotNet = true;
                 envelope.setOutputSoapObject(request);
-                data.value = 40;
-                data.name = "";
-                publishProgress(data);
                 HttpTransportSE androidHttpTransport = new HttpTransportSE(CommonString.URL);
                 androidHttpTransport.call(CommonString.SOAP_ACTION_STORE_VISIT, envelope);
                 Object result = (Object) envelope.getResponse();
                 if (result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
-                    data.value = 60;
-                    data.name = "Data Uploaded";
-                    publishProgress(data);
                     ///////////////////////for coverage upload...............Service...........
                     String onXMLCOV = "[DATA][USER_DATA][STORE_ID]"
                             + store_id
@@ -373,7 +347,7 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                             + getCurrentTime()
                             + "[/IN_TIME][OUT_TIME]"
                             + ""
-                            + "[/OUT_TIME][UPLOAD_STATUS] I"
+                            + "[/OUT_TIME][UPLOAD_STATUS]I"
                             + "[/UPLOAD_STATUS][CREATED_BY]" + username
                             + "[/CREATED_BY][REASON_REMARK]"
                             + "0"
@@ -391,7 +365,6 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                             + "[/CHECKOUT_IMAGE]"
                             + "[/USER_DATA][/DATA]";
 
-
                     request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_DR_STORE_COVERAGE_LOC);
                     request.addProperty("onXML", onXMLCOV);
                     envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -401,9 +374,6 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                     androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_DR_STORE_COVERAGE, envelope);
                     result = (Object) envelope.getResponse();
                     if (result.toString().contains(CommonString.KEY_SUCCESS)) {
-                        data.value = 100;
-                        data.name = "Intime uploaded";
-                        publishProgress(data);
                         errormesg = CommonString.KEY_SUCCESS;
                     } else {
                         errormesg = CommonString.METHOD_UPLOAD_DR_STORE_COVERAGE_LOC + "," + result.toString();
@@ -412,6 +382,7 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                     if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                         errormesg = CommonString.METHOD_STORE_VISIT;
                     }
+
                     // for failure
                     FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                     xmlR.setContentHandler(failureXMLHandler);
@@ -426,23 +397,16 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                 return errormesg;
 
             } catch (Exception e) {
+                Crashlytics.logException(e);
                 errormesg = e.toString();
                 return errormesg;
             }
         }
 
         @Override
-        protected void onProgressUpdate(Data... values) {
-            pb.setProgress(values[0].value);
-            percentage.setText(values[0].value + "%");
-            message.setText(values[0].name);
-        }
-
-
-        @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            dialog.dismiss();
+            loading.dismiss();
             if (result.equals(CommonString.KEY_SUCCESS)) {
                 CoverageBean data = new CoverageBean();
                 db.open();
@@ -459,7 +423,7 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                 data.setApp_version(app_version);
                 data.setProcess_id(process_id);
                 data.setImage_allow(picStatus);
-                data.setStatus("N");
+                data.setStatus(CommonString.KEY_CHECK_IN);
                 data.setCHECKOUT_IMG("");
                 db.InsertCoverage(data, store_id, date, process_id);
                 db.updateStoreStatusOnLeave(store_id, date, CommonString.KEY_CHECK_IN, process_id);
@@ -487,18 +451,6 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
         return intime;
     }
 
-    protected void startCameraActivity() {
-        try {
-            Log.i("MakeMachine", "startCameraActivity()");
-            File file = new File(_path);
-            Uri outputFileUri = Uri.fromFile(file);
-            Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-            startActivityForResult(intent, 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -508,14 +460,22 @@ public class StoreInformationActivity extends Activity implements GoogleApiClien
                 Log.i("MakeMachine", "User cancelled");
                 break;
             case -1:
-                if (_pathforcheck != null && !_pathforcheck.equals("")) {
-                    if (new File((str + _pathforcheck).trim()).exists()) {
-                        img1 = _pathforcheck;
-                        image1 = img1;
-                        img.setBackgroundResource(R.drawable.camera_tick_ico);
-                        _pathforcheck = "";
-                        break;
+                try {
+                    if (_pathforcheck != null && !_pathforcheck.equals("")) {
+                        if (new File((str + _pathforcheck).trim()).exists()) {
+                            String metadata = CommonFunctions.setMetadataAtImages(storename, store_id, "STORE IMAGE", username);
+                            CommonFunctions.addMetadataAndTimeStampToImage(context, _path, metadata, date);
+                            //Set Clicked image to Imageview
+                            img.setBackgroundResource(R.drawable.camera_tick_ico);
+                            img1 = _pathforcheck;
+                            image1 = img1;
+                            _pathforcheck = "";
+                            break;
+                        }
                     }
+                } catch (Exception e) {
+                    Crashlytics.logException(e);
+                    e.printStackTrace();
                 }
                 break;
         }

@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/GSKMT" />
+            <option value="$PROJECT_DIR$/annca" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

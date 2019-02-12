@@ -3,283 +3,303 @@
 
     <item
         is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\416403979d16ff7fd5991614dedb0400\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="233f60a165ae622c8b36731502ebbda0f65e1930">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\23.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\4d4c7cddcb6f9f18e96cacc78f3c240f\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="508f50705b4fde51a16259f29c854201a3044516">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\21.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.0.2.aar\6125ed583e9c375ce12beb20db8c6061\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="4022261eeea0d92eb2997a68d2c1f084a16abad9">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\15.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\95a1ca779907ddd57ab36a6ccbfd4767\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="94d9cedd04b124aed044ac71c451a292856d854c">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\12.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\cb051e7a14d84f3ef0674882f89abb71\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\19.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\807dc4f2cd64774b22e6dc412949659d\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="f428e2fbc9ed0b297e3a3f420e51e6982f66822d">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\9.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\play-services-tasks-9.0.2.aar\b8ac602671c811ccb38104330e574ae7\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="aec1bc54964a85d851c2c1b1cb7f90f7dbd755ab">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\14.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\786251110230f6e2133748f42217d007\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="b4d6fbbb48b42dd03fd9c5a09b3b7a53266df6ed">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\10.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\c65af4c4d6b8e30e0e3d72bb0eae0c62\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="58b12bdb21a84f22e0dc3b047aeceb0a546b1b44">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\18.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.4.3\e876a79d561e5c6207b78d347e198c8c4531a5e5\httpcore-4.4.3.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="e876a79d561e5c6207b78d347e198c8c4531a5e5">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\3.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.2.aar\84df737a89b43f79f16694c36ac872e1\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="d900f2a1ff098cac8befe6c023d723e9afb154be">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\346d510a9c94e4e343448ee1a6712b34\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="a37fc31c5ceeaa4532a37358add1b189d8db4af1">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\8.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\0ff9cb09dd4f2f58b7a7a71e4e20ba94\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="20e1a0f0de6276a5f36062b655f8b20f8cc00cc4">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.0.0\a2d487452376193fc8c103dd2b9bd5f2b1b44563\common-1.0.0.jar"
+        jar="C:\Users\jeevanp\.gradle\caches\modules-2\files-2.1\android.arch.core\common\1.0.0\a2d487452376193fc8c103dd2b9bd5f2b1b44563\common-1.0.0.jar"
         jumboMode="false"
         min-sdk-version="14"
         optimize="true"
         revision="26.0.2"
         sha1="a2d487452376193fc8c103dd2b9bd5f2b1b44563">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\28.jar" />
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\30.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\26.1.0\814258103cf26a15fcc26ecce35f5b7d24b73f8\support-annotations-26.1.0.jar"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\1e1f6356d37e5ed76a8b2ca04474cec6\jars\classes.jar"
         jumboMode="false"
         min-sdk-version="14"
         optimize="true"
         revision="26.0.2"
-        sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\25.jar" />
+        sha1="f428e2fbc9ed0b297e3a3f420e51e6982f66822d">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\9.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\0552886100a6544e09067421069bc590\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\22.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.0.0\e414a4cb28434e25c4f6aa71426eb20cf4874ae9\common-1.0.0.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\27.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\7fa0e4d71234c47f916c860ec0e0fc24\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="9919563cffd8e3732e944d3c437d4b9575a08448">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\13.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\41a5bc4ed89db7b678f9de56d945f3a8\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\17.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\5745efa9a330a2f6b57b7660d6c45ba2\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="7efef32744ca4a436492d5cf28c08698cc2af256">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\20.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\8d4217466ced03e44f408a655635b55a\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\16.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\play-services-location-9.0.2.aar\4d929669bffc9110e90b7161bd688fa6\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="92a1d5f71b0fc8938f1d3f2e6ef984b52b894b4d">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\5.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\288b3cb9313d2d3d39b1dff21a80f9af\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\26.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="E:\GSK_MT1\GSKMT\libs\acra-4.4.0.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="7864f0ac6c74d84e465aa5449fa14408b0a1418f">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\fb141e61cd35547045b02f1b15b21feb\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\24.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\9863dbe55d06bbf138c26e51ca042565\jars\classes.jar"
-        jumboMode="false"
-        min-sdk-version="14"
-        optimize="true"
-        revision="26.0.2"
-        sha1="7e6a161b3796c15fe00755ce47e03067e568ecc4">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\4.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\yadavendras.CPMIN\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\2b998ca8b0b4850f81d2b9c6f2dd1c11\jars\classes.jar"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\a677fd887f51843524663bb93319a80a\jars\classes.jar"
         jumboMode="false"
         min-sdk-version="14"
         optimize="true"
         revision="26.0.2"
         sha1="b12cd9c87c3dfb012a911b6e38d2444ed0a65e1f">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\11.jar" />
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\12.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="E:\GSK_MT1\GSKMT\libs\ksoap2-android-assembly-2.4-jar-with-dependencies.jar"
+        jar="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\libs\ksoap2-android-assembly-2.4-jar-with-dependencies.jar"
         jumboMode="false"
         min-sdk-version="14"
         optimize="true"
         revision="26.0.2"
         sha1="e8796346a9191a019e936210a2dc50662c57594b">
-        <dex dex="E:\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\2.jar" />
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\248b841a99b6ca804d14e3bb21d1af80\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\a895e05311da31e47f1e8115e53729af\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="58b12bdb21a84f22e0dc3b047aeceb0a546b1b44">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="9919563cffd8e3732e944d3c437d4b9575a08448">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\14.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\java_jdk\Sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\17.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\a18ffef0d42b1dee74cb4019e5af9cb8\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="233f60a165ae622c8b36731502ebbda0f65e1930">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\23.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\b1178a5d02fd3de3d7f940f49eaea733\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="7e6a161b3796c15fe00755ce47e03067e568ecc4">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\modules-2\files-2.1\org.apache.httpcomponents\httpcore\4.4.3\e876a79d561e5c6207b78d347e198c8c4531a5e5\httpcore-4.4.3.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e876a79d561e5c6207b78d347e198c8c4531a5e5">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\286c4d6e5f5c60e0f0922eb29daf1738\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6f4138a4e065826cb044d49faea4cfd7191773d1">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-9.0.2.aar\b6fc486bd326572ee20b4d6b03468919\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="aec1bc54964a85d851c2c1b1cb7f90f7dbd755ab">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\15.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\8f26950258d32905f485da685d372ef4\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\4387fdc629eea250186a10025dbcae02\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2442771a5590dd4eb4bce00c2e9dca9e22e4c963">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\26.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\libs\acra-4.4.0.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="7864f0ac6c74d84e465aa5449fa14408b0a1418f">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="a37fc31c5ceeaa4532a37358add1b189d8db4af1">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\5a6f0734dee520f98e26a9b8ab3f6353\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b4d6fbbb48b42dd03fd9c5a09b3b7a53266df6ed">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\10.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\3be156526f84cb2ed8e785181eaa3890\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="40392f30a601db5675cdf18192aab013d6fee6ec">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\18.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="94d9cedd04b124aed044ac71c451a292856d854c">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\13.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\31d79459d66fc10d6b9cd4cf87471b01\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b62fdc4cfef174c1e456014195c83fa7de7dc041">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\28.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\eca61112a6e32879479fd7149d8342d8\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f97cf85b0fe70d37a705111dafa6b1b418ea1650">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\24.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.0.2.aar\ebc2e159ecf722c3fc9a69cae50bd0e8\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="4022261eeea0d92eb2997a68d2c1f084a16abad9">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\16.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\26.1.0\814258103cf26a15fcc26ecce35f5b7d24b73f8\support-annotations-26.1.0.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0814258103cf26a15fcc26ecce35f5b7d24b73f8">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\25.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-9.0.2.aar\4f216ad8a4f251ae13d5fb8b8885ca8a\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="92a1d5f71b0fc8938f1d3f2e6ef984b52b894b4d">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\a1176972df82534082c05a52c9ec7c39\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="508f50705b4fde51a16259f29c854201a3044516">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\21.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\modules-2\files-2.1\android.arch.lifecycle\common\1.0.0\e414a4cb28434e25c4f6aa71426eb20cf4874ae9\common-1.0.0.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e414a4cb28434e25c4f6aa71426eb20cf4874ae9">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\29.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="20e1a0f0de6276a5f36062b655f8b20f8cc00cc4">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.2.aar\242e8443e8bfa48b9dc8f6a3e53949b4\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d900f2a1ff098cac8befe6c023d723e9afb154be">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\62853b374eaf104cb7814ba00231d137\jars\classes.jar"
+        jumboMode="false"
+        min-sdk-version="14"
+        optimize="true"
+        revision="26.0.2"
+        sha1="7efef32744ca4a436492d5cf28c08698cc2af256">
+        <dex dex="F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\build\intermediates\transforms\preDex\release\22.jar" />
     </item>
 
 </items>

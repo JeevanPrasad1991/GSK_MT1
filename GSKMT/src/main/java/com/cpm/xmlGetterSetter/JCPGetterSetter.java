@@ -17,6 +17,26 @@ public class JCPGetterSetter {
 	ArrayList<String>  GEO_TAG_STATUS = new ArrayList<String>();
 	ArrayList<String>  STATE_ID = new ArrayList<String>();
 
+	public ArrayList<String> getCLASS_ID() {
+		return CLASS_ID;
+	}
+
+	public void setCLASS_ID(String CLASS_ID) {
+		this.CLASS_ID.add(CLASS_ID);
+	}
+
+	ArrayList<String>  CLASS_ID = new ArrayList<String>();
+
+	public ArrayList<String> getCOMP_ENABLE() {
+		return COMP_ENABLE;
+	}
+
+	public void setCOMP_ENABLE(String COMP_ENABLE) {
+		this.COMP_ENABLE.add(COMP_ENABLE);
+	}
+
+	ArrayList<String>COMP_ENABLE = new ArrayList<String>();
+
 	public ArrayList<String> getPACKED_KEY() {
 		return PACKED_KEY;
 	}

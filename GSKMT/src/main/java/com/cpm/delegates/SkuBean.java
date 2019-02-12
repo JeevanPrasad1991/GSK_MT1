@@ -316,4 +316,14 @@ public class SkuBean {
 	public void setBrand_img(String brand_img) {
 		this.brand_img = brand_img;
 	}
+
+	public boolean isCompTExist() {
+		return compTExist;
+	}
+
+	public void setCompTExist(boolean compTExist) {
+		this.compTExist = compTExist;
+	}
+
+	boolean compTExist=true;
 }

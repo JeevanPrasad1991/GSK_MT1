@@ -3,6 +3,7 @@ package com.cpm.DailyEntry;
 import java.io.File;
 import java.util.ArrayList;
 
+import com.cpm.Constants.CommonFunctions;
 import com.cpm.Constants.CommonString;
 
 
@@ -10,6 +11,7 @@ import com.cpm.database.GSKMTDatabase;
 
 
 import com.cpm.delegates.SkuBean;
+import com.crashlytics.android.Crashlytics;
 import com.example.gsk_mtt.R;
 
 import android.app.Activity;
@@ -28,11 +30,15 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
@@ -44,584 +50,556 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ToggleButton;
 
-public class BeforeAdditionalDisplay extends Activity{
-	
-	public ListView listview; Spinner brand, display;
-	EditText quantity; Button add;
-	public ArrayList<SkuBean> brand_list = new ArrayList<SkuBean>();
-	public ArrayList<SkuBean> display_list = new ArrayList<SkuBean>();
-	private ArrayAdapter<CharSequence> brandAdaptor, displayAdaptor;
-	GSKMTDatabase db; String brand_name, brand_id, display_name, display_id, store_id,store_type_id, image_url;
-	private SharedPreferences preferences;
-	MyAdaptor  adapterData;Button show;
-	ImageView cam; String img1 = "";
-	ArrayList<SkuBean> list = new ArrayList<SkuBean>();
-	private static String str, path;
-	protected static String _pathforcheck = "";
-	public String category_id, process_id, date, intime, username, app_version,imgDate, _path , image1="";
-	LinearLayout l1, l2;
-	ToggleButton toggle;
-	String s, yesorno;
-	Button refImage;
+public class BeforeAdditionalDisplay extends Activity implements OnClickListener, AdapterView.OnItemSelectedListener {
 
-	String reference_image_path = Environment.getExternalStorageDirectory() + "/GSKMT Planogram Images/";
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.addtional_before_display);
-		listview = (ListView)findViewById(R.id.lv);
-		cam = (ImageView)findViewById(R.id.camera);
-		brand = (Spinner)findViewById(R.id.brand_name);
-		display = (Spinner)findViewById(R.id.display_name);
-		quantity = (EditText)findViewById(R.id.qty_bought);
-		toggle = (ToggleButton)findViewById(R.id.toggle);
-		add = (Button)findViewById(R.id.add_btn);
-		refImage = (Button)findViewById(R.id.refimage);
-		l1 = (LinearLayout)findViewById(R.id.addtional_layout);
-		l2 = (LinearLayout)findViewById(R.id.list_layout);
-		
-//		show = (Button)findViewById(R.id.show);
-		
-		preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-		store_id = preferences.getString(CommonString.KEY_STORE_ID, null);
-		category_id = preferences.getString(CommonString.KEY_CATEGORY_ID, null);
-		process_id = preferences.getString(CommonString.KEY_PROCESS_ID, null);
-		date = preferences.getString(CommonString.KEY_DATE, null);
-		intime = preferences.getString(CommonString.KEY_IN_TIME, null);
-		username = preferences.getString(CommonString.KEY_USERNAME, null);
-		app_version = preferences.getString(CommonString.KEY_VERSION, null);
-		store_type_id = preferences.getString(CommonString.storetype_id, null);
-		imgDate = date.replace("/", "-");
-		
-		
-		db = new GSKMTDatabase(BeforeAdditionalDisplay.this);
-		db.open();
-		
-		toggle.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				 s = toggle.getText().toString();
-				 
-				 if (s.equalsIgnoreCase("YES")) {
-						l1.setVisibility(View.VISIBLE);
-						l2.setVisibility(View.VISIBLE);
-						yesorno = "YES";
-					} else if (s.equalsIgnoreCase("NO")) {
-						l1.setVisibility(View.GONE);
-						l2.setVisibility(View.GONE);
-						yesorno = "NO";
-					}
-				
-			}
-		});
-		
-		if (toggle.getText().toString().equalsIgnoreCase("YES")) {
-			l1.setVisibility(View.VISIBLE);
-			l2.setVisibility(View.VISIBLE);
-			yesorno = "YES";
-			quantity.setText("1");
-			
-		} else if (toggle.getText().toString().equalsIgnoreCase("NO")) {
-			
-			
-			l1.setVisibility(View.GONE);
-			l2.setVisibility(View.GONE);
-			yesorno = "NO";
-			
-			brand_name = "";
-			brand_id = "";
-			
-			display_id = "";
-			display_name = "";
-			
-			quantity.setText("1");
-			
-			image1 = "";                    
-					
-		}
-		
-		str = Environment.getExternalStorageDirectory()+"/MT_GSK_Images/";
-		brand_list = db.getBrandList(category_id);
-		display_list = db.getDisplayList(category_id, store_id, store_type_id,process_id);
-		
-		brandAdaptor = new ArrayAdapter<CharSequence>(BeforeAdditionalDisplay.this, android.R.layout.simple_spinner_item);
-		brandAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		
-		
-		displayAdaptor = new ArrayAdapter<CharSequence>(BeforeAdditionalDisplay.this, android.R.layout.simple_spinner_item);
-		displayAdaptor.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		
-		
-		brandAdaptor.add("Select Brand");
-		for(int i=0 ; i<brand_list.size();i++){
-		brandAdaptor.add(brand_list.get(i).getBrand());
-	}
-	
-		displayAdaptor.add("Select Display");
-		for(int i=0 ; i<display_list.size();i++){
-			displayAdaptor.add(display_list.get(i).getDisplay());
-		}
-		
-		brand.setAdapter(brandAdaptor);
-		display.setAdapter(displayAdaptor);
-		
-		brand.setOnItemSelectedListener(new OnItemSelectedListener() {
+    public RecyclerView additional_Recycler;
+    Spinner brand, display;
+    EditText quantity;
+    Button add, save_btn;
+    public ArrayList<SkuBean> brand_list = new ArrayList<SkuBean>();
+    public ArrayList<SkuBean> display_list = new ArrayList<SkuBean>();
+    private ArrayAdapter<CharSequence> brandAdaptor, displayAdaptor;
+    GSKMTDatabase db;
+    String brand_name, brand_id, display_name, display_id, store_id, store_type_id, image_url;
+    private SharedPreferences preferences;
+    MyAdaptor adapterData;
+    Button show;
+    ImageView cam;
+    String img1 = "";
+    ArrayList<SkuBean> list = new ArrayList<SkuBean>();
+    private static String str, path;
+    protected static String _pathforcheck = "";
+    public String category_id, process_id, date, intime, username, app_version, imgDate, _path, image1 = "", storename,cat_name;
+    ToggleButton toggle;
+    String s;
+    Button refImage;
+    String reference_image_path = Environment.getExternalStorageDirectory() + "/GSKMT Planogram Images/";
 
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int position, long id) {
-				
-				if (position != 0) {
-					brand_name = brand_list.get(position - 1).getBrand();
-					brand_id = brand_list.get(position- 1).getBrand_id();
-					
-				} else {
-					
-					brand_name = "";
-					brand_id = "";
-				}
+    /////Rl
+    LinearLayout RL_headerS, rl_allDATA, savebtnLayout;
+    boolean addflag = false;
 
-			}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.addtional_before_display);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        additional_Recycler = (RecyclerView) findViewById(R.id.additional_Recycler);
+        cam = (ImageView) findViewById(R.id.camera);
+        brand = (Spinner) findViewById(R.id.brand_name);
+        display = (Spinner) findViewById(R.id.display_name);
+        quantity = (EditText) findViewById(R.id.qty_bought);
+        toggle = (ToggleButton) findViewById(R.id.toggle);
+        add = (Button) findViewById(R.id.add_btn);
+        refImage = (Button) findViewById(R.id.refimage);
 
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-				
-				
-			}
-		});
-		
-		display.setOnItemSelectedListener(new OnItemSelectedListener() {
+        ///new changessssssssss
+        RL_headerS = (LinearLayout) findViewById(R.id.RL_headerS);
+        rl_allDATA = (LinearLayout) findViewById(R.id.rl_allDATA);
 
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view,
-					int position, long id) {
-				
-				if (position != 0) {
-					display_name = display_list.get(position - 1).getDisplay();
-					display_id = display_list.get(position- 1).getDisplay_id();
-					image_url = display_list.get(position-1).getImage_url();
-					
-				} else {
-					
-					display_name = "";
-					display_id = "";
-				}
+        savebtnLayout = (LinearLayout) findViewById(R.id.savebtnLayout);
+        save_btn = (Button) findViewById(R.id.save_btn);
 
-			}
+        preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        store_id = preferences.getString(CommonString.KEY_STORE_ID, null);
+        category_id = preferences.getString(CommonString.KEY_CATEGORY_ID, null);
+        process_id = preferences.getString(CommonString.KEY_PROCESS_ID, null);
+        date = preferences.getString(CommonString.KEY_DATE, null);
+        intime = preferences.getString(CommonString.KEY_IN_TIME, null);
+        username = preferences.getString(CommonString.KEY_USERNAME, null);
+        app_version = preferences.getString(CommonString.KEY_VERSION, null);
+        store_type_id = preferences.getString(CommonString.storetype_id, null);
+        storename = preferences.getString(CommonString.KEY_STORE_NAME, "");
+        cat_name = preferences.getString(CommonString.KEY_CATEGORY_NAME, "");
+        imgDate = date.replace("/", "-");
+        db = new GSKMTDatabase(BeforeAdditionalDisplay.this);
+        db.open();
 
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
-				
-				
-			}
-		});
-		
-		
-		
-		add.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-			String quan = 	quantity.getText().toString();
-			
-			if (yesorno.equalsIgnoreCase("YES")) {
-				if (!quan.equalsIgnoreCase("") && !image1.equalsIgnoreCase("")) {
+        toggle.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                s = toggle.getText().toString();
+                if (s.equalsIgnoreCase("YES")) {
+                    if (list.size() > 0 && list.get(0).getYesorno().equalsIgnoreCase("NO")) {
+                        db.deleteProductEntryData(store_id, process_id, category_id);
+                        list.clear();
+                    }
+                    RL_headerS.setVisibility(View.VISIBLE);
+                    rl_allDATA.setVisibility(View.VISIBLE);
+                    savebtnLayout.setVisibility(View.VISIBLE);
+                    additional_Recycler.setVisibility(View.VISIBLE);
+                    toggle.setChecked(true);
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(BeforeAdditionalDisplay.this);
+                    builder.setMessage("Are you sure you want to close the window")
+                            .setTitle("Parinaam")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    list.clear();
+                                    toggle.setChecked(false);
+                                    RL_headerS.setVisibility(View.GONE);
+                                    rl_allDATA.setVisibility(View.GONE);
+                                    savebtnLayout.setVisibility(View.GONE);
+                                    additional_Recycler.setVisibility(View.GONE);
 
-					
-					if (validatedata()) {
-						SkuBean ab = new SkuBean();
-						
-						ab.setQuantity(quan);
-						ab.setBrand(brand_name);
-						ab.setBrand_id(brand_id);
-						ab.setDisplay(display_name);
-						ab.setDisplay_id(display_id);
-						ab.setAdditional_image(image1);
-						ab.setYesorno(yesorno);
-		
-						db.InsertAdditionalInfo(ab, store_id, category_id, process_id);
-						quantity.setText("1");
-						
-						brand.setSelection(0);
-						display.setSelection(0);
-						image1 = "";
-						cam.setBackgroundResource(R.drawable.camera_ico);
-						
-						
-						list = db.getProductEntryDetail(store_id, category_id, process_id);
-				        adapterData = new MyAdaptor(BeforeAdditionalDisplay.this,list);
-				        
-				    	listview.setAdapter(adapterData);
-				    	listview.invalidateViews();
-					} else {
-						Toast.makeText(getBaseContext(), "Please Select the Product,Display", Toast.LENGTH_LONG).show();
-					}
+                                }
 
-				} else {
-					
-					Toast.makeText(getBaseContext(), "Please Take a photo", Toast.LENGTH_LONG).show();
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                            toggle.setChecked(true);
+                        }
+                    });
 
-				}
-			} else {
-//				db.deleteProductEntry(store_id,category_id);
-//				adapterData.notifyDataSetChanged();
-//				listview.invalidateViews();
-				
-				SkuBean ab = new SkuBean();
-				ab.setQuantity("0");
-				ab.setBrand("0");
-				ab.setBrand_id("0");
-				ab.setDisplay("0");
-				ab.setDisplay_id("0");
-				ab.setAdditional_image("0");
-				ab.setYesorno(yesorno);
-				db.InsertAdditionalInfo(ab, store_id, category_id, process_id);
-				
-				Intent in = new Intent(BeforeAdditionalDisplay.this, DailyEntryMainMenu.class);
-				startActivity(in);
-				BeforeAdditionalDisplay.this.finish();
-
-			}
-			
-			
-				
-			}
-		});
-		
-		
-		
-		refImage.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				
-				if (!display_id.equalsIgnoreCase("")) {
-
-					
-					final Dialog dialog = new Dialog(BeforeAdditionalDisplay.this);
-					dialog.setContentView(R.layout.popup);
-					ImageView refimage = (ImageView)dialog.findViewById(R.id.displayimage);
-					dialog.setTitle("Reference Image");
-
-					Bitmap bitmap = BitmapFactory.decodeFile(reference_image_path + image_url);
-					Drawable mDrawable = new BitmapDrawable(getResources(), bitmap);
-					refimage.setImageDrawable(mDrawable);
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
+            }
+        });
 
 
-					/*if (image_url.equalsIgnoreCase("Chem1st.jpg")) {
-						refimage.setBackgroundResource(R.drawable.chemfirst);
-					} 					
-					 else if (image_url.equalsIgnoreCase("DumpBIn.jpg")){
-						 
-							refimage.setBackgroundResource(R.drawable.dumpbin);
-						}
-					
-					 else if (image_url.equalsIgnoreCase("FloorStickers.jpg")){
-							refimage.setBackgroundResource(R.drawable.floorstickers);
-						}
-					
-					 else if (image_url.equalsIgnoreCase("Onewayvision.jpg")){
-							refimage.setBackgroundResource(R.drawable.onewayvision);
-						}
-					
-					 else if (image_url.equalsIgnoreCase("DropDown.jpg")){
-							refimage.setBackgroundResource(R.drawable.dropdown);                                                                                                                                           
-						}
+        str = Environment.getExternalStorageDirectory() + "/MT_GSK_Images/";
+        brand_list = db.getBrandList(category_id);
+        brandAdaptor = new ArrayAdapter<CharSequence>(BeforeAdditionalDisplay.this, R.layout.spinner_custom_item);
+        brandAdaptor.setDropDownViewResource(R.layout.spinner_custom_item);
+        brandAdaptor.add("-Select Brand-");
+        for (int i = 0; i < brand_list.size(); i++) {
+            brandAdaptor.add(brand_list.get(i).getBrand());
+        }
 
-					 else if (image_url.equalsIgnoreCase("Skirting.jpg")){
-							refimage.setBackgroundResource(R.drawable.skirting);                                                                                                                                           
-						}
-					
-					 else if (image_url.equalsIgnoreCase("FloorStack.jpg")){
-							refimage.setBackgroundResource(R.drawable.floorstack);                                                                                                                                           
-						}
-					
-					 else if (image_url.equalsIgnoreCase("Endcap.jpg")){
-							refimage.setBackgroundResource(R.drawable.endcap);                                                                                                                                           
-						}
-					
-					 else if (image_url.equalsIgnoreCase("FSU.jpg")){
-							refimage.setBackgroundResource(R.drawable.fsu);                                                                                                                                           
-						}
-					
-					 else if (image_url.equalsIgnoreCase("PillarBranding.jpg")){
-							refimage.setBackgroundResource(R.drawable.pillarbranding);                                                                                                                                           
-						}
-					
-					 else if (image_url.equalsIgnoreCase("Parasite.jpg")){
-							refimage.setBackgroundResource(R.drawable.parasite);                                                                                                                                           
-						}
-					 else if (image_url.equalsIgnoreCase("Chem1st.jpg")){
-							refimage.setBackgroundResource(R.drawable.chemfirst);                                                                                                                                           
-						}
-					
-					 else if (image_url.equalsIgnoreCase("ClipStrips.jpg")){
-							refimage.setBackgroundResource(R.drawable.clipstrips);                                                                                                                                           
-						}*/
-					dialog.show();
-					
-					
-				
-				} else {
-					
-					Toast.makeText(BeforeAdditionalDisplay.this, "Please Select Display", Toast.LENGTH_LONG).show();
+        brand.setAdapter(brandAdaptor);
 
-				}
-				
-				
-			}
-		});
-		
-		list = db.getProductEntryDetail(store_id, category_id, process_id);
-		
-		if (list.size()>0) {
-			adapterData = new MyAdaptor(BeforeAdditionalDisplay.this,list);
-			
-	    	listview.setAdapter(adapterData);
-	    	listview.invalidateViews();
-		}
-		
-//	show.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//			
-//				} else {
-//					Toast.makeText(getApplicationContext(), "NO DATA", Toast.LENGTH_LONG).show();
-//				}
-//				
-//				
-//			}
-//		});
-		
-	
-		
-	}
-	
-	
-	
-	 public void onButtonClick(View v){
-         
-         
-         if (v.getId() == R.id.camera) {
+        display_list = db.getDisplayList(category_id, store_id, store_type_id, process_id);
+        displayAdaptor = new ArrayAdapter<CharSequence>(BeforeAdditionalDisplay.this, R.layout.spinner_custom_item);
+        displayAdaptor.setDropDownViewResource(R.layout.spinner_custom_item);
+        displayAdaptor.add("-Select Display-");
+        for (int i = 0; i < display_list.size(); i++) {
+            displayAdaptor.add(display_list.get(i).getDisplay());
+        }
 
-        	 if (brand_name != null && !brand_id.equalsIgnoreCase("") && display_name != null && !display_id.equalsIgnoreCase("")) {
-        		 _pathforcheck = store_id+"_1_BA"+ imgDate + brand_id + display_id +".jpg";
-                 _path = str + _pathforcheck;
-                 startCameraActivity();
-     		}
-        	 
-        	 else{
-        		 Toast.makeText(BeforeAdditionalDisplay.this, "Please select Brand and Display first", Toast.LENGTH_LONG).show();
-        	 }
-
-         
-         
-         }          
-         
-}
-	 
-	 
-	 @Override
-	public void onBackPressed() {
-		super.onBackPressed();
-		Intent in = new Intent(BeforeAdditionalDisplay.this, DailyEntryMainMenu.class);
-		startActivity(in);
-		BeforeAdditionalDisplay.this.finish();
-		
-	}
-	 	protected void startCameraActivity() {
-
-         try {
-                         Log.i("MakeMachine", "startCameraActivity()");
-                         File file = new File(_path);
-                         Uri outputFileUri = Uri.fromFile(file);
-
-                         Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                         intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-
-                         startActivityForResult(intent, 0);
-         } catch (Exception e) { 
-                         e.printStackTrace();
-         }
-	 	}
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        display.setAdapter(displayAdaptor);
+        cam.setOnClickListener(this);
+        add.setOnClickListener(this);
+        refImage.setOnClickListener(this);
+        save_btn.setOnClickListener(this);
+        brand.setOnItemSelectedListener(this);
+        display.setOnItemSelectedListener(this);
+        setadditionalDisplayData();
+    }
 
 
-         Log.i("MakeMachine", "resultCode: " + resultCode);
-         switch (resultCode) {
-         case 0:
-                         Log.i("MakeMachine", "User cancelled");
-                         break;
-                        
-         case -1:
-                         if (_pathforcheck != null && !_pathforcheck.equals("")) {
-                                         if (new File((str + _pathforcheck).trim()).exists()) {
-                                         				
-                                    img1 = _pathforcheck;
-                                     String value = img1.substring(img1.indexOf("_")+1, img1.lastIndexOf("_"));
-                                      if(value != null){
-                                         if(value.equalsIgnoreCase("1")){
-                                        	 
-                                           image1 = img1;
-                                            cam.setBackgroundResource(R.drawable.camera_tick_ico);
-                                                                         }                                                                        
-                                                                         
-                                                                         
-                                                                                                                                  }
-                         //                            audit_lv.invalidateViews();
-                                                         _pathforcheck = "";
-                                                         break;
+    public void setadditionalDisplayData() {
+        list = db.getProductEntryDetail(store_id, category_id, process_id);
+        if (list.size() > 0) {
+            if (list.get(0).getYesorno().equals("YES")) {
+                toggle.setChecked(true);
+                additional_Recycler.setAdapter(new MyAdaptor(this, list));
+                additional_Recycler.setLayoutManager(new LinearLayoutManager(this));
+                additional_Recycler.setVisibility(View.VISIBLE);
+                RL_headerS.setVisibility(View.VISIBLE);
+                rl_allDATA.setVisibility(View.VISIBLE);
+                savebtnLayout.setVisibility(View.VISIBLE);
 
-                                         						}
-                         									}
+            } else {
+                RL_headerS.setVisibility(View.GONE);
+                rl_allDATA.setVisibility(View.GONE);
+                savebtnLayout.setVisibility(View.GONE);
+                additional_Recycler.setVisibility(View.GONE);
+                toggle.setChecked(false);
+            }
+        }
+    }
 
-                         break;
-         }
-}
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(
+                this);
+        builder.setMessage(CommonString.ONBACK_ALERT_MESSAGE)
+                .setCancelable(false)
+                .setPositiveButton("OK",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                Intent in = new Intent(BeforeAdditionalDisplay.this, DailyEntryMainMenu.class);
+                                startActivity(in);
+                                BeforeAdditionalDisplay.this.finish();
 
-	
-	public boolean validatedata() {
-		boolean result = false;
-		if (brand_name != null && !brand_id.equalsIgnoreCase("") && display_name != null && !display_id.equalsIgnoreCase("")) {
-			result = true;
-		}
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(
+                                    DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+        AlertDialog alert = builder.create();
+        alert.show();
 
-		return result;
+    }
 
-	}
-	
-	public class MyAdaptor extends BaseAdapter{
-		
-		private LayoutInflater mInflater;
-		private Context mcontext;
-		private ArrayList<SkuBean> list;
+    public void hideSoftKeyboard() {
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-	public MyAdaptor(Activity activity, ArrayList<SkuBean> list1) {
-		
-		mInflater = LayoutInflater.from(getBaseContext());
-		mcontext = activity;
-		list = list1;
-		}
+    }
 
-	@Override
-	public int getCount() {
-		
-		return list.size();
-	}
+    protected void startCameraActivity() {
+        try {
+            Log.i("MakeMachine", "startCameraActivity()");
+            File file = new File(_path);
+            Uri outputFileUri = Uri.fromFile(file);
+            Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+            startActivityForResult(intent, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	public Object getItem(int position) {
-		
-		return position;
-	}
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-	@Override
-	public long getItemId(int position) {
-		
-		return position;
-	}
-	
-	class ViewHolder {
-		TextView brand, qty_bought, display;
-		Button save,delete;
 
-	}
+        Log.i("MakeMachine", "resultCode: " + resultCode);
+        switch (resultCode) {
+            case 0:
+                Log.i("MakeMachine", "User cancelled");
+                break;
 
-	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
-		
-		final ViewHolder holder;
-		
-		if (convertView == null) {
+            case -1:
+                if (_pathforcheck != null && !_pathforcheck.equals("")) {
+                    try {
+                        if (new File((str + _pathforcheck).trim()).exists()) {
+                            img1 = _pathforcheck;
+                            String value = img1.substring(img1.indexOf("_") + 1, img1.lastIndexOf("_"));
+                            if (value != null) {
+                                if (value.equals("1")) {
+                                    String metadata = CommonFunctions.setMetadataAtImagesforcategory(storename, store_id, "ADDITIONAL DISPLAY IMAGE", username,cat_name);
+                                    Bitmap bmp = CommonFunctions.addMetadataAndTimeStampToImage(BeforeAdditionalDisplay.this, _path, metadata, date);
+                                    image1 = img1;
+                                    cam.setImageResource(R.drawable.camera_tick_ico);
+                                }
+                            }
+                            _pathforcheck = "";
+                            break;
+                        }
+                    } catch (Exception e) {
+                        Crashlytics.logException(e);
+                        e.printStackTrace();
+                    }
+                }
 
-			convertView = mInflater
-					.inflate(R.layout.addtional_list, null);
-			holder = new ViewHolder();
-		
-			holder.brand = (TextView) convertView.findViewById(R.id.brand_name);
+                break;
+        }
+    }
 
-			holder.display = (TextView) convertView.findViewById(R.id.display_name);
-			holder.qty_bought = (TextView) convertView.findViewById(R.id.qty_bought);
-			
-			
 
-			holder.delete = (Button) convertView.findViewById(R.id.delete_btn);
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.add_btn:
+                hideSoftKeyboard();
+                if (validate()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Parinaam").setMessage("Do you want to add data");
+                    builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            addflag = true;
+                            SkuBean ab = new SkuBean();
+                            ab.setQuantity(quantity.getText().toString());
+                            ab.setBrand(brand_name);
+                            ab.setBrand_id(brand_id);
+                            ab.setDisplay(display_name);
+                            ab.setDisplay_id(display_id);
+                            ab.setAdditional_image(image1);
+                            ab.setYesorno("YES");
+                            list.add(ab);
+                            adapterData = new MyAdaptor(BeforeAdditionalDisplay.this, list);
+                            additional_Recycler.setAdapter(adapterData);
+                            additional_Recycler.setLayoutManager(new LinearLayoutManager(BeforeAdditionalDisplay.this));
+                            quantity.setText("1");
+                            brand.setSelection(0);
+                            display.setSelection(0);
+                            image1 = "";
+                            cam.setImageResource(R.drawable.camera_ico);
 
-			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
-		
-		holder.delete.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
+                        }
+                    });
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    });
+                    builder.show();
+                }
+                break;
 
-				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
-						BeforeAdditionalDisplay.this);
-		 
-					// set title
-					alertDialogBuilder.setTitle("Do You Want To Delete?");
-		 
-					// set dialog message
-					alertDialogBuilder
-						.setMessage("Click Yes To Delete!")
-						.setCancelable(false)
-						.setPositiveButton("Yes",new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,int id) {
-								// if this button is clicked, close
-								// current activity
-								
-								db.deleteProductEntry(list.get(position).getKey_id());
-								
-								adapterData.notifyDataSetChanged();
-								
-								list = db.getProductEntryDetail(store_id, category_id, process_id);
-								listview.setAdapter(new MyAdaptor(BeforeAdditionalDisplay.this, list));
-								listview.invalidateViews();
-								
-							}
-						  })
-						.setNegativeButton("No",new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog,int id) {
-								// if this button is clicked, just close
-								// the dialog box and do nothing
-								dialog.cancel();
-							}
-						});
-		 
-						// create alert dialog
-						AlertDialog alertDialog = alertDialogBuilder.create();
-		 
-						// show it
-						alertDialog.show();
-			
-			}			
-		});
-		
+            case R.id.save_btn:
+                if (!toggle.isChecked()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Parinaam").setMessage("Do you want to save data");
+                    builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            list.clear();
+                            SkuBean ab = new SkuBean();
+                            ab.setQuantity("0");
+                            ab.setBrand("");
+                            ab.setBrand_id("");
+                            ab.setDisplay("");
+                            ab.setDisplay_id("");
+                            ab.setAdditional_image("");
+                            ab.setYesorno("NO");
+                            list.add(ab);
+                            db.open();
+                            db.InsertAdditionalInfo(list, store_id, category_id, process_id);
+                            TOAST("Data has been saved");
+                            Intent in = new Intent(BeforeAdditionalDisplay.this, DailyEntryMainMenu.class);
+                            startActivity(in);
+                            BeforeAdditionalDisplay.this.finish();
+                        }
+                    });
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
 
-		
-		holder.brand.setText(list.get(position).getBrand()
-					.toString());
-		holder.display.setText(list.get(position).getDisplay().toString());
-		
-		holder.qty_bought.setText(list.get(position).getQuantity());
-		
-	
-		
-		
-		return convertView;
-	}
-	}
+                        }
+                    });
+                    builder.show();
+                } else if (list.size() > 0 && addflag) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Parinaam").setMessage("Do you want to save data");
+                    builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            db.open();
+                            db.InsertAdditionalInfo(list, store_id, category_id, process_id);
+                            TOAST("Data has been saved");
+                            Intent in = new Intent(BeforeAdditionalDisplay.this, DailyEntryMainMenu.class);
+                            startActivity(in);
+                            BeforeAdditionalDisplay.this.finish();
+                        }
+                    });
+                    builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+
+                        }
+                    });
+                    builder.show();
+                } else {
+                    TOAST("Please add first");
+                }
+
+                break;
+            case R.id.camera:
+                _pathforcheck = store_id + "_1_BA" + imgDate + brand_id + display_id + ".jpg";
+                _path = str + _pathforcheck;
+                CommonFunctions.startAnncaCameraActivity(BeforeAdditionalDisplay.this, _path);
+                break;
+            case R.id.refimage:
+                if (!display_id.equals("")) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(reference_image_path + image_url);
+                    if (bitmap != null) {
+                        final Dialog dialog = new Dialog(BeforeAdditionalDisplay.this);
+                        dialog.setContentView(R.layout.popup);
+                        ImageView refimage = (ImageView) dialog.findViewById(R.id.displayimage);
+                        dialog.setTitle("Reference Image");
+                        bitmap = BitmapFactory.decodeFile(reference_image_path + image_url);
+                        Drawable mDrawable = new BitmapDrawable(getResources(), bitmap);
+                        refimage.setImageDrawable(mDrawable);
+                        dialog.show();
+                    } else {
+                        Toast.makeText(BeforeAdditionalDisplay.this, "Reference Image not available", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(BeforeAdditionalDisplay.this, "Please Select Display", Toast.LENGTH_LONG).show();
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        if (adapterView.getId() == R.id.brand_name) {
+            if (position != 0) {
+                brand_name = brand_list.get(position - 1).getBrand();
+                brand_id = brand_list.get(position - 1).getBrand_id();
+            } else {
+                brand_name = "";
+                brand_id = "";
+            }
+        } else if (adapterView.getId() == R.id.display_name) {
+            if (position != 0) {
+                display_name = display_list.get(position - 1).getDisplay();
+                display_id = display_list.get(position - 1).getDisplay_id();
+                image_url = display_list.get(position - 1).getImage_url();
+            } else {
+                display_name = "";
+                display_id = "";
+            }
+
+        }
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    public class MyAdaptor extends RecyclerView.Adapter<MyAdaptor.ViewHolder> {
+        private LayoutInflater mInflater;
+        private Context mcontext;
+        private ArrayList<SkuBean> list;
+
+        public MyAdaptor(Context context, ArrayList<SkuBean> list1) {
+            mInflater = LayoutInflater.from(context);
+            mcontext = context;
+            list = list1;
+        }
+
+        @Override
+        public MyAdaptor.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            View view = mInflater.inflate(R.layout.addtional_list, parent, false);
+            MyAdaptor.ViewHolder holder = new MyAdaptor.ViewHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(MyAdaptor.ViewHolder holder, final int position) {
+
+            holder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (list.get(position).getKey_id() == null) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
+                        builder.setMessage("Are you sure you want to Delete")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                list.remove(position);
+                                                notifyDataSetChanged();
+                                                if (list.size() > 0) {
+                                                    MyAdaptor adapter = new MyAdaptor(mcontext, list);
+                                                    additional_Recycler.setAdapter(adapter);
+                                                    additional_Recycler.setLayoutManager(new LinearLayoutManager(mcontext));
+                                                    adapter.notifyDataSetChanged();
+                                                }
+                                                notifyDataSetChanged();
+                                            }
+                                        })
+                                .setNegativeButton("No",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog,
+                                                                int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    } else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(mcontext);
+                        builder.setMessage("Are you sure you want to Delete")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                db.deleteProductEntry(list.get(position).getKey_id());
+                                                list.remove(position);
+                                                notifyDataSetChanged();
+                                                if (list.size() > 0) {
+                                                    MyAdaptor adapter = new MyAdaptor(mcontext, list);
+                                                    additional_Recycler.setAdapter(adapter);
+                                                    additional_Recycler.setLayoutManager(new LinearLayoutManager(mcontext));
+                                                    adapter.notifyDataSetChanged();
+                                                }
+                                                notifyDataSetChanged();
+                                            }
+                                        })
+                                .setNegativeButton("No",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                dialog.cancel();
+                                            }
+                                        });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+
+
+                }
+            });
+
+
+            holder.brand.setText(list.get(position).getBrand().toString());
+            holder.display.setText(list.get(position).getDisplay().toString());
+            holder.qty_bought.setText(list.get(position).getQuantity());
+            holder.brand.setId(position);
+            holder.display.setId(position);
+            holder.qty_bought.setId(position);
+            holder.delete.setId(position);
+
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public int getItemCount() {
+            return list.size();
+        }
+
+        class ViewHolder extends RecyclerView.ViewHolder {
+            TextView brand, qty_bought, display;
+            ImageView delete;
+
+            public ViewHolder(View convertView) {
+                super(convertView);
+                brand = (TextView) convertView.findViewById(R.id.brand_name);
+                display = (TextView) convertView.findViewById(R.id.display_name);
+                qty_bought = (TextView) convertView.findViewById(R.id.qty_bought);
+                delete = (ImageView) convertView.findViewById(R.id.dlt_img);
+            }
+        }
+    }
+
+    private boolean validate() {
+        boolean status = true;
+        if (brand.getSelectedItemId() == 0) {
+            TOAST("Please Select Brand Dropdown .");
+            status = false;
+        }
+        if (status && display.getSelectedItemId() == 0) {
+            TOAST("Please Select Display Dropdown .");
+            status = false;
+        }
+
+        if (status && image1.equals("")) {
+            TOAST("Please Capture Image .");
+            status = false;
+        }
+
+        return status;
+    }
+
+    private void TOAST(String msg) {
+        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+    }
 
 }

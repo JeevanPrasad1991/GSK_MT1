@@ -5,6 +5,26 @@ public class StoreBean {
 	public String EMP_ID,STORE,CITY,VISIT_DATE,PROCESS_ID,UPLOAD_STATUS,STORE_ID, storeType_id, key_id, REGION_ID
 	, CHECKOUT_STATUS, store_type, geotag_status, key_account, Latitude, Longitude,pkdKey,STATE_ID;
 
+	public String getCLASS_ID() {
+		return CLASS_ID;
+	}
+
+	public void setCLASS_ID(String CLASS_ID) {
+		this.CLASS_ID = CLASS_ID;
+	}
+
+	String CLASS_ID;
+
+	public String getCOMP_ENABLE() {
+		return COMP_ENABLE;
+	}
+
+	public void setCOMP_ENABLE(String COMP_ENABLE) {
+		this.COMP_ENABLE = COMP_ENABLE;
+	}
+
+	String COMP_ENABLE;
+
 	public String getImage() {
 		return image;
 	}

@@ -59,7 +59,7 @@ public class Sales extends Activity implements OnClickListener {
     ImageView cam1, cam2, cam3, cam4;
     public static ArrayList<SkuBean> sku_brand_list = new ArrayList<SkuBean>();
     GSKMTDatabase db;
-    String store_id, category_id, process_id, intime, username, app_version, region_id, store_type_id;
+    String store_id, category_id, process_id, intime, username, app_version, region_id, store_type_id, state_id, key_id, class_id;
     protected static String _pathforcheck = "";
     public String image1 = "", image2 = "", image3 = "", _path, date, image4 = "", imgDate;
     private static String str, path;
@@ -97,45 +97,35 @@ public class Sales extends Activity implements OnClickListener {
         username = preferences.getString(CommonString.KEY_USERNAME, null);
         app_version = preferences.getString(CommonString.KEY_VERSION, null);
         region_id = preferences.getString(CommonString.region_id, null);
-
+        ///change by jeevan RAna
+        state_id = preferences.getString(CommonString.KEY_STATE_ID, null);
+        key_id = preferences.getString(CommonString.KEY_ID, null);
+        class_id = preferences.getString(CommonString.KEY_CLASS_ID, null);
         //		imglayout = (LinearLayout)findViewById(R.id.imageLayout);
         save = (Button) findViewById(R.id.savebtn);
 
 
-        imgDate = date.replace("/", "-");
 
+        imgDate = date.replace("/", "-");
         db = new GSKMTDatabase(Sales.this);
         db.open();
-
-
         coveragelist = db.getCoverageData(date, store_id, process_id);
-
-
         sku_brand_list = db.getSalesStockData(store_id, category_id, process_id);
-
         if (sku_brand_list.size() == 0) {
-            sku_brand_list = db.getBrandSkuListForSales(category_id, store_id, process_id, region_id, store_type_id);
+            sku_brand_list = db.getBrandSkuListForSales(category_id, store_id, process_id, state_id, store_type_id,key_id,class_id);
         } else {
             save.setText("Update");
             update = true;
         }
-
-
         if (sku_brand_list.size() > 0) {
-
             System.out.println("" + sku_brand_list.size());
-
             lv.setAdapter(new MyAdaptor(this));
         }
 
 
         save.setOnClickListener(this);
-
         currentVersion = android.os.Build.VERSION.SDK_INT;
-
-
         if (isTablet(getApplicationContext())) {
-
             mKeyboard = new Keyboard(this, R.xml.keyboard);
             //			Toast.makeText(BeforeStock.this, "Hi ! i am tablet", Toast.LENGTH_LONG).show();
 
@@ -357,9 +347,6 @@ public class Sales extends Activity implements OnClickListener {
 
             //					holder.stockQuantity.setText(sku_brand_list.get(position).getBefore_Stock());
             holder.faceup.setText(sku_brand_list.get(position).getSales_qty());
-            /*if(update){
-				holder.faceup.setText(String.valueOf(sku_brand_list.get(position).getSales_value()));
-			}*/
 
 
             if (position == row_pos - 1) {

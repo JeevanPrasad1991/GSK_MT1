@@ -49,12 +49,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cpm.Constants.CommonFunctions;
 import com.cpm.Constants.CommonString;
 
 import com.cpm.database.GSKMTDatabase;
 import com.cpm.message.AlertMessage;
 import com.cpm.xmlGetterSetter.FailureGetterSetter;
 import com.cpm.xmlHandler.FailureXMLHandler;
+import com.crashlytics.android.Crashlytics;
 import com.example.gsk_mtt.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -74,11 +76,11 @@ public class CheckOutStoreActivity extends Activity implements GoogleApiClient.C
     Button checkout_save;
     private Data data;
     GoogleApiClient mGoogleApiClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checkout_activity);
-        //  updateCoverageCheckoutIMAGE
         checkout_image = (ImageView) findViewById(R.id.checkout_image);
         checkout_save = (Button) findViewById(R.id.checkout_save);
         storename_checkout = findViewById(R.id.storename_checkout);
@@ -115,6 +117,7 @@ public class CheckOutStoreActivity extends Activity implements GoogleApiClient.C
         super.onResume();
         db.open();
     }
+
     public boolean CheckNetAvailability() {
         boolean connected = false;
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -135,7 +138,8 @@ public class CheckOutStoreActivity extends Activity implements GoogleApiClient.C
                 _pathforcheck = store_id + "_CheckoutIMG_" + visit_date.replace("/", "") + "_"
                         + getCurrentTime().replace(":", "") + ".jpg";
                 _path = CommonString.FILE_PATH + _pathforcheck;
-                startCameraActivity();
+                CommonFunctions.startAnncaCameraActivity(CheckOutStoreActivity.this, _path);
+
                 break;
             case R.id.checkout_save:
                 if (!image1.equals("")) {
@@ -239,6 +243,7 @@ public class CheckOutStoreActivity extends Activity implements GoogleApiClient.C
                     db.open();
                     db.updateStoreStatusOnCheckout(store_id, visit_date, CommonString.KEY_C, process_id);
                     db.updateCoverageCheckoutIMAGE(store_id, image1, process_id);
+                    db.updateCoverageStatus(store_id, CommonString.KEY_C, process_id);
                     db.updateOutTime(store_id, getCurrentTime());
                 } else {
                     if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
@@ -259,7 +264,7 @@ public class CheckOutStoreActivity extends Activity implements GoogleApiClient.C
                 return CommonString.KEY_SUCCESS;
 
             } catch (MalformedURLException e) {
-
+                Crashlytics.logException(e);
                 final AlertMessage message = new AlertMessage(
                         CheckOutStoreActivity.this,
                         AlertMessage.MESSAGE_EXCEPTION, "checkout", e);
@@ -284,6 +289,7 @@ public class CheckOutStoreActivity extends Activity implements GoogleApiClient.C
                     }
                 });
             } catch (Exception e) {
+                Crashlytics.logException(e);
                 final AlertMessage message = new AlertMessage(
                         CheckOutStoreActivity.this,
                         AlertMessage.MESSAGE_EXCEPTION, "acra_checkout", e);
@@ -360,14 +366,21 @@ public class CheckOutStoreActivity extends Activity implements GoogleApiClient.C
                 Log.i("MakeMachine", "User cancelled");
                 break;
             case -1:
-                if (_pathforcheck != null && !_pathforcheck.equals("")) {
-                    if (new File(CommonString.FILE_PATH + _pathforcheck).exists()) {
-                        image1 = _pathforcheck;
-                        checkout_image.setBackgroundResource(R.drawable.camera_tick_ico);
-                        _pathforcheck = "";
-                        break;
+                try {
+                    if (_pathforcheck != null && !_pathforcheck.equals("")) {
+                        if (new File(CommonString.FILE_PATH + _pathforcheck).exists()) {
+                            String metadata = CommonFunctions.setMetadataAtImages(storename, store_id, "CHECHOUT IMAGE", username);
+                            CommonFunctions.addMetadataAndTimeStampToImage(CheckOutStoreActivity.this, _path, metadata, visit_date);
+                            image1 = _pathforcheck;
+                            checkout_image.setBackgroundResource(R.drawable.camera_tick_ico);
+                            _pathforcheck = "";
+                            break;
 
+                        }
                     }
+                } catch (Exception e) {
+                    Crashlytics.logException(e);
+                    e.printStackTrace();
                 }
                 break;
         }

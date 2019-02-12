@@ -47,7 +47,17 @@ public class StockMappingGetterSetter {
 	ArrayList<String> sku_sequence = new ArrayList<String>();
 	ArrayList<String> brand_sequence = new ArrayList<String>();
 	ArrayList<String> process_id = new ArrayList<String>();
-	ArrayList<String> region_id = new ArrayList<String>();
+	ArrayList<String> KEY_ID = new ArrayList<String>();
+
+	public ArrayList<String> getSTATE_ID() {
+		return STATE_ID;
+	}
+
+	public void setSTATE_ID(String STATE_ID) {
+		this.STATE_ID.add(STATE_ID);
+	}
+
+	ArrayList<String> STATE_ID = new ArrayList<String>();
 	
 	public ArrayList<String> getSTORETYPE_ID() {
 		return STORETYPE_ID;
@@ -57,11 +67,21 @@ public class StockMappingGetterSetter {
 	}
 	ArrayList<String> STORETYPE_ID = new ArrayList<String>();
 
-	public ArrayList<String> getRegion_id() {
-		return region_id;
+	public ArrayList<String> getCLASS_ID() {
+		return CLASS_ID;
 	}
-	public void setRegion_id(String region_id) {
-		this.region_id.add(region_id);
+
+	public void setCLASS_ID(String CLASS_ID) {
+		this.CLASS_ID.add(CLASS_ID);
+	}
+
+	ArrayList<String> CLASS_ID = new ArrayList<String>();
+
+	public ArrayList<String> getKEY_ID() {
+		return KEY_ID;
+	}
+	public void setKEY_ID(String KEY_ID) {
+		this.KEY_ID.add(KEY_ID);
 	}
 
 }
