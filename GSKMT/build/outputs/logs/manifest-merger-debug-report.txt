@@ -1,402 +1,537 @@
 -- Merging decision tree log ---
 manifest
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:1:1-209:12
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:1:1-209:12
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:1:1-209:12
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:1:1-209:12
-MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\b1178a5d02fd3de3d7f940f49eaea733\AndroidManifest.xml:2:1-14:12
-MERGED from [com.google.android.gms:play-services-location:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-9.0.2.aar\4f216ad8a4f251ae13d5fb8b8885ca8a\AndroidManifest.xml:16:1-20:12
-MERGED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:16:1-28:12
-MERGED from [com.google.android.gms:play-services-appindexing:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.2.aar\242e8443e8bfa48b9dc8f6a3e53949b4\AndroidManifest.xml:16:1-20:12
-MERGED from [com.android.support:design:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\1e1f6356d37e5ed76a8b2ca04474cec6\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\5a6f0734dee520f98e26a9b8ab3f6353\AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\a677fd887f51843524663bb93319a80a\AndroidManifest.xml:17:1-28:12
-MERGED from [com.google.android.gms:play-services-base:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\AndroidManifest.xml:16:1-24:12
-MERGED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:2:1-13:12
-MERGED from [com.google.android.gms:play-services-tasks:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-9.0.2.aar\b6fc486bd326572ee20b4d6b03468919\AndroidManifest.xml:2:1-6:12
-MERGED from [com.google.android.gms:play-services-basement:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.0.2.aar\ebc2e159ecf722c3fc9a69cae50bd0e8\AndroidManifest.xml:16:1-26:12
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\3be156526f84cb2ed8e785181eaa3890\AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\286c4d6e5f5c60e0f0922eb29daf1738\AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:transition:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\a895e05311da31e47f1e8115e53729af\AndroidManifest.xml:17:1-28:12
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\8f26950258d32905f485da685d372ef4\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\62853b374eaf104cb7814ba00231d137\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\a1176972df82534082c05a52c9ec7c39\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\eca61112a6e32879479fd7149d8342d8\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\a18ffef0d42b1dee74cb4019e5af9cb8\AndroidManifest.xml:17:1-31:12
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\4387fdc629eea250186a10025dbcae02\AndroidManifest.xml:17:1-31:12
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\31d79459d66fc10d6b9cd4cf87471b01\AndroidManifest.xml:17:1-30:12
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:1:1-209:12
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:1:1-209:12
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:1:1-209:12
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:2:1-239:12
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:2:1-239:12
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:2:1-239:12
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:2:1-239:12
+MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\68e4aa936bee9fc250a6999ec71af230\AndroidManifest.xml:2:1-14:12
+MERGED from [com.google.android.gms:play-services-location:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-11.8.0.aar\c97831d9b10efb1eecff08cadd4bf181\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:17:1-32:12
+MERGED from [com.google.android.gms:play-services-appindexing:9.0.1] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.1.aar\d63c78326c63621758d6e4b34edce635\AndroidManifest.xml:16:1-20:12
+MERGED from [:annca] F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\annca\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:2:1-18:12
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:2:1-19:12
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\dd607a9b03cba5f41ebd72e0dcd3693c\AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.firebase:firebase-core:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-core-11.8.0.aar\fba1c43bf5940cdb168a7b57f5d2a79c\AndroidManifest.xml:2:1-6:12
+MERGED from [com.android.support:design:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-27.1.0.aar\2f5aa3852918fafa9d20026d8a97e87d\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:appcompat-v7:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.0.aar\ef40e8251cf87767411bfb375a4a1474\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:cardview-v7:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.1.0.aar\8b7db947ea36d271a0d47f5d8a30ab60\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:recyclerview-v7:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.0.aar\169e64bae7ee04d176ac7d9bebcf3640\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\958aeea5e1afd61ac10947667f24d82c\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:17:1-54:12
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:17:1-59:12
+MERGED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:2:1-15:12
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-11.8.0.aar\2e5e28c3f05bf9730253941f298f5159\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.8.0.aar\e1c1a5b0e38054154b8e924c6b91b435\AndroidManifest.xml:17:1-28:12
+MERGED from [com.google.android.gms:play-services-location-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-license-11.8.0.aar\a942b992fb0814e02c65f1def443b1bc\AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-license-11.8.0.aar\6ec07a050be7a45fdc649d6c150c08eb\AndroidManifest.xml:2:1-6:12
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.6.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-core-2.6.4.aar\1ef0c451d95b17b8b285f186fe26ff28\AndroidManifest.xml:45:1-56:12
+MERGED from [com.crashlytics.sdk.android:answers:1.4.3] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\answers-1.4.3.aar\6d4e83c0f7446306f93a2485de688e3f\AndroidManifest.xml:2:1-13:12
+MERGED from [com.crashlytics.sdk.android:beta:1.2.10] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\beta-1.2.10.aar\c9bbe5459477b0f3bdfa9add924b8ceb\AndroidManifest.xml:2:1-13:12
+MERGED from [io.fabric.sdk.android:fabric:1.4.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fabric-1.4.4.aar\30ef74a6153d6c3f1ce5814e222add4d\AndroidManifest.xml:22:1-33:12
+MERGED from [com.android.support:support-v4:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.0.aar\780ffaca50814b0b97476e80d9e44d8a\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.0.aar\b1fcdf549fd452fca94a6652c0c2bcdd\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:animated-vector-drawable:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.0.aar\91e4c225efce20a91a58cb8c449c6b25\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.0.aar\d4c5ef2050f984109f78c8f749c4f48c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.0.aar\a931c2ad31bf5f4b34b0f1639502fe9b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-vector-drawable:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.0.aar\fc90bc2352ff6214af1aed24d9138632\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:transition:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-27.1.0.aar\e1fb0dba482d663fe8ae714075c33cc5\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-media-compat:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.0.aar\50bf80f41f9935d03e39f7238aaabdcb\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.0.aar\cfad9c5f3a668a7f4c23d697aa1ff87f\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-analytics-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-license-11.8.0.aar\ce3af46d7e5751b4aef72d8e9f99eb62\AndroidManifest.xml:2:1-6:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\1d9a2894b5d4dbc79607113da04ab0f8\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\0fe9035da2a87e9cbc72ed28bb52a3a1\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\6aa5175a42046c97dc2fa5a4265273a8\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-license-11.8.0.aar\0333b419dc8c859b45d7e787ee04afc1\AndroidManifest.xml:2:1-6:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\697e7bae1e01d70c4e05ac86281d954b\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-iid-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-license-11.8.0.aar\0123d9b08c1dd0e314cd5c757aca7fd6\AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\bd2f65dff6ba6b2cdc08ddc806a6c5aa\AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-license-11.8.0.aar\1a34d40b7c7a26944376b9f0bc4a16a5\AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-license-11.8.0.aar\7cb5446f369b919115c22ad31931ba7c\AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.firebase:firebase-common-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-license-11.8.0.aar\c69ecaf0173e61f5bcd9c4e0882252d6\AndroidManifest.xml:2:1-6:12
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:2:1-239:12
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:2:1-239:12
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:2:1-239:12
 	package
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:2:5-34
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:3:5-34
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 	android:versionName
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:4:5-30
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:5:5-30
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 	xmlns:android
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:1:11-69
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:2:11-69
 	android:versionCode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:3:5-29
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:4:5-29
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 uses-sdk
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:6:5-8:41
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:6:5-8:41
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:6:5-8:41
-MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\b1178a5d02fd3de3d7f940f49eaea733\AndroidManifest.xml:8:5-10:41
-MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\b1178a5d02fd3de3d7f940f49eaea733\AndroidManifest.xml:8:5-10:41
-MERGED from [com.google.android.gms:play-services-location:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-9.0.2.aar\4f216ad8a4f251ae13d5fb8b8885ca8a\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-location:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-9.0.2.aar\4f216ad8a4f251ae13d5fb8b8885ca8a\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:26:5-42
-MERGED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:26:5-42
-MERGED from [com.google.android.gms:play-services-appindexing:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.2.aar\242e8443e8bfa48b9dc8f6a3e53949b4\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-appindexing:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.2.aar\242e8443e8bfa48b9dc8f6a3e53949b4\AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:design:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\AndroidManifest.xml:21:5-23:62
-MERGED from [com.android.support:design:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\AndroidManifest.xml:21:5-23:62
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\1e1f6356d37e5ed76a8b2ca04474cec6\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\1e1f6356d37e5ed76a8b2ca04474cec6\AndroidManifest.xml:21:5-23:78
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\5a6f0734dee520f98e26a9b8ab3f6353\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\5a6f0734dee520f98e26a9b8ab3f6353\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\a677fd887f51843524663bb93319a80a\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\a677fd887f51843524663bb93319a80a\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-base:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\AndroidManifest.xml:18:5-42
-MERGED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:4:5-43
-MERGED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-tasks:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-9.0.2.aar\b6fc486bd326572ee20b4d6b03468919\AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-tasks:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-9.0.2.aar\b6fc486bd326572ee20b4d6b03468919\AndroidManifest.xml:4:5-43
-MERGED from [com.google.android.gms:play-services-basement:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.0.2.aar\ebc2e159ecf722c3fc9a69cae50bd0e8\AndroidManifest.xml:18:5-42
-MERGED from [com.google.android.gms:play-services-basement:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.0.2.aar\ebc2e159ecf722c3fc9a69cae50bd0e8\AndroidManifest.xml:18:5-42
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\3be156526f84cb2ed8e785181eaa3890\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\3be156526f84cb2ed8e785181eaa3890\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\286c4d6e5f5c60e0f0922eb29daf1738\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\286c4d6e5f5c60e0f0922eb29daf1738\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\a895e05311da31e47f1e8115e53729af\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:transition:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\a895e05311da31e47f1e8115e53729af\AndroidManifest.xml:20:5-44
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\8f26950258d32905f485da685d372ef4\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\8f26950258d32905f485da685d372ef4\AndroidManifest.xml:21:5-23:54
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\62853b374eaf104cb7814ba00231d137\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\62853b374eaf104cb7814ba00231d137\AndroidManifest.xml:21:5-23:60
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\a1176972df82534082c05a52c9ec7c39\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\a1176972df82534082c05a52c9ec7c39\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\eca61112a6e32879479fd7149d8342d8\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\eca61112a6e32879479fd7149d8342d8\AndroidManifest.xml:21:5-23:63
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\a18ffef0d42b1dee74cb4019e5af9cb8\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\a18ffef0d42b1dee74cb4019e5af9cb8\AndroidManifest.xml:21:5-23:61
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\4387fdc629eea250186a10025dbcae02\AndroidManifest.xml:21:5-23:58
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\4387fdc629eea250186a10025dbcae02\AndroidManifest.xml:21:5-23:58
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\31d79459d66fc10d6b9cd4cf87471b01\AndroidManifest.xml:20:5-22:41
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\31d79459d66fc10d6b9cd4cf87471b01\AndroidManifest.xml:20:5-22:41
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:6:5-8:41
-INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:6:5-8:41
-	tools:overrideLibrary
-		ADDED from [com.android.support:design:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\AndroidManifest.xml:23:9-59
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:7:5-9:41
+MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\68e4aa936bee9fc250a6999ec71af230\AndroidManifest.xml:8:5-10:41
+MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\68e4aa936bee9fc250a6999ec71af230\AndroidManifest.xml:8:5-10:41
+MERGED from [com.google.android.gms:play-services-location:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-11.8.0.aar\c97831d9b10efb1eecff08cadd4bf181\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-11.8.0.aar\c97831d9b10efb1eecff08cadd4bf181\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-appindexing:9.0.1] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.1.aar\d63c78326c63621758d6e4b34edce635\AndroidManifest.xml:18:5-42
+MERGED from [com.google.android.gms:play-services-appindexing:9.0.1] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.1.aar\d63c78326c63621758d6e4b34edce635\AndroidManifest.xml:18:5-42
+MERGED from [:annca] F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\annca\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [:annca] F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\annca\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:7:5-9:41
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:7:5-43
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:7:5-43
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\dd607a9b03cba5f41ebd72e0dcd3693c\AndroidManifest.xml:5:5-7:41
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\dd607a9b03cba5f41ebd72e0dcd3693c\AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-core:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-core-11.8.0.aar\fba1c43bf5940cdb168a7b57f5d2a79c\AndroidManifest.xml:4:5-43
+MERGED from [com.google.firebase:firebase-core:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-core-11.8.0.aar\fba1c43bf5940cdb168a7b57f5d2a79c\AndroidManifest.xml:4:5-43
+MERGED from [com.android.support:design:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-27.1.0.aar\2f5aa3852918fafa9d20026d8a97e87d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:design:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-27.1.0.aar\2f5aa3852918fafa9d20026d8a97e87d\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.0.aar\ef40e8251cf87767411bfb375a4a1474\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:appcompat-v7:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-27.1.0.aar\ef40e8251cf87767411bfb375a4a1474\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.1.0.aar\8b7db947ea36d271a0d47f5d8a30ab60\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:cardview-v7:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-27.1.0.aar\8b7db947ea36d271a0d47f5d8a30ab60\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.0.aar\169e64bae7ee04d176ac7d9bebcf3640\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:recyclerview-v7:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-27.1.0.aar\169e64bae7ee04d176ac7d9bebcf3640\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\958aeea5e1afd61ac10947667f24d82c\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\958aeea5e1afd61ac10947667f24d82c\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-11.8.0.aar\2e5e28c3f05bf9730253941f298f5159\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-11.8.0.aar\2e5e28c3f05bf9730253941f298f5159\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.8.0.aar\e1c1a5b0e38054154b8e924c6b91b435\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.8.0.aar\e1c1a5b0e38054154b8e924c6b91b435\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-location-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-license-11.8.0.aar\a942b992fb0814e02c65f1def443b1bc\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-location-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-license-11.8.0.aar\a942b992fb0814e02c65f1def443b1bc\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-license-11.8.0.aar\6ec07a050be7a45fdc649d6c150c08eb\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-license-11.8.0.aar\6ec07a050be7a45fdc649d6c150c08eb\AndroidManifest.xml:4:5-43
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.6.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-core-2.6.4.aar\1ef0c451d95b17b8b285f186fe26ff28\AndroidManifest.xml:50:5-43
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.6.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-core-2.6.4.aar\1ef0c451d95b17b8b285f186fe26ff28\AndroidManifest.xml:50:5-43
+MERGED from [com.crashlytics.sdk.android:answers:1.4.3] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\answers-1.4.3.aar\6d4e83c0f7446306f93a2485de688e3f\AndroidManifest.xml:7:5-43
+MERGED from [com.crashlytics.sdk.android:answers:1.4.3] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\answers-1.4.3.aar\6d4e83c0f7446306f93a2485de688e3f\AndroidManifest.xml:7:5-43
+MERGED from [com.crashlytics.sdk.android:beta:1.2.10] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\beta-1.2.10.aar\c9bbe5459477b0f3bdfa9add924b8ceb\AndroidManifest.xml:7:5-43
+MERGED from [com.crashlytics.sdk.android:beta:1.2.10] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\beta-1.2.10.aar\c9bbe5459477b0f3bdfa9add924b8ceb\AndroidManifest.xml:7:5-43
+MERGED from [io.fabric.sdk.android:fabric:1.4.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fabric-1.4.4.aar\30ef74a6153d6c3f1ce5814e222add4d\AndroidManifest.xml:27:5-43
+MERGED from [io.fabric.sdk.android:fabric:1.4.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fabric-1.4.4.aar\30ef74a6153d6c3f1ce5814e222add4d\AndroidManifest.xml:27:5-43
+MERGED from [com.android.support:support-v4:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.0.aar\780ffaca50814b0b97476e80d9e44d8a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.0.aar\780ffaca50814b0b97476e80d9e44d8a\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.0.aar\b1fcdf549fd452fca94a6652c0c2bcdd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.0.aar\b1fcdf549fd452fca94a6652c0c2bcdd\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.0.aar\91e4c225efce20a91a58cb8c449c6b25\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:animated-vector-drawable:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-27.1.0.aar\91e4c225efce20a91a58cb8c449c6b25\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.0.aar\d4c5ef2050f984109f78c8f749c4f48c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.0.aar\d4c5ef2050f984109f78c8f749c4f48c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.0.aar\a931c2ad31bf5f4b34b0f1639502fe9b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.0.aar\a931c2ad31bf5f4b34b0f1639502fe9b\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.0.aar\fc90bc2352ff6214af1aed24d9138632\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-27.1.0.aar\fc90bc2352ff6214af1aed24d9138632\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-27.1.0.aar\e1fb0dba482d663fe8ae714075c33cc5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:transition:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-27.1.0.aar\e1fb0dba482d663fe8ae714075c33cc5\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.0.aar\50bf80f41f9935d03e39f7238aaabdcb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.0.aar\50bf80f41f9935d03e39f7238aaabdcb\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.0.aar\cfad9c5f3a668a7f4c23d697aa1ff87f\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.0.aar\cfad9c5f3a668a7f4c23d697aa1ff87f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-license-11.8.0.aar\ce3af46d7e5751b4aef72d8e9f99eb62\AndroidManifest.xml:4:5-43
+MERGED from [com.google.firebase:firebase-analytics-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-license-11.8.0.aar\ce3af46d7e5751b4aef72d8e9f99eb62\AndroidManifest.xml:4:5-43
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\1d9a2894b5d4dbc79607113da04ab0f8\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\1d9a2894b5d4dbc79607113da04ab0f8\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\0fe9035da2a87e9cbc72ed28bb52a3a1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\0fe9035da2a87e9cbc72ed28bb52a3a1\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\6aa5175a42046c97dc2fa5a4265273a8\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\6aa5175a42046c97dc2fa5a4265273a8\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-license-11.8.0.aar\0333b419dc8c859b45d7e787ee04afc1\AndroidManifest.xml:4:5-43
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-license-11.8.0.aar\0333b419dc8c859b45d7e787ee04afc1\AndroidManifest.xml:4:5-43
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\697e7bae1e01d70c4e05ac86281d954b\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\697e7bae1e01d70c4e05ac86281d954b\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-iid-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-license-11.8.0.aar\0123d9b08c1dd0e314cd5c757aca7fd6\AndroidManifest.xml:4:5-43
+MERGED from [com.google.firebase:firebase-iid-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-license-11.8.0.aar\0123d9b08c1dd0e314cd5c757aca7fd6\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\bd2f65dff6ba6b2cdc08ddc806a6c5aa\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\bd2f65dff6ba6b2cdc08ddc806a6c5aa\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-license-11.8.0.aar\1a34d40b7c7a26944376b9f0bc4a16a5\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-license-11.8.0.aar\1a34d40b7c7a26944376b9f0bc4a16a5\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-license-11.8.0.aar\7cb5446f369b919115c22ad31931ba7c\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-license-11.8.0.aar\7cb5446f369b919115c22ad31931ba7c\AndroidManifest.xml:4:5-43
+MERGED from [com.google.firebase:firebase-common-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-license-11.8.0.aar\c69ecaf0173e61f5bcd9c4e0882252d6\AndroidManifest.xml:4:5-43
+MERGED from [com.google.firebase:firebase-common-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-license-11.8.0.aar\c69ecaf0173e61f5bcd9c4e0882252d6\AndroidManifest.xml:4:5-43
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:7:5-9:41
+INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:7:5-9:41
 	android:targetSdkVersion
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:8:9-38
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:9:9-38
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 	android:minSdkVersion
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:7:9-35
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:8:9-35
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 		INJECTED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:10:5-79
-MERGED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:20:5-78
-MERGED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:20:5-78
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:11:5-79
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:23:5-79
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:22:5-79
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:10:22-76
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:11:22-76
 uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:11:5-81
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:12:5-81
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:11:22-78
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:12:22-78
 uses-permission#android.permission.ACCESS_FINE_LOCATION
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:12:5-79
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:13:5-79
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:12:22-76
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:13:22-76
 uses-permission#android.permission.INTERNET
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:13:5-67
-MERGED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:21:5-66
-MERGED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:21:5-66
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:14:5-67
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:24:5-67
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:9:5-67
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:9:5-67
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:23:5-67
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:23:5-67
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.6.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-core-2.6.4.aar\1ef0c451d95b17b8b285f186fe26ff28\AndroidManifest.xml:52:5-67
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.6.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-core-2.6.4.aar\1ef0c451d95b17b8b285f186fe26ff28\AndroidManifest.xml:52:5-67
+MERGED from [com.crashlytics.sdk.android:answers:1.4.3] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\answers-1.4.3.aar\6d4e83c0f7446306f93a2485de688e3f\AndroidManifest.xml:9:5-67
+MERGED from [com.crashlytics.sdk.android:answers:1.4.3] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\answers-1.4.3.aar\6d4e83c0f7446306f93a2485de688e3f\AndroidManifest.xml:9:5-67
+MERGED from [com.crashlytics.sdk.android:beta:1.2.10] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\beta-1.2.10.aar\c9bbe5459477b0f3bdfa9add924b8ceb\AndroidManifest.xml:9:5-67
+MERGED from [com.crashlytics.sdk.android:beta:1.2.10] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\beta-1.2.10.aar\c9bbe5459477b0f3bdfa9add924b8ceb\AndroidManifest.xml:9:5-67
+MERGED from [io.fabric.sdk.android:fabric:1.4.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fabric-1.4.4.aar\30ef74a6153d6c3f1ce5814e222add4d\AndroidManifest.xml:29:5-67
+MERGED from [io.fabric.sdk.android:fabric:1.4.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fabric-1.4.4.aar\30ef74a6153d6c3f1ce5814e222add4d\AndroidManifest.xml:29:5-67
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:13:22-64
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:14:22-64
 uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:14:5-81
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:15:5-81
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:14:22-78
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:15:22-78
 uses-permission#android.permission.WRITE_SYNC_SETTINGS
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:15:5-78
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:16:5-78
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:15:22-75
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:16:22-75
 uses-permission#android.permission.WAKE_LOCK
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:16:5-68
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:17:5-68
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:25:5-68
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:24:5-68
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:24:5-68
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:16:22-65
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:17:22-65
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:17:5-19:23
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:18:5-75
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:17:22-72
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:18:22-72
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:19:5-80
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:19:22-77
+uses-permission#android.permission.SYSTEM_ALERT_WINDOW
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:20:5-78
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:20:22-75
+uses-feature#android.hardware.camera
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:22:5-60
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:22:19-57
+uses-permission#android.permission.CAMERA
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:23:5-65
+MERGED from [:annca] F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\annca\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:11:5-65
+MERGED from [:annca] F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\annca\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:11:5-65
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:23:22-62
+uses-permission#android.hardware.camera.autofocus
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:24:5-73
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:24:22-70
 supports-screens
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:21:5-23:39
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:26:5-28:39
 	android:largeScreens
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:23:9-36
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:28:9-36
 	android:anyDensity
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:22:9-34
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:27:9-34
 application
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:27:5-208:19
-MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\b1178a5d02fd3de3d7f940f49eaea733\AndroidManifest.xml:12:5-20
-MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\b1178a5d02fd3de3d7f940f49eaea733\AndroidManifest.xml:12:5-20
-MERGED from [com.google.android.gms:play-services-location:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-9.0.2.aar\4f216ad8a4f251ae13d5fb8b8885ca8a\AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-location:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-9.0.2.aar\4f216ad8a4f251ae13d5fb8b8885ca8a\AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:27:5-20
-MERGED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:27:5-20
-MERGED from [com.google.android.gms:play-services-appindexing:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.2.aar\242e8443e8bfa48b9dc8f6a3e53949b4\AndroidManifest.xml:19:5-20
-MERGED from [com.google.android.gms:play-services-appindexing:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.2.aar\242e8443e8bfa48b9dc8f6a3e53949b4\AndroidManifest.xml:19:5-20
-MERGED from [com.android.support:design:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:design:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\1e1f6356d37e5ed76a8b2ca04474cec6\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\1e1f6356d37e5ed76a8b2ca04474cec6\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\5a6f0734dee520f98e26a9b8ab3f6353\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\5a6f0734dee520f98e26a9b8ab3f6353\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\a677fd887f51843524663bb93319a80a\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\a677fd887f51843524663bb93319a80a\AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-base:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\AndroidManifest.xml:19:5-23:19
-MERGED from [com.google.android.gms:play-services-base:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\AndroidManifest.xml:19:5-23:19
-MERGED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:5:5-12:19
-MERGED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:5:5-12:19
-MERGED from [com.google.android.gms:play-services-tasks:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-9.0.2.aar\b6fc486bd326572ee20b4d6b03468919\AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-tasks:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-9.0.2.aar\b6fc486bd326572ee20b4d6b03468919\AndroidManifest.xml:5:5-20
-MERGED from [com.google.android.gms:play-services-basement:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.0.2.aar\ebc2e159ecf722c3fc9a69cae50bd0e8\AndroidManifest.xml:20:5-24:19
-MERGED from [com.google.android.gms:play-services-basement:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.0.2.aar\ebc2e159ecf722c3fc9a69cae50bd0e8\AndroidManifest.xml:20:5-24:19
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\3be156526f84cb2ed8e785181eaa3890\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\3be156526f84cb2ed8e785181eaa3890\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\286c4d6e5f5c60e0f0922eb29daf1738\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\286c4d6e5f5c60e0f0922eb29daf1738\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:transition:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\a895e05311da31e47f1e8115e53729af\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:transition:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\a895e05311da31e47f1e8115e53729af\AndroidManifest.xml:22:5-26:19
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\8f26950258d32905f485da685d372ef4\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\8f26950258d32905f485da685d372ef4\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\62853b374eaf104cb7814ba00231d137\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\62853b374eaf104cb7814ba00231d137\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\a1176972df82534082c05a52c9ec7c39\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\a1176972df82534082c05a52c9ec7c39\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\eca61112a6e32879479fd7149d8342d8\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\eca61112a6e32879479fd7149d8342d8\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\a18ffef0d42b1dee74cb4019e5af9cb8\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\a18ffef0d42b1dee74cb4019e5af9cb8\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\4387fdc629eea250186a10025dbcae02\AndroidManifest.xml:25:5-29:19
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\4387fdc629eea250186a10025dbcae02\AndroidManifest.xml:25:5-29:19
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\31d79459d66fc10d6b9cd4cf87471b01\AndroidManifest.xml:24:5-28:19
-MERGED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\31d79459d66fc10d6b9cd4cf87471b01\AndroidManifest.xml:24:5-28:19
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:30:5-237:19
+MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\68e4aa936bee9fc250a6999ec71af230\AndroidManifest.xml:12:5-20
+MERGED from [com.github.clans:fab:1.6.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fab-1.6.2.aar\68e4aa936bee9fc250a6999ec71af230\AndroidManifest.xml:12:5-20
+MERGED from [com.google.android.gms:play-services-location:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-11.8.0.aar\c97831d9b10efb1eecff08cadd4bf181\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-11.8.0.aar\c97831d9b10efb1eecff08cadd4bf181\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:30:5-20
+MERGED from [com.google.android.gms:play-services-appindexing:9.0.1] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.1.aar\d63c78326c63621758d6e4b34edce635\AndroidManifest.xml:19:5-20
+MERGED from [com.google.android.gms:play-services-appindexing:9.0.1] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-appindexing-9.0.1.aar\d63c78326c63621758d6e4b34edce635\AndroidManifest.xml:19:5-20
+MERGED from [:annca] F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\annca\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:13:5-16:19
+MERGED from [:annca] F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\annca\build\intermediates\merged_manifests\debug\processDebugManifest\merged\AndroidManifest.xml:13:5-16:19
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:11:5-17:19
+MERGED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:11:5-17:19
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\dd607a9b03cba5f41ebd72e0dcd3693c\AndroidManifest.xml:9:5-20
+MERGED from [com.android.support.constraint:constraint-layout:1.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\constraint-layout-1.0.2.aar\dd607a9b03cba5f41ebd72e0dcd3693c\AndroidManifest.xml:9:5-20
+MERGED from [com.google.firebase:firebase-core:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-core-11.8.0.aar\fba1c43bf5940cdb168a7b57f5d2a79c\AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-core:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-core-11.8.0.aar\fba1c43bf5940cdb168a7b57f5d2a79c\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\958aeea5e1afd61ac10947667f24d82c\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\958aeea5e1afd61ac10947667f24d82c\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:27:5-52:19
+MERGED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:27:5-52:19
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:27:5-38:19
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:27:5-38:19
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:34:5-57:19
+MERGED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:34:5-57:19
+MERGED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:7:5-13:19
+MERGED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:7:5-13:19
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-11.8.0.aar\2e5e28c3f05bf9730253941f298f5159\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-11.8.0.aar\2e5e28c3f05bf9730253941f298f5159\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.8.0.aar\e1c1a5b0e38054154b8e924c6b91b435\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.8.0.aar\e1c1a5b0e38054154b8e924c6b91b435\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-location-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-license-11.8.0.aar\a942b992fb0814e02c65f1def443b1bc\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-location-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-location-license-11.8.0.aar\a942b992fb0814e02c65f1def443b1bc\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-license-11.8.0.aar\6ec07a050be7a45fdc649d6c150c08eb\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-maps-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-license-11.8.0.aar\6ec07a050be7a45fdc649d6c150c08eb\AndroidManifest.xml:5:5-20
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.6.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-core-2.6.4.aar\1ef0c451d95b17b8b285f186fe26ff28\AndroidManifest.xml:54:5-20
+MERGED from [com.crashlytics.sdk.android:crashlytics-core:2.6.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-core-2.6.4.aar\1ef0c451d95b17b8b285f186fe26ff28\AndroidManifest.xml:54:5-20
+MERGED from [com.crashlytics.sdk.android:answers:1.4.3] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\answers-1.4.3.aar\6d4e83c0f7446306f93a2485de688e3f\AndroidManifest.xml:11:5-20
+MERGED from [com.crashlytics.sdk.android:answers:1.4.3] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\answers-1.4.3.aar\6d4e83c0f7446306f93a2485de688e3f\AndroidManifest.xml:11:5-20
+MERGED from [com.crashlytics.sdk.android:beta:1.2.10] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\beta-1.2.10.aar\c9bbe5459477b0f3bdfa9add924b8ceb\AndroidManifest.xml:11:5-20
+MERGED from [com.crashlytics.sdk.android:beta:1.2.10] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\beta-1.2.10.aar\c9bbe5459477b0f3bdfa9add924b8ceb\AndroidManifest.xml:11:5-20
+MERGED from [io.fabric.sdk.android:fabric:1.4.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fabric-1.4.4.aar\30ef74a6153d6c3f1ce5814e222add4d\AndroidManifest.xml:31:5-20
+MERGED from [io.fabric.sdk.android:fabric:1.4.4] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\fabric-1.4.4.aar\30ef74a6153d6c3f1ce5814e222add4d\AndroidManifest.xml:31:5-20
+MERGED from [com.google.firebase:firebase-analytics-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-license-11.8.0.aar\ce3af46d7e5751b4aef72d8e9f99eb62\AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-analytics-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-license-11.8.0.aar\ce3af46d7e5751b4aef72d8e9f99eb62\AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-license-11.8.0.aar\0333b419dc8c859b45d7e787ee04afc1\AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-analytics-impl-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-license-11.8.0.aar\0333b419dc8c859b45d7e787ee04afc1\AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-iid-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-license-11.8.0.aar\0123d9b08c1dd0e314cd5c757aca7fd6\AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-iid-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-license-11.8.0.aar\0123d9b08c1dd0e314cd5c757aca7fd6\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\bd2f65dff6ba6b2cdc08ddc806a6c5aa\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-base-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-license-11.8.0.aar\bd2f65dff6ba6b2cdc08ddc806a6c5aa\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-license-11.8.0.aar\1a34d40b7c7a26944376b9f0bc4a16a5\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-license-11.8.0.aar\1a34d40b7c7a26944376b9f0bc4a16a5\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-license-11.8.0.aar\7cb5446f369b919115c22ad31931ba7c\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-tasks-license-11.8.0.aar\7cb5446f369b919115c22ad31931ba7c\AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-common-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-license-11.8.0.aar\c69ecaf0173e61f5bcd9c4e0882252d6\AndroidManifest.xml:5:5-20
+MERGED from [com.google.firebase:firebase-common-license:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-license-11.8.0.aar\c69ecaf0173e61f5bcd9c4e0882252d6\AndroidManifest.xml:5:5-20
+	android:supportsRtl
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:36:9-35
 	android:label
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:31:9-41
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:34:9-41
+	android:largeHeap
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:35:9-33
 	android:icon
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:30:9-38
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:33:9-38
 	android:allowBackup
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:29:9-35
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:32:9-35
 	android:theme
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:32:9-40
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:37:9-40
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:28:9-56
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:31:9-56
 activity#com.cpm.gsk_mt.LoginActivity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:33:9-41:20
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:38:9-47:20
+	android:screenOrientation
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:41:13-49
 	android:label
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:35:13-45
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:40:13-45
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:34:13-56
-intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:36:13-40:29
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:39:13-56
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:42:13-46:29
 action#android.intent.action.MAIN
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:37:17-69
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:43:17-69
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:37:25-66
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:43:25-66
 category#android.intent.category.LAUNCHER
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:39:17-77
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:45:17-77
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:39:27-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:45:27-74
 activity#com.cpm.gsk_mt.MainMenuActivity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:42:9-45:52
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:48:9-51:52
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:45:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:51:13-49
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:44:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:50:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:43:13-59
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:49:13-59
 activity#com.cpm.CompleteDownload.CompleteDownloadActivity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:46:9-49:52
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:52:9-55:52
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:49:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:55:13-49
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:48:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:54:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:47:13-77
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:53:13-77
 activity#com.cpm.DailyEntry.CopyOfStorelistActivity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:51:9-54:52
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:56:9-59:52
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:54:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:59:13-49
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:53:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:58:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:52:13-70
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:57:13-70
 activity#com.cpm.DailyEntry.StoreInformationActivity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:55:9-58:52
-	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:58:13-49
-	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:57:13-74
-	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:56:13-71
-activity#com.cpm.geotagging.LocationActivity
 ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:60:9-63:52
 	android:screenOrientation
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:63:13-49
 	android:configChanges
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:62:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:61:13-63
-activity#com.cpm.DailyEntry.StoreVisitedActivity
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:61:13-71
+activity#com.cpm.geotagging.LocationActivity
 ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:64:9-67:52
 	android:screenOrientation
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:67:13-49
 	android:configChanges
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:66:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:65:13-67
-activity#com.cpm.DailyEntry.StorevisitedYesMenu
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:65:13-63
+activity#com.cpm.DailyEntry.StoreVisitedActivity
 ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:68:9-71:52
 	android:screenOrientation
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:71:13-49
 	android:configChanges
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:70:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:69:13-66
-activity#com.cpm.DailyEntry.CopyOfStorevisitedYesMenu
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:69:13-67
+activity#com.cpm.DailyEntry.StorevisitedYesMenu
 ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:72:9-75:52
 	android:screenOrientation
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:75:13-49
 	android:configChanges
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:74:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:73:13-72
-activity#com.cpm.DailyEntry.DailyEntryMainMenu
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:73:13-66
+activity#com.cpm.DailyEntry.CopyOfStorevisitedYesMenu
 ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:76:9-79:52
 	android:screenOrientation
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:79:13-49
 	android:configChanges
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:78:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:77:13-65
-activity#com.cpm.DailyEntry.NonWorkingActivity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:80:9-84:58
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:77:13-72
+activity#com.cpm.DailyEntry.DailyEntryMainMenu
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:80:9-83:52
 	android:screenOrientation
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:83:13-49
-	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:84:13-55
 	android:configChanges
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:82:13-74
 	android:name
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:81:13-65
+activity#com.cpm.DailyEntry.NonWorkingActivity
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:84:9-88:58
+	android:screenOrientation
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:87:13-49
+	android:windowSoftInputMode
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:88:13-55
+	android:configChanges
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:86:13-74
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:85:13-65
 activity#com.cpm.autoupdate.AutoupdateActivity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:85:9-89:58
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:89:9-93:58
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:88:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:92:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:89:13-55
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:93:13-55
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:87:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:91:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:86:13-65
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:90:13-65
 activity#com.cpm.DailyEntry.AfterStockActivity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:90:9-94:68
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:94:9-98:68
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:93:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:97:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:94:13-65
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:98:13-65
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:92:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:96:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:91:13-65
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:95:13-65
 activity#com.cpm.DailyEntry.BeforeTOT
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:95:9-99:68
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:99:9-103:68
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:98:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:102:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:99:13-65
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:103:13-65
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:97:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:101:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:96:13-56
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:100:13-56
 activity#com.cpm.DailyEntry.TOTstock_Activity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:100:9-104:68
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:104:9-108:68
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:103:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:107:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:104:13-65
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:108:13-65
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:102:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:106:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:101:13-64
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:105:13-64
 activity#com.cpm.DailyEntry.Sales
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:105:9-109:68
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:109:9-113:68
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:108:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:112:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:109:13-65
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:113:13-65
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:107:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:111:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:106:13-52
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:110:13-52
 activity#com.cpm.DailyEntry.CompetitionTracking
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:110:9-114:58
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:114:9-118:58
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:113:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:117:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:114:13-55
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:118:13-55
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:112:13-59
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:116:13-59
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:111:13-66
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:115:13-66
 activity#com.cpm.DailyEntry.BeforeStock
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:117:9-121:55
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:119:9-123:55
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:120:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:122:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:121:13-52
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:123:13-52
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:119:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:121:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:118:13-58
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:120:13-58
 activity#com.cpm.DailyEntry.StockwareHouse
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:122:9-126:55
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:124:9-128:55
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:125:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:127:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:126:13-52
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:128:13-52
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:124:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:126:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:123:13-61
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:125:13-61
 activity#com.cpm.DailyEntry.AfterTOT
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:127:9-131:55
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:129:9-133:55
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:130:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:132:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:131:13-52
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:133:13-52
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:129:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:131:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:128:13-55
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:130:13-55
 activity#com.cpm.DailyEntry.BeforeAdditionalDisplay
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:132:9-135:52
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:134:9-137:52
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:135:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:137:13-49
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:134:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:136:13-74
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:133:13-70
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:135:13-70
 activity#com.cpm.DailyEntry.StoreWisePerformance
 ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:138:9-141:52
 	android:screenOrientation
@@ -414,11 +549,11 @@ ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\sr
 	android:name
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:143:13-70
 activity#com.cpm.DailyEntry.PromoCompliance
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:146:9-150:52
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:146:9-150:68
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:150:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:149:13-49
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:149:13-65
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:150:13-65
 	android:configChanges
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:148:13-74
 	android:name
@@ -476,90 +611,228 @@ ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\sr
 	android:name
 		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:176:23-61
 meta-data#com.google.android.maps.v2.API_KEY
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:184:9-186:71
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:181:9-183:71
 	android:value
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:186:13-68
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:183:13-68
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:185:13-62
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:182:13-62
 meta-data#com.google.android.gms.version
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:189:9-191:69
-MERGED from [com.google.android.gms:play-services-basement:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.0.2.aar\ebc2e159ecf722c3fc9a69cae50bd0e8\AndroidManifest.xml:21:9-23:69
-MERGED from [com.google.android.gms:play-services-basement:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-9.0.2.aar\ebc2e159ecf722c3fc9a69cae50bd0e8\AndroidManifest.xml:21:9-23:69
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:185:9-187:69
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.8.0.aar\e1c1a5b0e38054154b8e924c6b91b435\AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-basement-11.8.0.aar\e1c1a5b0e38054154b8e924c6b91b435\AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:191:13-66
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:187:13-66
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:190:13-58
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:186:13-58
 activity#com.cpm.geotagging.GeoTagActivity
-ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:199:9-207:20
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:196:9-202:55
 	android:screenOrientation
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:203:13-49
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:200:13-49
 	android:label
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:202:13-59
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:199:13-59
 	android:windowSoftInputMode
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:205:13-52
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:202:13-52
 	android:configChanges
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:201:13-74
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:198:13-74
 	android:theme
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:204:13-56
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:201:13-56
 	android:name
-		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:200:13-61
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:197:13-61
+activity#com.cpm.DailyEntry.MerchandisingAttendenceActivity
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:204:9-208:55
+	android:screenOrientation
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:207:13-49
+	android:windowSoftInputMode
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:208:13-52
+	android:configChanges
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:206:13-74
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:205:13-78
+activity#com.cpm.gsk_mt.NoticeBoardActivity
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:210:9-214:55
+	android:screenOrientation
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:213:13-49
+	android:windowSoftInputMode
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:214:13-52
+	android:configChanges
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:212:13-74
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:211:13-62
+activity#com.cpm.DailyEntry.CompetitionPromotionActivity
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:216:9-221:64
+	android:screenOrientation
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:220:13-49
+	android:label
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:219:13-50
+	android:windowSoftInputMode
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:221:13-52
+	android:configChanges
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:218:13-74
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:217:13-75
+activity#io.github.memfis19.annca.internal.ui.camera.Camera1Activity
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:224:9-227:54
+	android:screenOrientation
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:226:13-49
+	android:theme
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:227:13-51
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:225:13-87
+activity#io.github.memfis19.annca.internal.ui.camera2.Camera2Activity
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:228:9-231:54
+	android:screenOrientation
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:230:13-49
+	android:theme
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:231:13-51
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:229:13-88
+activity#io.github.memfis19.annca.internal.ui.preview.PreviewActivity
+ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:232:9-235:54
+	android:screenOrientation
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:234:13-49
+	android:theme
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:235:13-51
+	android:name
+		ADDED from F:\jeevanAndroidProject\androidProject\gskMT 7 March\GSK_MT1\GSKMT\src\main\AndroidManifest.xml:233:13-88
 uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:22:5-24:33
+ADDED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:26:5-28:35
 	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:23:8-40
+		ADDED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:27:9-41
 	android:required
-		ADDED from [com.google.android.gms:play-services-maps:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-9.0.2.aar\db03edbe6c98097f0a206d4b028af020\AndroidManifest.xml:24:8-31
-meta-data#android.support.VERSION
-ADDED from [com.android.support:design:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\1e1f6356d37e5ed76a8b2ca04474cec6\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:appcompat-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\appcompat-v7-26.1.0.aar\1e1f6356d37e5ed76a8b2ca04474cec6\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\5a6f0734dee520f98e26a9b8ab3f6353\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:cardview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\cardview-v7-26.1.0.aar\5a6f0734dee520f98e26a9b8ab3f6353\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\a677fd887f51843524663bb93319a80a\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:recyclerview-v7:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\recyclerview-v7-26.1.0.aar\a677fd887f51843524663bb93319a80a\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\3be156526f84cb2ed8e785181eaa3890\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:animated-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\animated-vector-drawable-26.1.0.aar\3be156526f84cb2ed8e785181eaa3890\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\286c4d6e5f5c60e0f0922eb29daf1738\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-vector-drawable:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-vector-drawable-26.1.0.aar\286c4d6e5f5c60e0f0922eb29daf1738\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:transition:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\a895e05311da31e47f1e8115e53729af\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:transition:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\transition-26.1.0.aar\a895e05311da31e47f1e8115e53729af\AndroidManifest.xml:23:9-25:38
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\8f26950258d32905f485da685d372ef4\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-v4:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-v4-26.1.0.aar\8f26950258d32905f485da685d372ef4\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\62853b374eaf104cb7814ba00231d137\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-fragment:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-fragment-26.1.0.aar\62853b374eaf104cb7814ba00231d137\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\a1176972df82534082c05a52c9ec7c39\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-ui:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-ui-26.1.0.aar\a1176972df82534082c05a52c9ec7c39\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\eca61112a6e32879479fd7149d8342d8\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-media-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-media-compat-26.1.0.aar\eca61112a6e32879479fd7149d8342d8\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\a18ffef0d42b1dee74cb4019e5af9cb8\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-core-utils:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-core-utils-26.1.0.aar\a18ffef0d42b1dee74cb4019e5af9cb8\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\4387fdc629eea250186a10025dbcae02\AndroidManifest.xml:26:9-28:38
-MERGED from [com.android.support:support-compat:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\support-compat-26.1.0.aar\4387fdc629eea250186a10025dbcae02\AndroidManifest.xml:26:9-28:38
-	android:value
-		ADDED from [com.android.support:design:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\AndroidManifest.xml:28:13-35
-	android:name
-		ADDED from [com.android.support:design:26.1.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\design-26.1.0.aar\9055242149d2d2ffcc063bf1ffecd5e5\AndroidManifest.xml:27:13-51
-activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\AndroidManifest.xml:20:9-22:45
-	android:exported
-		ADDED from [com.google.android.gms:play-services-base:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\AndroidManifest.xml:22:19-43
-	android:theme
-		ADDED from [com.google.android.gms:play-services-base:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\AndroidManifest.xml:21:19-78
-	android:name
-		ADDED from [com.google.android.gms:play-services-base:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-9.0.2.aar\efbeb5270cca2b41092b8da47634ae7a\AndroidManifest.xml:20:19-85
-provider#com.google.firebase.provider.FirebaseInitProvider
-ADDED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:7:9-11:39
+		ADDED from [com.google.android.gms:play-services-maps:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-maps-11.8.0.aar\fae2c76c59bda4b51b802bc79af7e94e\AndroidManifest.xml:28:9-32
+provider#com.crashlytics.android.CrashlyticsInitProvider
+ADDED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:12:9-16:38
 	android:authorities
-		ADDED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:8:13-72
+		ADDED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:14:13-75
 	android:exported
-		ADDED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:10:13-37
+		ADDED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:15:13-37
 	android:initOrder
-		ADDED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:11:13-36
+		ADDED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:16:13-35
 	android:name
-		ADDED from [com.google.firebase:firebase-common:9.0.2] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-9.0.2.aar\9663599f0b89943af9e51fc03b9aaaea\AndroidManifest.xml:9:13-58
-meta-data#android.arch.lifecycle.VERSION
-ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\31d79459d66fc10d6b9cd4cf87471b01\AndroidManifest.xml:25:9-27:47
-	android:value
-		ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\31d79459d66fc10d6b9cd4cf87471b01\AndroidManifest.xml:27:13-44
+		ADDED from [com.crashlytics.sdk.android:crashlytics:2.9.5] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\crashlytics-2.9.5.aar\aaf612d46d1e65b426719dcb7bb58b05\AndroidManifest.xml:13:13-75
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\958aeea5e1afd61ac10947667f24d82c\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\958aeea5e1afd61ac10947667f24d82c\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\958aeea5e1afd61ac10947667f24d82c\AndroidManifest.xml:26:13-72
 	android:name
-		ADDED from [android.arch.lifecycle:runtime:1.0.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\runtime-1.0.0.aar\31d79459d66fc10d6b9cd4cf87471b01\AndroidManifest.xml:26:13-58
+		ADDED from [com.google.android.gms:play-services-base:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\play-services-base-11.8.0.aar\958aeea5e1afd61ac10947667f24d82c\AndroidManifest.xml:24:13-79
+receiver#com.google.android.gms.measurement.AppMeasurementReceiver
+ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:28:9-32:20
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:28:9-32:20
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:28:9-32:20
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:30:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:31:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:29:13-85
+receiver#com.google.android.gms.measurement.AppMeasurementInstallReferrerReceiver
+ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:33:9-41:20
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:35:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:36:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:37:13-69
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:34:13-100
+intent-filter#action:name:com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:38:13-40:29
+action#com.android.vending.INSTALL_REFERRER
+ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:39:17-79
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:39:25-76
+service#com.google.android.gms.measurement.AppMeasurementService
+ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:43:9-46:40
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:34:9-37:40
+MERGED from [com.google.firebase:firebase-analytics-impl:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-impl-11.8.0.aar\975612f545c6863dbceba7e75fbe75d9\AndroidManifest.xml:34:9-37:40
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:45:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:46:13-37
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:44:13-84
+service#com.google.android.gms.measurement.AppMeasurementJobService
+ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:47:9-51:72
+	android:enabled
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:49:13-35
+	android:exported
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:50:13-37
+	android:permission
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:51:13-69
+	android:name
+		ADDED from [com.google.firebase:firebase-analytics:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-analytics-11.8.0.aar\f98dcacc4a0eaa27368f98e6a386abfe\AndroidManifest.xml:48:13-87
+uses-permission#com.google.android.c2dm.permission.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:26:5-82
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:26:22-79
+permission#${applicationId}.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:28:5-30:47
+	android:protectionLevel
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:30:9-44
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:29:9-63
+permission#com.example.gsk_mtt.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:28:5-30:47
+	android:protectionLevel
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:30:9-44
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:29:9-63
+uses-permission#${applicationId}.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:32:5-79
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:32:22-76
+uses-permission#com.example.gsk_mtt.permission.C2D_MESSAGE
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:32:5-79
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:32:22-76
+receiver#com.google.firebase.iid.FirebaseInstanceIdReceiver
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:35:9-44:20
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:37:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:38:13-73
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:36:13-78
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE+category:name:${applicationId}
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:39:13-43:29
+intent-filter#action:name:com.google.android.c2dm.intent.RECEIVE+category:name:com.example.gsk_mtt
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:39:13-43:29
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:40:17-81
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:40:25-78
+category#${applicationId}
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:42:17-61
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:42:27-58
+category#com.example.gsk_mtt
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:42:17-61
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:42:27-58
+service#com.google.firebase.iid.FirebaseInstanceIdService
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:50:9-56:19
+	android:exported
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:52:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:51:13-77
+intent-filter#action:name:com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:53:13-55:29
+	android:priority
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:53:28-51
+action#com.google.firebase.INSTANCE_ID_EVENT
+ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:54:17-80
+	android:name
+		ADDED from [com.google.firebase:firebase-iid:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-iid-11.8.0.aar\a632ed5e852870f77cdca76bbeb6083f\AndroidManifest.xml:54:25-77
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:8:9-12:39
+	android:authorities
+		ADDED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:10:13-72
+	android:exported
+		ADDED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:11:13-37
+	android:initOrder
+		ADDED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:12:13-36
+	android:name
+		ADDED from [com.google.firebase:firebase-common:11.8.0] C:\Users\jeevanp\.gradle\caches\transforms-1\files-1.1\firebase-common-11.8.0.aar\d1b5c84596d264df5bf6eb50fed97ad6\AndroidManifest.xml:9:13-77

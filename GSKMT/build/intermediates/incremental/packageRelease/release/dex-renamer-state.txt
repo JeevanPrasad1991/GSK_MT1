@@ -1,4 +1,0 @@
-#Tue Jan 30 19:43:37 IST 2018
-base.0=E\:\\GSK_MT1\\GSKMT\\build\\intermediates\\transforms\\dex\\release\\0
-path.0=classes.dex
-renamed.0=classes.dex

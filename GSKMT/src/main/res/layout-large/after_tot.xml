@@ -87,6 +87,7 @@
         android:choiceMode="none"
         android:divider="#ff9933"
         android:dividerHeight="4dp"
+        android:layout_marginBottom="30dp"
         android:descendantFocusability="beforeDescendants" >
     </ListView>
 

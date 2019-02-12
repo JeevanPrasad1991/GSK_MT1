@@ -44,7 +44,9 @@ import com.cpm.delegates.TOTBean;
 
 import com.cpm.message.AlertMessage;
 import com.cpm.xmlGetterSetter.FailureGetterSetter;
+import com.cpm.xmlGetterSetter.SKUGetterSetter;
 import com.cpm.xmlHandler.FailureXMLHandler;
+import com.crashlytics.android.Crashlytics;
 import com.example.gsk_mtt.R;
 
 public class UploadDataActivity extends Activity {
@@ -77,7 +79,9 @@ public class UploadDataActivity extends Activity {
     private FailureGetterSetter failureGetterSetter = null;
     StoreBean storestatus = new StoreBean();
     ArrayList<GeotaggingBeans> geotaglist = new ArrayList<GeotaggingBeans>();
+    ArrayList<SKUGetterSetter> competitionpromotionList = new ArrayList<>();
     String sub_reason = "0";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,7 +94,12 @@ public class UploadDataActivity extends Activity {
         app_ver = preferences.getString(CommonString.KEY_VERSION, "");
         database = new GSKMTDatabase(this);
         database.open();
-        new UploadTask(this).execute();
+        try {
+            new UploadTask(this).execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Crashlytics.logException(e);
+        }
     }
 
     @Override
@@ -99,6 +108,7 @@ public class UploadDataActivity extends Activity {
         startActivity(i);
         UploadDataActivity.this.finish();
     }
+
     private class UploadTask extends AsyncTask<Void, Void, String> {
         private Context context;
 
@@ -108,9 +118,7 @@ public class UploadDataActivity extends Activity {
 
         @Override
         protected void onPreExecute() {
-
             super.onPreExecute();
-
             dialog = new Dialog(context);
             dialog.setContentView(R.layout.custom);
             dialog.setTitle("Uploading Data");
@@ -119,7 +127,7 @@ public class UploadDataActivity extends Activity {
             pb = (ProgressBar) dialog.findViewById(R.id.progressBar1);
             percentage = (TextView) dialog.findViewById(R.id.percentage);
             message = (TextView) dialog.findViewById(R.id.message);
-            final TextView tv_title=dialog.findViewById(R.id.tv_title);
+            final TextView tv_title = dialog.findViewById(R.id.tv_title);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -140,14 +148,17 @@ public class UploadDataActivity extends Activity {
                 AlertMessage message = new AlertMessage(UploadDataActivity.this, AlertMessage.MESSAGE_ERROR
                         + result, "success", null);
                 message.showMessage();
+            } else {
+                AlertMessage message = new AlertMessage(UploadDataActivity.this, AlertMessage.MESSAGE_SOCKETEXCEPTION + result, "success", null);
+                message.showMessage();
             }
 
         }
 
         @Override
         protected String doInBackground(Void... params) {
-            database.open();
             try {
+                database.open();
                 coverageBeanlist = database.getCoverageData(visit_date, null, null);
                 geotaglist = database.getGeotaggingData("Y");
                 if (coverageBeanlist.size() > 0 || geotaglist.size() == 0) {
@@ -157,11 +168,11 @@ public class UploadDataActivity extends Activity {
                         factor = 100 / (coverageBeanlist.size() + geotaglist.size());
                     }
                 }
-
                 SAXParserFactory saxPF = SAXParserFactory.newInstance();
                 SAXParser saxP = saxPF.newSAXParser();
                 XMLReader xmlR = saxP.getXMLReader();
                 for (int i = 0; i < coverageBeanlist.size(); i++) {
+                    database.open();
                     storestatus = database.getStoreStatus(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                     if (coverageBeanlist.get(i).getSub_reasonId().equals("")) {
                         sub_reason = "0";
@@ -169,8 +180,7 @@ public class UploadDataActivity extends Activity {
                         sub_reason = coverageBeanlist.get(i).getSub_reasonId();
                     }
 
-                    if (storestatus.getUPLOAD_STATUS().equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE) ||
-                            storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_C)) {
+                    if (storestatus.getUPLOAD_STATUS().equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE) || storestatus.getCHECKOUT_STATUS().equalsIgnoreCase(CommonString.KEY_C)) {
                         if (!coverageBeanlist.get(i).getStatus().equalsIgnoreCase("D")) {
                             String onXML = "[DATA][USER_DATA][STORE_ID]"
                                     + coverageBeanlist.get(i).getStoreId()
@@ -222,16 +232,13 @@ public class UploadDataActivity extends Activity {
                             words = datacheck.split("\\;");
                             validity = (words[0]);
                             if (validity.equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
-                                database.updateCoverageStatus(coverageBeanlist.get(i).getStoreId(),
-                                        CommonString.KEY_P, coverageBeanlist.get(i).getProcess_id());
-                                database.updateStoreStatusOnLeave(coverageBeanlist.get(i).getStoreId(),
-                                        visit_date, CommonString.KEY_P, coverageBeanlist.get(i).getProcess_id());
+                                database.open();
+                                database.updateCoverageStatus(coverageBeanlist.get(i).getStoreId(), CommonString.KEY_P, coverageBeanlist.get(i).getProcess_id());
+                                database.updateStoreStatusOnLeave(coverageBeanlist.get(i).getStoreId(), visit_date, CommonString.KEY_P, coverageBeanlist.get(i).getProcess_id());
                             } else {
-                                if (result.toString().equalsIgnoreCase(
-                                        CommonString.KEY_FALSE)) {
+                                if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                     return CommonString.METHOD_UPLOAD_DR_STORE_COVERAGE;
                                 }
-
                                 // for failure
                                 FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                 xmlR.setContentHandler(failureXMLHandler);
@@ -255,16 +262,15 @@ public class UploadDataActivity extends Activity {
                                 }
                             });
 
-                            if (!(coverageBeanlist.get(i).getReasonid().equalsIgnoreCase("") || coverageBeanlist
-                                    .get(i).getReasonid().equalsIgnoreCase("0"))) {
-                                System.out.println("");
+                            if (!(coverageBeanlist.get(i).getReasonid().equals("") || coverageBeanlist.get(i).getReasonid().equalsIgnoreCase("0"))) {
                             } else {
                                 database.open();
                                 //  backroom Stock data
-                                backRoomStockData = database.getBackRoomStockDataForUpload(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-
+                                backRoomStockData = database.getBackRoomStockDataForUpload(coverageBeanlist.get(i).getStoreId(),
+                                        coverageBeanlist.get(i).getProcess_id());
                                 String final_data_xml = "";
-                                if (!(backRoomStockData.size() == 0)) {
+                                onXML = "";
+                                if (backRoomStockData.size() > 0) {
                                     for (int j = 0; j < backRoomStockData.size(); j++) {
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
@@ -288,46 +294,26 @@ public class UploadDataActivity extends Activity {
                                     request.addProperty("USERNAME", username);
                                     request.addProperty("XMLDATA", final_data_xml);
 
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
                                     androidHttpTransport = new HttpTransportSE(CommonString.URL);
-                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                            envelope);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
-
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
-
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
-
                                 }
                                 runOnUiThread(new Runnable() {
 
@@ -339,16 +325,11 @@ public class UploadDataActivity extends Activity {
 
                                 //  Sales data
                                 database.open();
-                                salesStockData = database.getsalesStockDataForUpload(coverageBeanlist
-                                        .get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-
+                                salesStockData = database.getsalesStockDataForUpload(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                                 String final_data_xmll = "";
-
-                                if (!(salesStockData.size() == 0)) {
-
+                                onXML = "";
+                                if (salesStockData.size() > 0) {
                                     for (int j = 0; j < salesStockData.size(); j++) {
-
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -365,62 +346,30 @@ public class UploadDataActivity extends Activity {
 
                                     }
 
-
-                                    final_data_xmll = "[DATA]" + final_data_xmll
-                                            + "[/DATA]";
-
-
-                                    request = new SoapObject(
-                                            CommonString.NAMESPACE,
-                                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
-
+                                    final_data_xmll = "[DATA]" + final_data_xmll + "[/DATA]";
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
                                     request.addProperty("MID", mid);
                                     request.addProperty("KEYS", "SALES_XML");
                                     request.addProperty("USERNAME", username);
-
                                     request.addProperty("XMLDATA", final_data_xmll);
-
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
-
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
-
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
 
@@ -434,9 +383,9 @@ public class UploadDataActivity extends Activity {
 
                                 database.open();
                                 // Stock
-                                beforeStockData = database.getStockDataForUpload(coverageBeanlist.get(i).getStoreId(),
-                                        coverageBeanlist.get(i).getProcess_id());
+                                beforeStockData = database.getStockDataForUpload(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                                 String final_xml = "";
+                                onXML = "";
                                 if (!(beforeStockData.size() == 0)) {
                                     for (int j = 0; j < beforeStockData.size(); j++) {
                                         String stock, faceup;
@@ -445,8 +394,6 @@ public class UploadDataActivity extends Activity {
                                         } else {
                                             stock = beforeStockData.get(j).getBefore_Stock();
                                         }
-
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -484,33 +431,19 @@ public class UploadDataActivity extends Activity {
                                     androidHttpTransport = new HttpTransportSE(CommonString.URL);
                                     androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
 
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
-
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
 
@@ -522,19 +455,16 @@ public class UploadDataActivity extends Activity {
                                     }
                                 });
 
+
+                                /////changesssssss
                                 database.open();
                                 //Shelf Visibility Data uploading
-                                shelfData = database
-                                        .getInsertedShelfDataForUpload(coverageBeanlist
-                                                .get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-
+                                // shelfData = database.getInsertedShelfDataForUpload(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
+                                shelfData = database.getInsertedShelfFacingStockDataForUpload(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                                 String shelf_xml = "";
-
-                                if (!(shelfData.size() == 0)) {
-
+                                onXML = "";
+                                if (shelfData.size() > 0) {
                                     for (int j = 0; j < shelfData.size(); j++) {
-
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -542,7 +472,6 @@ public class UploadDataActivity extends Activity {
                                                 + "[/CREATED_BY][CATEGORY_ID]"
                                                 + shelfData.get(j).getCate_id()
                                                 + "[/CATEGORY_ID]"
-
                                                 + "[PROCESS_ID]"
                                                 + shelfData.get(j).getProcess_id()
                                                 + "[/PROCESS_ID][STORE_TYPEID]"
@@ -550,61 +479,39 @@ public class UploadDataActivity extends Activity {
                                                 + "[/STORE_TYPEID]"
                                                 + "[BRAND_ID]"
                                                 + shelfData.get(j).getBrand_id()
-                                                + "[/BRAND_ID][SHELF_ID]"
-                                                + shelfData.get(j).getShelf_id()
-                                                + "[/SHELF_ID][YESNO]"
+                                                + "[/BRAND_ID][FACING_TARGET]"
+                                                + shelfData.get(j).getFacing_Target()
+                                                + "[/FACING_TARGET][YESORNO]"
                                                 + shelfData.get(j).getAnswer()
-                                                + "[/YESNO][IMAGE_URL]"
+                                                + "[/YESORNO][IMAGE_URL]"
                                                 + shelfData.get(j).getImage()
                                                 + "[/IMAGE_URL][/USER_DATA]";
+
 
                                         shelf_xml = shelf_xml + onXML;
 
                                     }
-
-
-                                    shelf_xml = "[DATA]" + shelf_xml
-                                            + "[/DATA]";
-
-
-                                    request = new SoapObject(
-                                            CommonString.NAMESPACE,
-                                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
-
+                                    shelf_xml = "[DATA]" + shelf_xml + "[/DATA]";
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
                                     request.addProperty("MID", mid);
-                                    request.addProperty("KEYS", "SHELF_VISIBILITY_XML");
+                                    request.addProperty("KEYS", "SHELF_VISIBILITY_FACING_XML");
                                     request.addProperty("USERNAME", username);
-
                                     request.addProperty("XMLDATA", shelf_xml);
-
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
 
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
 
                                         failureGetterSetter = failureXMLHandler
@@ -630,17 +537,11 @@ public class UploadDataActivity extends Activity {
                                 });
 
                                 database.open();
-                                stockImages = database
-                                        .getStockImagesForUpload(coverageBeanlist
-                                                .get(i).getStoreId(), username, coverageBeanlist.get(i).getProcess_id());
-
+                                stockImages = database.getStockImagesForUpload(coverageBeanlist.get(i).getStoreId(), username, coverageBeanlist.get(i).getProcess_id());
                                 String stock_xml = "";
-
-                                if (!(stockImages.size() == 0)) {
-
+                                onXML = "";
+                                if (stockImages.size() > 0) {
                                     for (int j = 0; j < stockImages.size(); j++) {
-
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -671,61 +572,32 @@ public class UploadDataActivity extends Activity {
                                     }
 
 
-                                    stock_xml = "[DATA]" + stock_xml
-                                            + "[/DATA]";
-
-
-                                    request = new SoapObject(
-                                            CommonString.NAMESPACE,
-                                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
-
+                                    stock_xml = "[DATA]" + stock_xml + "[/DATA]";
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
                                     request.addProperty("MID", mid);
                                     request.addProperty("KEYS", "STOCK_IMAGES");
                                     request.addProperty("USERNAME", username);
 
                                     request.addProperty("XMLDATA", stock_xml);
-
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
 
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
-
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
 
@@ -740,14 +612,10 @@ public class UploadDataActivity extends Activity {
 
                                 // Before TOT Data
                                 database.open();
-                                afterTOTData = database
-                                        .getAfterTOTDataForUpload(coverageBeanlist
-                                                .get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-
+                                afterTOTData = database.getAfterTOTDataForUpload(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                                 String before_tot_xml = "";
-
-                                if (!(afterTOTData.size() == 0)) {
-
+                                onXML = "";
+                                if (afterTOTData.size() > 0) {
                                     for (int j = 0; j < afterTOTData.size(); j++) {
 
                                         onXML = "[USER_DATA][MID]"
@@ -786,61 +654,32 @@ public class UploadDataActivity extends Activity {
                                     }
 
 
-                                    before_tot_xml = "[DATA]" + before_tot_xml
-                                            + "[/DATA]";
+                                    before_tot_xml = "[DATA]" + before_tot_xml + "[/DATA]";
 
 
-                                    request = new SoapObject(
-                                            CommonString.NAMESPACE,
-                                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
-
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
                                     request.addProperty("MID", mid);
                                     request.addProperty("KEYS", "TOT_NEW_XML");
                                     request.addProperty("USERNAME", username);
-
                                     request.addProperty("XMLDATA", before_tot_xml);
-
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
-
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
-
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
 
@@ -855,15 +694,11 @@ public class UploadDataActivity extends Activity {
 
                                 //totStockdata
                                 database.open();
-                                stockTotdata = database.getTOTStockEntryDetailForUpload(coverageBeanlist.get(i).getStoreId(),
-                                        coverageBeanlist.get(i).getProcess_id());
-
+                                stockTotdata = database.getTOTStockEntryDetailForUpload(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                                 String stock_tot_xml = "";
-
-                                if (!(stockTotdata.size() == 0)) {
-
+                                onXML = "";
+                                if (stockTotdata.size() > 0) {
                                     for (int j = 0; j < stockTotdata.size(); j++) {
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -887,39 +722,22 @@ public class UploadDataActivity extends Activity {
                                     }
 
 
-                                    stock_tot_xml = "[DATA]" + stock_tot_xml
-                                            + "[/DATA]";
+                                    stock_tot_xml = "[DATA]" + stock_tot_xml + "[/DATA]";
 
-
-                                    request = new SoapObject(
-                                            CommonString.NAMESPACE,
-                                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
-
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
                                     request.addProperty("MID", mid);
                                     request.addProperty("KEYS", "TOT_STOCK_XML");
                                     request.addProperty("USERNAME", username);
-
                                     request.addProperty("XMLDATA", stock_tot_xml);
 
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
 
@@ -927,21 +745,11 @@ public class UploadDataActivity extends Activity {
                                         xmlR.setContentHandler(failureXMLHandler);
 
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
-
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
 
@@ -955,16 +763,11 @@ public class UploadDataActivity extends Activity {
 
                                 // Promotion Data
                                 database.open();
-                                promotionData = database
-                                        .getInsertedPromoCompliance(coverageBeanlist
-                                                .get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-
+                                promotionData = database.getInsertedPromoCompliance(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                                 String after_tot_xml = "";
-
-                                if (!(promotionData.size() == 0)) {
-
+                                onXML = "";
+                                if (promotionData.size() > 0) {
                                     for (int j = 0; j < promotionData.size(); j++) {
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -979,13 +782,10 @@ public class UploadDataActivity extends Activity {
                                                 + "[/POP][RUNNING_IN_SYSTEM]"
                                                 + promotionData.get(j).getRunning()
                                                 + "[/RUNNING_IN_SYSTEM][RUNNING_IN_SYSTEM_CHILD]"
-
                                                 + promotionData.get(j).getRunning_child_toggle()
                                                 + "[/RUNNING_IN_SYSTEM_CHILD][RUNNING_IN_SYSTEM_CHILD_PRICE]"
-
                                                 + promotionData.get(j).getRunning_child_price()
                                                 + "[/RUNNING_IN_SYSTEM_CHILD_PRICE][PROMOTION]"
-
                                                 + promotionData.get(j).getPromotion()
                                                 + "[/PROMOTION][CATEGORY_ID]"
                                                 + promotionData.get(j).getCategory_id()
@@ -1003,65 +803,41 @@ public class UploadDataActivity extends Activity {
                                     }
 
 
-                                    after_tot_xml = "[DATA]" + after_tot_xml
-                                            + "[/DATA]";
+                                    after_tot_xml = "[DATA]" + after_tot_xml + "[/DATA]";
 
 
-                                    request = new SoapObject(
-                                            CommonString.NAMESPACE,
-                                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
 
                                     request.addProperty("MID", mid);
                                     request.addProperty("KEYS", "PROMOTION_DATA_NEW");
                                     request.addProperty("USERNAME", username);
-
                                     request.addProperty("XMLDATA", after_tot_xml);
 
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
 
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
-
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
 
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
 
                                 }
+
                                 runOnUiThread(new Runnable() {
 
                                     public void run() {
@@ -1070,16 +846,11 @@ public class UploadDataActivity extends Activity {
                                 });
 
                                 database.open();
-                                complianceData = database
-                                        .getAfterComplianceData(coverageBeanlist
-                                                .get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-
+                                complianceData = database.getAfterComplianceData(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                                 String question_xml = "";
-
-                                if (!(complianceData.size() == 0)) {
-
+                                onXML = "";
+                                if (complianceData.size() > 0) {
                                     for (int j = 0; j < complianceData.size(); j++) {
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -1098,7 +869,6 @@ public class UploadDataActivity extends Activity {
                                                 + "[/CATEGORY_ID][/USER_DATA]";
 
                                         question_xml = question_xml + onXML;
-
                                     }
 
 
@@ -1143,9 +913,8 @@ public class UploadDataActivity extends Activity {
                                 sku_brand_list_second = database.getInsertedDisplayListAfterStockUpload(coverageBeanlist
                                         .get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                                 String question_xml_stockAdditional = "";
-
-                                if (!(sku_brand_list_second.size() == 0)) {
-
+                                onXML = "";
+                                if (sku_brand_list_second.size() > 0) {
                                     for (int j = 0; j < sku_brand_list_second.size(); j++) {
 
                                         onXML = "[USER_DATA][MID]"
@@ -1173,53 +942,31 @@ public class UploadDataActivity extends Activity {
                                     request.addProperty("MID", mid);
                                     request.addProperty("KEYS", "PRIMARY_WINDOW_DISPLAY_WITH_IMAGE");
                                     request.addProperty("USERNAME", username);
-
                                     request.addProperty("XMLDATA", question_xml_stockAdditional);
-
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
 
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
 
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
-
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
 
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
 
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
-
                                 }
                                 runOnUiThread(new Runnable() {
 
@@ -1234,11 +981,9 @@ public class UploadDataActivity extends Activity {
                                                 .get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
 
                                 String question_xml_stockAfter = "";
-
-                                if (!(complianceData.size() == 0)) {
-
+                                onXML = "";
+                                if (complianceData.size() > 0) {
                                     for (int j = 0; j < complianceData.size(); j++) {
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -1275,47 +1020,27 @@ public class UploadDataActivity extends Activity {
 
                                     request.addProperty("XMLDATA", question_xml_stockAfter);
 
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
 
 
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
-
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
 
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
 
@@ -1329,17 +1054,11 @@ public class UploadDataActivity extends Activity {
 
                                 // Before Additional  Data
                                 database.open();
-                                beforeaddtionalData = database
-                                        .getProductEntryDetailForUpload(coverageBeanlist
-                                                .get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-
+                                beforeaddtionalData = database.getProductEntryDetailForUpload(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
                                 String before_add_xml = "";
-
-                                if (!(beforeaddtionalData.size() == 0)) {
-
+                                onXML = "";
+                                if (beforeaddtionalData.size() > 0) {
                                     for (int j = 0; j < beforeaddtionalData.size(); j++) {
-
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -1363,62 +1082,30 @@ public class UploadDataActivity extends Activity {
 
                                     }
 
-
-                                    before_add_xml = "[DATA]" + before_add_xml
-                                            + "[/DATA]";
-
-
-                                    request = new SoapObject(
-                                            CommonString.NAMESPACE,
-                                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
-
+                                    before_add_xml = "[DATA]" + before_add_xml + "[/DATA]";
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
                                     request.addProperty("MID", mid);
                                     request.addProperty("KEYS", "ADDITIONAL_XML");
                                     request.addProperty("USERNAME", username);
-
                                     request.addProperty("XMLDATA", before_add_xml);
-
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
-
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
-
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
 
@@ -1432,16 +1119,16 @@ public class UploadDataActivity extends Activity {
 
                                 database.open();
                                 // Uploading Competition Tracking data
-                                competitionTrackingData = database.getEnteredCompetitionDetailForUploading(coverageBeanlist
-                                        .get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
-
-
-                                String comp_xml = "";
-
-                                if (!(competitionTrackingData.size() == 0)) {
-
+                                competitionTrackingData = database.getEnteredCompetitionDetailForUploading(coverageBeanlist.get(i).getStoreId(), coverageBeanlist.get(i).getProcess_id());
+                                String comp_xml = "", comIsExist = "";
+                                onXML = "";
+                                if (competitionTrackingData.size() > 0) {
                                     for (int j = 0; j < competitionTrackingData.size(); j++) {
-
+                                        if (competitionTrackingData.get(j).isCompTExist() == true) {
+                                            comIsExist = "1";
+                                        } else {
+                                            comIsExist = "0";
+                                        }
 
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
@@ -1456,73 +1143,48 @@ public class UploadDataActivity extends Activity {
                                                 + competitionTrackingData.get(j).getQuantity()
                                                 + "[/QUANTITY][IMAGE]"
                                                 + competitionTrackingData.get(j).getAdditional_image()
-                                                + "[/IMAGE][CATEGORY_ID]"
+                                                + "[/IMAGE]"
+
+                                                + "[CATEGORY_ID]"
                                                 + competitionTrackingData.get(j).getCategory_id()
-                                                + "[/CATEGORY_ID][/USER_DATA]";
+                                                + "[/CATEGORY_ID]"
+
+                                                + "[COM_EXIST]"
+                                                + comIsExist
+                                                + "[/COM_EXIST]"
+
+                                                + "[/USER_DATA]";
 
                                         comp_xml = comp_xml + onXML;
-
                                     }
 
+                                    comp_xml = "[DATA]" + comp_xml + "[/DATA]";
 
-                                    comp_xml = "[DATA]" + comp_xml
-                                            + "[/DATA]";
-
-
-                                    request = new SoapObject(
-                                            CommonString.NAMESPACE,
-                                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
-
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
                                     request.addProperty("MID", mid);
-                                    request.addProperty("KEYS", "COMPETITION_TRACKING_XML");
+                                    request.addProperty("KEYS", "COMPETITION_TRACKING_NEW_XML");
                                     request.addProperty("USERNAME", username);
-
                                     request.addProperty("XMLDATA", comp_xml);
-
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
-
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
-
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
-
                                 }
                                 runOnUiThread(new Runnable() {
 
@@ -1534,17 +1196,11 @@ public class UploadDataActivity extends Activity {
 
                                 // AFTER Additional  Data
                                 database.open();
-                                afterAddaitionalData = database
-                                        .getAfterProductEntryDetail(coverageBeanlist
-                                                .get(i).getStoreId());
-
+                                afterAddaitionalData = database.getAfterProductEntryDetail(coverageBeanlist.get(i).getStoreId());
                                 String after_add_xml = "";
-
+                                onXML = "";
                                 if (!(afterAddaitionalData.size() == 0)) {
-
                                     for (int j = 0; j < afterAddaitionalData.size(); j++) {
-
-
                                         onXML = "[USER_DATA][MID]"
                                                 + mid
                                                 + "[/MID][CREATED_BY]"
@@ -1562,65 +1218,33 @@ public class UploadDataActivity extends Activity {
                                                 + "[/USER_DATA]";
 
                                         after_add_xml = after_add_xml + onXML;
-
                                     }
 
-
-                                    after_add_xml = "[DATA]" + after_add_xml
-                                            + "[/DATA]";
-
-
-                                    request = new SoapObject(
-                                            CommonString.NAMESPACE,
-                                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
-
+                                    after_add_xml = "[DATA]" + after_add_xml + "[/DATA]";
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
                                     request.addProperty("MID", mid);
                                     request.addProperty("KEYS", "AFTER_ADDITIONAL_INFO");
                                     request.addProperty("USERNAME", username);
-
                                     request.addProperty("XMLDATA", after_add_xml);
-
-                                    envelope = new SoapSerializationEnvelope(
-                                            SoapEnvelope.VER11);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                                     envelope.dotNet = true;
                                     envelope.setOutputSoapObject(request);
-
-                                    androidHttpTransport = new HttpTransportSE(
-                                            CommonString.URL);
-
-
-                                    androidHttpTransport
-                                            .call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA,
-                                                    envelope);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                                     result = (Object) envelope.getResponse();
-
-                                    if (!result.toString().equalsIgnoreCase(
-                                            CommonString.KEY_SUCCESS)) {
-
-                                        if (result.toString().equalsIgnoreCase(
-                                                CommonString.KEY_FALSE)) {
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                             return CommonString.METHOD_UPLOAD_ASSET;
                                         }
 
                                         FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
                                         xmlR.setContentHandler(failureXMLHandler);
-
                                         InputSource is = new InputSource();
-                                        is.setCharacterStream(new StringReader(
-                                                result.toString()));
+                                        is.setCharacterStream(new StringReader(result.toString()));
                                         xmlR.parse(is);
-
-                                        failureGetterSetter = failureXMLHandler
-                                                .getFailureGetterSetter();
-
-                                        if (failureGetterSetter
-                                                .getStatus()
-                                                .equalsIgnoreCase(
-                                                        CommonString.KEY_FAILURE)) {
-                                            return CommonString.METHOD_UPLOAD_ASSET
-                                                    + ","
-                                                    + failureGetterSetter
-                                                    .getErrorMsg();
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
                                         }
                                     }
 
@@ -1633,13 +1257,87 @@ public class UploadDataActivity extends Activity {
                                 });
 
 
-                            }
+                                // AFTER Additional  Data
+                                database.open();
+                                competitionpromotionList = database.getcompetitionPromotionfromDatabase(coverageBeanlist.get(i).getStoreId(), "", coverageBeanlist.get(i).getProcess_id());
+                                after_add_xml = "";
+                                onXML = "";
+                                if (competitionpromotionList.size() > 0) {
+                                    for (int j = 0; j < competitionpromotionList.size(); j++) {
+                                        onXML = "[USER_DATA][MID]"
+                                                + mid
+                                                + "[/MID][CREATED_BY]"
+                                                + username
+                                                + "[/CREATED_BY]"
 
+                                                + "[CATEGORY_ID]"
+                                                + competitionpromotionList.get(j).getCategory_id().get(0)
+                                                + "[/CATEGORY_ID]"
+                                                + "[COMPANY_ID]"
+                                                + competitionpromotionList.get(j).getCompany_id().get(0)
+                                                + "[/COMPANY_ID]"
+                                                + "[BRAND_ID]"
+                                                + competitionpromotionList.get(j).getBrand_id().get(0)
+                                                + "[/BRAND_ID]"
+                                                + "[SKU_ID]"
+                                                + competitionpromotionList.get(j).getSku_id().get(0)
+                                                + "[/SKU_ID]"
+                                                + "[PRICEOFF_SPIN]"
+                                                + competitionpromotionList.get(j).getPriceOFFtoggleValue()
+                                                + "[/PRICEOFF_SPIN]"
+                                                + "[PRICEOFF_QTY]"
+                                                + competitionpromotionList.get(j).getPriceOFF_edtRS()
+                                                + "[/PRICEOFF_QTY]"
+
+                                                + "[SKU_MRP]"
+                                                + competitionpromotionList.get(j).getMRP_sku().get(0)
+                                                + "[/SKU_MRP]"
+
+                                                + "[/USER_DATA]";
+
+                                        after_add_xml = after_add_xml + onXML;
+                                    }
+
+
+                                    after_add_xml = "[DATA]" + after_add_xml + "[/DATA]";
+                                    request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
+
+                                    request.addProperty("MID", mid);
+                                    request.addProperty("KEYS", "COMP_PROMOTION_TRACKING_DATA");
+                                    request.addProperty("USERNAME", username);
+                                    request.addProperty("XMLDATA", after_add_xml);
+                                    envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                                    envelope.dotNet = true;
+                                    envelope.setOutputSoapObject(request);
+                                    androidHttpTransport = new HttpTransportSE(CommonString.URL);
+                                    androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
+                                    result = (Object) envelope.getResponse();
+                                    if (!result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
+                                        if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET;
+                                        }
+
+                                        FailureXMLHandler failureXMLHandler = new FailureXMLHandler();
+                                        xmlR.setContentHandler(failureXMLHandler);
+                                        InputSource is = new InputSource();
+                                        is.setCharacterStream(new StringReader(result.toString()));
+                                        xmlR.parse(is);
+                                        failureGetterSetter = failureXMLHandler.getFailureGetterSetter();
+                                        if (failureGetterSetter.getStatus().equalsIgnoreCase(CommonString.KEY_FAILURE)) {
+                                            return CommonString.METHOD_UPLOAD_ASSET + "," + failureGetterSetter.getErrorMsg();
+                                        }
+                                    }
+                                }
+                                runOnUiThread(new Runnable() {
+
+                                    public void run() {
+                                        message.setText("Sku Data Uploaded");
+                                    }
+                                });
+                            }
                             database.open();
-                            database.updateCoverageStatus(
-                                    coverageBeanlist.get(i).getStoreId(), CommonString.KEY_D, coverageBeanlist.get(i).getProcess_id());
-                            database.updateStoreStatusOnLeave(coverageBeanlist.get(i).getStoreId(), visit_date,
-                                    CommonString.KEY_D, coverageBeanlist.get(i).getProcess_id());
+                            database.updateCoverageStatus(coverageBeanlist.get(i).getStoreId(), CommonString.KEY_D, coverageBeanlist.get(i).getProcess_id());
+                            database.updateStoreStatusOnLeave(coverageBeanlist.get(i).getStoreId(), visit_date, CommonString.KEY_D, coverageBeanlist.get(i).getProcess_id());
                             String statusxml = "";
                             if (coverageBeanlist.get(i).getReasonid().equals("2") ||
                                     coverageBeanlist.get(i).getReasonid().equals("7")) {
@@ -1665,7 +1363,6 @@ public class UploadDataActivity extends Activity {
                             }
 
                             // SET COVERAGE STATUS
-
                             request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_SET_COVERAGE_STATUS);
                             request.addProperty("onXML", statusxml);
                             envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -1675,25 +1372,17 @@ public class UploadDataActivity extends Activity {
                             androidHttpTransport.call(CommonString.SOAP_ACTION_SET_COVERAGE_STATUS, envelope);
                             result = (Object) envelope.getResponse();
                             if (result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
-
                                 if (leavetrue) {
-                                    database.updateCoverageStatus(coverageBeanlist.get(i).getStoreId(), CommonString.KEY_U,
-                                            coverageBeanlist.get(i).getProcess_id());
-                                    database.updateStoreStatusOnLeave(coverageBeanlist.get(i).getStoreId(), visit_date,
-                                            CommonString.KEY_U, coverageBeanlist.get(i).getProcess_id());
+                                    database.updateCoverageStatus(coverageBeanlist.get(i).getStoreId(), CommonString.KEY_U, coverageBeanlist.get(i).getProcess_id());
+                                    database.updateStoreStatusOnLeave(coverageBeanlist.get(i).getStoreId(), visit_date, CommonString.KEY_U, coverageBeanlist.get(i).getProcess_id());
                                 }
                             } else {
-                                if (result.toString().equalsIgnoreCase(
-                                        CommonString.KEY_FALSE)) {
-
+                                if (result.toString().equalsIgnoreCase(CommonString.KEY_FALSE)) {
                                 }
-
                             }
-
                         }
                     }
                 }
-
 
                 String geo_xml = "";
                 ArrayList<String> geotemplist = new ArrayList<String>();
@@ -1709,7 +1398,6 @@ public class UploadDataActivity extends Activity {
                                 message.setText("Uploading Geotag Data...");
                             }
                         });
-
 
                         String onXML = "[GeoTag_DATA][STORE_ID]"
                                 + geotaglist.get(i).getStoreid()
@@ -1733,26 +1421,17 @@ public class UploadDataActivity extends Activity {
 
                     }
 
-                    geo_xml = "[DATA]" + geo_xml
-                            + "[/DATA]";
-
-
-                    SoapObject request = new SoapObject(CommonString.NAMESPACE,
-                            CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
+                    geo_xml = "[DATA]" + geo_xml + "[/DATA]";
+                    SoapObject request = new SoapObject(CommonString.NAMESPACE, CommonString.METHOD_UPLOAD_STOCK_XML_DATA);
                     request.addProperty("MID", mid);
                     request.addProperty("KEYS", "GEOTAG_NEW_DATA");
                     request.addProperty("USERNAME", username);
 
-
                     request.addProperty("XMLDATA", geo_xml);
-
-                    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
-                            SoapEnvelope.VER11);
+                    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
                     envelope.dotNet = true;
                     envelope.setOutputSoapObject(request);
-
-                    HttpTransportSE androidHttpTransport = new HttpTransportSE(
-                            CommonString.URL);
+                    HttpTransportSE androidHttpTransport = new HttpTransportSE(CommonString.URL);
                     androidHttpTransport.call(CommonString.SOAP_ACTION_UPLOAD_ASSET_XMLDATA, envelope);
                     Object result = (Object) envelope.getResponse();
                     if (result.toString().equalsIgnoreCase(CommonString.KEY_SUCCESS)) {
@@ -1773,6 +1452,7 @@ public class UploadDataActivity extends Activity {
                 return CommonString.KEY_SUCCESS;
 
             } catch (Exception ex) {
+                Crashlytics.logException(ex);
                 ex.printStackTrace();
             }
             return "";

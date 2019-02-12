@@ -9,13 +9,6 @@
         android:orientation="vertical"
         android:weightSum="10">
 
-        <!--     <ImageView -->
-        <!--         android:id="@+id/imageView1" -->
-        <!--         android:layout_width="fill_parent" -->
-        <!--         android:layout_height="40dp" -->
-        <!--         android:layout_alignParentTop="true" -->
-        <!--          /> -->
-
         <LinearLayout
             android:id="@+id/storename_header"
             android:layout_width="fill_parent"
@@ -24,37 +17,34 @@
             android:layout_alignParentTop="true"
             android:layout_weight="1"
             android:background="#ff9933"
-            android:padding="5sp"
-            android:weightSum="15">
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="SOS Target:"
-                android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:weightSum="10">
 
             <TextView
                 android:id="@+id/sos_target"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text=""
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="5"
+                android:gravity="center_vertical"
                 android:textColor="#ffffff"
-                android:textSize="20sp"
+                android:textSize="@dimen/txtsize_16sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/per"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.27"
-                android:text="%"
+                android:id="@+id/sos_target_withohc_target"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="2dp"
+                android:layout_weight="5"
+                android:gravity="center_vertical"
                 android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/txtsize_16sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -96,20 +86,10 @@
 
         </LinearLayout>
 
-        <!--     <TextView -->
-        <!--         android:id="@+id/textView2" -->
-
-        <!--         android:layout_width="wrap_content" -->
-        <!--         android:layout_height="wrap_content" -->
-        <!--         android:layout_alignParentLeft="true" -->
-        <!--         android:layout_marginTop="10dp" -->
-        <!--         android:text="Stock Availability" -->
-        <!--         android:textColor="#ffffff" -->
-        <!--         android:textStyle="bold" /> -->
         <LinearLayout
             android:id="@+id/test"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:orientation="vertical"
             android:weightSum="18">
 
@@ -119,15 +99,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
                 android:orientation="horizontal"
-                android:weightSum="1">
+                android:weightSum="8">
 
                 <ImageView
                     android:id="@+id/cam1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
-                    android:background="@drawable/camera_ico"
-                    android:onClick="onButtonClick" />
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:onClick="onButtonClick"
+                    android:src="@drawable/camera_ico" />
 
                 <ImageView
                     android:id="@+id/nnn"
@@ -140,11 +122,13 @@
 
                 <ImageView
                     android:id="@+id/cam2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
-                    android:background="@drawable/camera_ico"
-                    android:onClick="onButtonClick" />
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:onClick="onButtonClick"
+                    android:src="@drawable/camera_ico" />
 
                 <ImageView
                     android:id="@+id/nzsnn"
@@ -157,30 +141,34 @@
 
                 <ImageView
                     android:id="@+id/cam3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
-                    android:background="@drawable/camera_ico"
-                    android:onClick="onButtonClick" />
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:onClick="onButtonClick"
+                    android:src="@drawable/camera_ico" />
 
                 <ImageView
                     android:id="@+id/xnnn"
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
+                    android:layout_gravity="center"
                     android:background="@drawable/camera_ico"
                     android:onClick="onButtonClick"
                     android:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/cam4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_alignParentTop="true"
-                    android:background="@drawable/camera_ico"
-                    android:onClick="onButtonClick" />
+                    android:layout_gravity="center"
+                    android:layout_weight="2"
+                    android:onClick="onButtonClick"
+                    android:src="@drawable/camera_ico" />
             </LinearLayout>
-
 
         </LinearLayout>
 
@@ -206,25 +194,6 @@
                 android:textStyle="bold" />
 
         </RelativeLayout>
-
-
-      <!--  <LinearLayout
-            android:id="@+id/hjk"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="10">
-
-            <TextView
-                android:id="@+id/textBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:layout_weight="5"
-
-                />
-        </LinearLayout>-->
-
     </LinearLayout>
 
     <com.cpm.DailyEntry.CustomKeyboardView

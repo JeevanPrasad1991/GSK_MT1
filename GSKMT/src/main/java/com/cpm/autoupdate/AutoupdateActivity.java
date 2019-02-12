@@ -31,6 +31,7 @@ import com.cpm.Constants.CommonString;
 import com.cpm.gsk_mt.LoginActivity;
 import com.cpm.gsk_mt.MainMenuActivity;
 import com.cpm.message.AlertMessage;
+import com.crashlytics.android.Crashlytics;
 import com.example.gsk_mtt.R;
 
 
@@ -70,33 +71,14 @@ public class AutoupdateActivity extends Activity {
 				.setCancelable(false)
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-
-						SharedPreferences preferences = PreferenceManager
-								.getDefaultSharedPreferences(AutoupdateActivity.this);
+						SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(AutoupdateActivity.this);
 						SharedPreferences.Editor editor = preferences.edit();
 						editor.clear();
 						editor.commit();
-
-						/*new File(
-								"/data/data/com.cpm.gsk_mt/databases/GTMT_DATABASE")
-								.delete();*/
-	
 						new DownloadTask(AutoupdateActivity.this).execute();
 
 					}
 				});
-				/*.setNegativeButton("Cancel",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-
-								Intent i = new Intent(AutoupdateActivity.this,
-										LoginActivity.class);
-								startActivity(i);
-
-								AutoupdateActivity.this.finish();
-
-							}
-						});*/
 		AlertDialog alert = builder.create();
 
 		alert.show();
@@ -193,6 +175,7 @@ public class AutoupdateActivity extends Activity {
 				return CommonString.KEY_SUCCESS;
 
 			} catch (NameNotFoundException e) {
+				Crashlytics.logException(e);
 				// TODO Auto-generated catch block
 				final AlertMessage message = new AlertMessage(
 						AutoupdateActivity.this,
@@ -232,6 +215,7 @@ public class AutoupdateActivity extends Activity {
 					}
 				});
 			} catch (Exception e) {
+				Crashlytics.logException(e);
 				final AlertMessage message = new AlertMessage(
 						AutoupdateActivity.this,
 						AlertMessage.MESSAGE_EXCEPTION, "download", e);
@@ -251,7 +235,6 @@ public class AutoupdateActivity extends Activity {
 		@Override
 		protected void onProgressUpdate(Data... values) {
 			// TODO Auto-generated method stub
-
 			pb.setProgress(values[0].value);
 			percentage.setText(values[0].value + "%");
 			message.setText(values[0].name);
@@ -263,7 +246,6 @@ public class AutoupdateActivity extends Activity {
 			
 			super.onPostExecute(result);
 			dialog.dismiss();
-
 			if (result.equals(CommonString.KEY_SUCCESS)) {
 				Intent i = new Intent(Intent.ACTION_VIEW);
 				i.setDataAndType(Uri.fromFile(new File(Environment

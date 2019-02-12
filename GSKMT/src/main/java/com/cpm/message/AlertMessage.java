@@ -39,7 +39,7 @@ public class AlertMessage {
     public static final String MESSAGE_NO_IMAGE = "No Image For Upload";
     public static final String MESSAGE_DATA_FIRST = "Upload Data First";
     public static final String MESSAGE_IMAGE_UPLOAD = "Upload Images";
-    public static final String MESSAGE_PARTIAL_UPLOAD = "Data Partially Uploaded";
+    public static final String MESSAGE_PARTIAL_UPLOAD = "Data Partially Uploaded . Please Try Again";
     public static final String MESSAGE_DATA_UPLOAD = "Data Uploaded";
     public static final String MESSAGE_CHECKOUT_UPLOAD = "Store Already Checkedout";
     public static final String MESSAGE_UPLOAD = "All Data Uploaded";
@@ -50,6 +50,7 @@ public class AlertMessage {
     public static final String MESSAGE_CHECKOUT = "Store Successfully Checkedout";
     public static final String MESSAGE_IMAGE = "All images are compulsory";
     public static final String MESSAGE_GAPS = "Please fill all display gaps";
+    public static final String title_store_list_checkout_current ="Please checkout from current store";
 
     public static final String MESSAGE_TOT_STOCK = "Please fill all stocks";
 
@@ -186,10 +187,8 @@ public class AlertMessage {
         builder.setMessage(str).setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
                         Intent i = new Intent(activity, MainMenuActivity.class);
                         activity.startActivity(i);
-
                         activity.finish();
 
                     }

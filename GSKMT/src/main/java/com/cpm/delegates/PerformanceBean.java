@@ -1,24 +1,49 @@
 package com.cpm.delegates;
 
 public class PerformanceBean {
-	
-	public String period;
-	public String sos_avg;
-	public String tot_avg;
-	public String paid_avg;
-
-	public String additional_avg;
-	public String pss_avg;
 	public String store_id;
+	public String period;
+
+	public String getSOS_SCORE() {
+		return SOS_SCORE;
+	}
+
+	public void setSOS_SCORE(String SOS_SCORE) {
+		this.SOS_SCORE = SOS_SCORE;
+	}
+
+	public String getSTOCK_SCORE() {
+		return STOCK_SCORE;
+	}
+
+	public void setSTOCK_SCORE(String STOCK_SCORE) {
+		this.STOCK_SCORE = STOCK_SCORE;
+	}
+
+	public String getASSET_SCORE() {
+		return ASSET_SCORE;
+	}
+
+	public void setASSET_SCORE(String ASSET_SCORE) {
+		this.ASSET_SCORE = ASSET_SCORE;
+	}
+
+	public String getPROMO_SCORE() {
+		return PROMO_SCORE;
+	}
+
+	public void setPROMO_SCORE(String PROMO_SCORE) {
+		this.PROMO_SCORE = PROMO_SCORE;
+	}
+
+	public String SOS_SCORE;
+	public String STOCK_SCORE;
+	public String ASSET_SCORE;
+	public String PROMO_SCORE;
+	public String pss_avg;
 	public String process_id;
 	
-	
-	public String getPaid_avg() {
-		return paid_avg;
-	}
-	public void setPaid_avg(String paid_avg) {
-		this.paid_avg = paid_avg;
-	}
+
 	
 	public String getProcess_id() {
 		return process_id;
@@ -47,26 +72,7 @@ public class PerformanceBean {
 	public void setPeriod(String period) {
 		this.period = period;
 	}
-	
 
-	public String getSos_avg() {
-		return sos_avg;
-	}
-	public void setSos_avg(String sos_avg) {
-		this.sos_avg = sos_avg;
-	}
-	public String getTot_avg() {
-		return tot_avg;
-	}
-	public void setTot_avg(String tot_avg) {
-		this.tot_avg = tot_avg;
-	}
-	public String getAdditional_avg() {
-		return additional_avg;
-	}
-	public void setAdditional_avg(String additional_avg) {
-		this.additional_avg = additional_avg;
-	}
 	public String getPss_avg() {
 		return pss_avg;
 	}

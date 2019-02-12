@@ -26,6 +26,16 @@ public class TableBean {
 	}
 
 	public static String emp_meeting_status_table;
+
+	public static String getTargetforohctoothpestTable() {
+		return targetforohctoothpestTable;
+	}
+
+	public static void setTargetforohctoothpestTable(String targetforohctoothpestTable) {
+		TableBean.targetforohctoothpestTable = targetforohctoothpestTable;
+	}
+
+	public static String targetforohctoothpestTable;
 	
 	public static String getStorewise_pss_table() {
 		return storewise_pss_table;
@@ -191,6 +201,36 @@ public class TableBean {
 	public static String stock_image_table;
 	
 	public static String coverage_table;
+
+	public static String getMappingPdrFacingTable() {
+		return MAPPING_PDR_FACING_TABLE;
+	}
+
+	public static void setMappingPdrFacingTable(String mappingPdrFacingTable) {
+		MAPPING_PDR_FACING_TABLE = mappingPdrFacingTable;
+	}
+
+	public static String MAPPING_PDR_FACING_TABLE;
+
+	public static String getMAPPINGCompeti_promotionTable() {
+		return MAPPINGCompeti_promotionTable;
+	}
+
+	public static void setMAPPINGCompeti_promotionTable(String MAPPINGCompeti_promotionTable) {
+		TableBean.MAPPINGCompeti_promotionTable = MAPPINGCompeti_promotionTable;
+	}
+
+	public static String MAPPINGCompeti_promotionTable;
+
+	public static String getNonwokingAttendenceTable() {
+		return NONWOKING_ATTENDENCE_TABLE;
+	}
+
+	public static void setNonwokingAttendenceTable(String nonwokingAttendenceTable) {
+		NONWOKING_ATTENDENCE_TABLE = nonwokingAttendenceTable;
+	}
+
+	public static String NONWOKING_ATTENDENCE_TABLE;
 	
 	
 

@@ -238,7 +238,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="30"
-            android:background="@drawable/competition_tracking"
+            android:background="@drawable/competition_asset"
             android:enabled="true"
             android:visibility="visible">
         </Button>

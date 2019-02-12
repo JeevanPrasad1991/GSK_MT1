@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cpm.Constants.CommonString;
-
+import com.crashlytics.android.Crashlytics;
 
 
 public class ImageUploadActivity extends Activity{
@@ -37,7 +37,7 @@ public class ImageUploadActivity extends Activity{
 
 	SoapObject result;
 
-	public static Vector strings = new Vector<String>();
+
 	
 	private static boolean status;
 
@@ -116,11 +116,14 @@ public class ImageUploadActivity extends Activity{
 		catch (MalformedURLException e) {
 			image_valid = false;
 			e.printStackTrace();
+			Crashlytics.logException(e);
 		} catch (IOException e) {
 			image_valid = false;
 			e.printStackTrace();
+			Crashlytics.logException(e);
 		}
 		catch (Exception e) {
+			Crashlytics.logException(e);
 			System.out.println(e.getMessage());
 
 		}
@@ -142,7 +145,6 @@ public class ImageUploadActivity extends Activity{
 			// Find the correct scale value. It should be the power of 2.
 			int width_tmp = o.outWidth, height_tmp = o.outHeight;
 			int scale = 1;
-
 			while (true) {
 				if (width_tmp < REQUIRED_SIZE && height_tmp < REQUIRED_SIZE)
 					break;
@@ -154,8 +156,7 @@ public class ImageUploadActivity extends Activity{
 			// Decode with inSampleSize
 			BitmapFactory.Options o2 = new BitmapFactory.Options();
 			o2.inSampleSize = scale;
-			Bitmap bitmap = BitmapFactory.decodeFile("/mnt/sdcard/MT_GSK_Images/"
-					+ path, o2);
+			Bitmap bitmap = BitmapFactory.decodeFile("/mnt/sdcard/MT_GSK_Images/" + path, o2);
 
 			if (bitmap != null) {
 
@@ -164,8 +165,8 @@ public class ImageUploadActivity extends Activity{
 			}
 
 		} catch (Exception e) {
+			Crashlytics.logException(e);
 			System.out.println(e.getMessage());
-
 		}
 
 		return status;

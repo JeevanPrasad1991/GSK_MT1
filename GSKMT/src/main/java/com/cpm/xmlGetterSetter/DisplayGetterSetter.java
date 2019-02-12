@@ -9,6 +9,16 @@ public class DisplayGetterSetter {
 	ArrayList<String> Image_url = new ArrayList<String>();
 	ArrayList<String> path = new ArrayList<String>();
 
+	public ArrayList<String> getCOMPETITOR_ONLY() {
+		return COMPETITOR_ONLY;
+	}
+
+	public void setCOMPETITOR_ONLY(String COMPETITOR_ONLY) {
+		this.COMPETITOR_ONLY.add(COMPETITOR_ONLY);
+	}
+
+	ArrayList<String> COMPETITOR_ONLY = new ArrayList<String>();
+
 	public ArrayList<String> getImage_url() {
 		return Image_url;
 	}

@@ -10,11 +10,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:background="#ff9933"
             android:orientation="horizontal"
             android:weightSum="10">
@@ -22,10 +20,11 @@
             <TextView
                 android:id="@+id/geotag_title_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="5"
                 android:gravity="center_vertical"
-                android:text="Daily Main Menu--"
+                android:padding="8dp"
+                android:text="Daily Main Menu -"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 
@@ -35,6 +34,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:gravity="center_vertical"
+                android:padding="8dp"
                 android:text="Daily Main Menu"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
@@ -73,8 +73,6 @@
                 android:layout_weight="30">
 
 
-
-
                 <Button
                     android:id="@+id/after_stock"
                     android:layout_width="match_parent"
@@ -87,15 +85,16 @@
                     android:textColor="#ff9933"
                     android:textSize="15sp"
                     android:textStyle="bold"></Button>
+
                 <TextView
                     android:id="@+id/sos_after"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:background="#ffffff"
-                    android:text=""
-
                     android:gravity="center"
+
+                    android:text=""
                     android:textSize="14dp"
                     android:textStyle="bold"
 
@@ -119,7 +118,6 @@
                     android:id="@+id/after_tot"
                     android:layout_width="match_parent"
                     android:layout_height="144dp"
-
                     android:background="@drawable/disabled_tot_after_ico"
                     android:enabled="false"
                     android:onClick="onButtonClick"
@@ -215,13 +213,13 @@
                 android:layout_weight="15"></ImageView>
 
             <Button
-                android:id="@+id/competitionTracking"
+                android:id="@+id/backroom_stock"
                 android:layout_width="0dp"
                 android:layout_height="144dp"
                 android:layout_weight="30"
-                android:background="@drawable/competition_tracking"
-                android:enabled="true"
-                android:visibility="visible"></Button>
+                android:background="@drawable/backroom"
+                android:visibility="visible" />
+
 
             <ImageView
                 android:layout_width="0dp"
@@ -270,13 +268,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="15"></ImageView>
 
+
             <Button
-                android:id="@+id/backroom_stock"
+                android:id="@+id/competitionTracking"
                 android:layout_width="0dp"
                 android:layout_height="144dp"
                 android:layout_weight="30"
-                android:background="@drawable/backroom"
-                android:visibility="visible" />
+                android:background="@drawable/competition_asset"
+                android:enabled="true"
+                android:visibility="visible"></Button>
 
             <ImageView
                 android:layout_width="0dp"
@@ -313,15 +313,13 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-
-            ></ImageView>
+            android:layout_height="40dp"></ImageView>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:layout_marginBottom="3dp"
             android:orientation="horizontal"
             android:weightSum="100">
 
@@ -336,7 +334,21 @@
                 android:layout_height="144dp"
                 android:layout_weight="30"
                 android:background="@drawable/sales"
+                android:visibility="gone" />
 
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:visibility="gone"></ImageView>
+
+            <Button
+                android:id="@+id/comptitionfor_promotion"
+                android:layout_width="0dp"
+                android:layout_height="144dp"
+                android:layout_weight="30"
+                android:background="@drawable/competition_promotion"
+                android:enabled="true"
                 android:visibility="visible" />
 
             <ImageView
@@ -344,8 +356,9 @@
                 android:layout_height="match_parent"
                 android:layout_weight="40"></ImageView>
 
-
         </LinearLayout>
+
+
     </LinearLayout>
 
 

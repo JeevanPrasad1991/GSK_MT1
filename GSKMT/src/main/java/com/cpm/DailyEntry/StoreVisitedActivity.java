@@ -21,6 +21,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -62,10 +64,12 @@ public class StoreVisitedActivity extends Activity {
         storestatus = db.getCoverageData(date, store_id, process_id);
 
         //////click on rediobutton...............
-        if (storestatus.size() > 0 && storestatus.get(0).getStatus().equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE)) {
-            no.setChecked(true);
-        } else {
+
+        if (storestatus.size() > 0 && storestatus.get(0).getStatus().equalsIgnoreCase(CommonString.KEY_CHECK_IN)
+                || storestatus.size() > 0 && storestatus.get(0).getStatus().equalsIgnoreCase(CommonString.KEY_VALID)) {
             yes.setChecked(true);
+        } else if (storestatus.size() > 0 && storestatus.get(0).getStatus().equalsIgnoreCase(CommonString.STORE_STATUS_LEAVE)) {
+            no.setChecked(true);
         }
         yes.setOnClickListener(new OnClickListener() {
             @Override
@@ -77,17 +81,18 @@ public class StoreVisitedActivity extends Activity {
                                 .setCancelable(false)
                                 .setPositiveButton("OK",
                                         new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog,
-                                                                int id) {
-                                               /* db.deleteAllTables(store_id, process_id);
-                                                db.updateStoreStatusOnLeave(store_id, date, CommonString.KEY_N, process_id);
-                                                //db.updateStoreStatusOnCheckout(store_id, date, CommonString.KEY_INVALID, process_id);*/
-                                                SharedPreferences.Editor editor = preferences.edit();
-                                                editor.putString(CommonString.KEY_IN_TIME, getCurrentTime());
-                                                editor.putString(CommonString.KEY_STOREVISITED, store_id);
-                                                editor.putString(CommonString.KEY_STOREVISITED_STATUS, "yes");
-                                                editor.commit();
-                                                UpdateData(user_id, store_id, date, "I");
+                                            public void onClick(DialogInterface dialog, int id) {
+                                                if (CheckNetAvailability()) {
+                                                    SharedPreferences.Editor editor = preferences.edit();
+                                                    editor.putString(CommonString.KEY_IN_TIME, getCurrentTime());
+                                                    editor.putString(CommonString.KEY_STOREVISITED, store_id);
+                                                    editor.putString(CommonString.KEY_STOREVISITED_STATUS, "yes");
+                                                    editor.commit();
+                                                    UpdateData(user_id, store_id, date, "I");
+                                                } else {
+                                                    showToast("No Internet Available");
+                                                }
+
                                             }
                                         })
                                 .setNegativeButton("Back",
@@ -103,12 +108,12 @@ public class StoreVisitedActivity extends Activity {
 
                         AlertDialog alert = builder.create();
                         alert.show();
+
                     } else {
                         if (checkcoverageStatus()) {
                             SharedPreferences.Editor editor = preferences.edit();
                             editor.putString(CommonString.KEY_IN_TIME, getCurrentTime());
                             editor.putString(CommonString.KEY_STOREVISITED, store_id);
-                            editor.putString(CommonString.KEY_STOREVISITED_STATUS, "yes");
                             editor.putString(CommonString.KEY_STOREVISITED_STATUS, "yes");
                             editor.commit();
                             Intent i = new Intent(StoreVisitedActivity.this, StoreInformationActivity.class);
@@ -133,6 +138,7 @@ public class StoreVisitedActivity extends Activity {
             }
         });
 
+
         no.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,14 +162,18 @@ public class StoreVisitedActivity extends Activity {
                                         new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog,
                                                                 int id) {
-                                                SharedPreferences.Editor editor = preferences.edit();
-                                                editor.putString(CommonString.KEY_IN_TIME, "");
-                                                editor.putString(CommonString.KEY_STOREVISITED, "");
-                                                editor.putString(CommonString.KEY_STOREVISITED_STATUS, "");
-                                                editor.putString(CommonString.KEY_LATITUDE, "");
-                                                editor.putString(CommonString.KEY_LONGITUDE, "");
-                                                editor.commit();
-                                                UpdateData(user_id, store_id, date, "N");
+                                                if (CheckNetAvailability()) {
+                                                    SharedPreferences.Editor editor = preferences.edit();
+                                                    editor.putString(CommonString.KEY_IN_TIME, "");
+                                                    editor.putString(CommonString.KEY_STOREVISITED, "");
+                                                    editor.putString(CommonString.KEY_STOREVISITED_STATUS, "");
+                                                    editor.putString(CommonString.KEY_LATITUDE, "");
+                                                    editor.putString(CommonString.KEY_LONGITUDE, "");
+                                                    editor.commit();
+                                                    UpdateData(user_id, store_id, date, "N");
+                                                } else {
+                                                    showToast("No Internet Available");
+                                                }
                                             }
                                         }).setNegativeButton("Back",
                                 new DialogInterface.OnClickListener() {
@@ -196,6 +206,11 @@ public class StoreVisitedActivity extends Activity {
 
     }
 
+
+    private void showToast(String message) {
+        Toast.makeText(getBaseContext(), message, Toast.LENGTH_LONG).show();
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -210,12 +225,26 @@ public class StoreVisitedActivity extends Activity {
         return intime;
     }
 
+    public boolean CheckNetAvailability() {
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
+                .getState() == NetworkInfo.State.CONNECTED
+                || connectivityManager.getNetworkInfo(
+                ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            // we are connected to a network
+            connected = true;
+        }
+        return connected;
+    }
+
     public long getMid() {
         int mid = 0;
         mid = db.CheckMid(date, store_id, process_id);
         _mid = mid;
         return mid;
     }
+
 
     public void UpdateData(final String user_id, final String store_id, final String visit_date, final String status) {
         runOnUiThread(new Runnable() {

@@ -160,9 +160,7 @@ public class TOTstock_Activity extends Activity implements OnItemSelectedListene
 							sku.setSelection(0);
 							quantity.setText("");
 							
-						/*	public ArrayList<TOTBean> getTOTStockEntryDetail(String store_id, String cate_id, String process_id, 
-									String display_id, String unique_id) {*/
-							
+
 							list = db.getTOTStockEntryDetail(store_id, category_id, process_id, display_id, unique_id);
 					        adapterData = new MyAdaptor(TOTstock_Activity.this,list);
 					        
@@ -182,20 +180,7 @@ public class TOTstock_Activity extends Activity implements OnItemSelectedListene
 		});
 		
 		
-	/*	if (!brand_id.equalsIgnoreCase("")) {
-			
-			
-			
-			
-			
-			
-		} else {
-			
-			Toast.makeText(TOTstock_Activity.this, "Please select brand", Toast.LENGTH_LONG).show();
 
-		}
-		*/
-		
 		
 	}
 	
@@ -394,9 +379,7 @@ public class TOTstock_Activity extends Activity implements OnItemSelectedListene
 					else{
 						skuAdaptor.clear();
 						sku_id = "";
-//						sub_reason_adapter.notifyDataSetChanged();
-//						sub_reason_adapter.add("No Sub-Reason");
-//						reasonSpinner2.setAdapter(sub_reason_adapter);
+
 						
 					}
 

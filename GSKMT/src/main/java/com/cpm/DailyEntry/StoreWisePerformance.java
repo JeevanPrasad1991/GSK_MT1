@@ -16,6 +16,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,7 +35,7 @@ public class StoreWisePerformance extends Activity {
     GSKMTDatabase database;
     ListView lv;
     ArrayList<PerformanceBean> per_list;
-    Button ok;
+    FloatingActionButton ok;
 
 
     @Override
@@ -43,32 +44,24 @@ public class StoreWisePerformance extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.store_performance);
         lv = (ListView) findViewById(R.id.listviewperformance);
-        ok = (Button) findViewById(R.id.ok);
-
+        ok = (FloatingActionButton) findViewById(R.id.ok);
         preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         date = preferences.getString(CommonString.KEY_DATE, null);
         store_id = preferences.getString(CommonString.KEY_STORE_ID, null);
         store_intime = preferences.getString(CommonString.KEY_STORE_IN_TIME, "");
         process_id = preferences.getString(CommonString.KEY_PROCESS_ID, "");
-
         database = new GSKMTDatabase(StoreWisePerformance.this);
         database.open();
-
-
         per_list = database.getStoreWisePerformanceData(store_id, process_id);
-
-
         if (per_list.size() > 0) {
-
             lv.setAdapter(new MyAdaptor());
-
         }
+
 
         ok.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
                 Intent in = new Intent(StoreWisePerformance.this, StoreVisitedActivity.class);
                 startActivity(in);
                 StoreWisePerformance.this.finish();
@@ -80,15 +73,10 @@ public class StoreWisePerformance extends Activity {
 
 
     private class ViewHolder {
-
-        TextView period, sos, tot, paid, additional, pss;
-
+        TextView period, sos_score, stock_score, asset_stock, promo_score, pss;
     }
 
-
     private class MyAdaptor extends BaseAdapter {
-
-
         public MyAdaptor() {
             super();
             // TODO Auto-generated constructor stub
@@ -108,7 +96,6 @@ public class StoreWisePerformance extends Activity {
 
         @Override
         public long getItemId(int position) {
-
             return position;
         }
 
@@ -117,65 +104,44 @@ public class StoreWisePerformance extends Activity {
             ViewHolder holder = null;
             if (convertView == null) {
                 holder = new ViewHolder();
-
                 LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.item_storewiseperformace_list, null);
-
-                holder.period = (TextView) convertView
-                        .findViewById(R.id.period);
-
-                holder.sos = (TextView) convertView
-                        .findViewById(R.id.sos);
-
-                holder.tot = (TextView) convertView
-                        .findViewById(R.id.tot);
-
-                holder.paid = (TextView) convertView
-                        .findViewById(R.id.paid);
-
-
-                holder.additional = (TextView) convertView
-                        .findViewById(R.id.additional);
-
-                holder.pss = (TextView) convertView
-                        .findViewById(R.id.pss);
-
-
+                holder.period = (TextView) convertView.findViewById(R.id.period);
+                holder.sos_score = (TextView) convertView.findViewById(R.id.sos_score);
+                holder.stock_score = (TextView) convertView.findViewById(R.id.stock_score);
+                holder.asset_stock = (TextView) convertView.findViewById(R.id.asset_stock);
+                holder.promo_score = (TextView) convertView.findViewById(R.id.promo_score);
+                holder.pss = (TextView) convertView.findViewById(R.id.pss);
                 convertView.setTag(holder);
-
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
             holder.period.setText(per_list.get(position).getPeriod());
-//			holder.sos.setText(per_list.get(position).getSos_avg());
-//			holder.tot.setText(per_list.get(position).getTot_avg());
 
-            if (per_list.get(position).getPaid_avg() == null) {
-                holder.paid.setText("0");
+            if (per_list.get(position).getSOS_SCORE() == null) {
+                holder.sos_score.setText("0");
             } else {
-                holder.paid.setText(per_list.get(position).getPaid_avg());
+                holder.sos_score.setText(per_list.get(position).getSOS_SCORE());
             }
 
 
-            if (per_list.get(position).getSos_avg() == null) {
-                holder.sos.setText("0");
+            if (per_list.get(position).getSTOCK_SCORE() == null) {
+                holder.stock_score.setText("0");
             } else {
-                holder.sos.setText(per_list.get(position).getSos_avg());
+                holder.stock_score.setText(per_list.get(position).getSTOCK_SCORE());
             }
 
-
-            if (per_list.get(position).getTot_avg() == null) {
-                holder.tot.setText("0");
+            if (per_list.get(position).getASSET_SCORE() == null) {
+                holder.asset_stock.setText("0");
             } else {
-                holder.tot.setText(per_list.get(position).getTot_avg());
+                holder.asset_stock.setText(per_list.get(position).getASSET_SCORE());
             }
 
-
-            if (per_list.get(position).getAdditional_avg() == null) {
-                holder.additional.setText("0");
+            if (per_list.get(position).getPROMO_SCORE() == null) {
+                holder.promo_score.setText("0");
             } else {
-                holder.additional.setText(per_list.get(position).getAdditional_avg());
+                holder.promo_score.setText(per_list.get(position).getPROMO_SCORE());
             }
 
 
@@ -185,12 +151,8 @@ public class StoreWisePerformance extends Activity {
                 holder.pss.setText(per_list.get(position).getPss_avg());
             }
 
-
-//			holder.additional.setText(per_list.get(position).getAdditional_avg());
-//			holder.pss.setText(per_list.get(position).getPss_avg());
             int value1 = ragAnalysis(per_list.get(position).getPss_avg());
             holder.pss.setBackgroundColor(value1);
-
 
             return convertView;
         }

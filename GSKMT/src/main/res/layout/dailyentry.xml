@@ -14,7 +14,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:background="#ff9933"
             android:orientation="horizontal"
             android:weightSum="10">
@@ -25,7 +24,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:gravity="center_vertical"
-                android:text="Daily Main Menu--"
+                android:text="Daily Main Menu -"
+                android:padding="5dp"
                 android:textColor="#ffffff"
                 android:textSize="20sp" />
 
@@ -37,6 +37,7 @@
                 android:gravity="center_vertical"
                 android:text="Daily Main Menu"
                 android:textColor="#ffffff"
+                android:padding="5dp"
                 android:textSize="20sp" />
         </LinearLayout>
 
@@ -194,75 +195,10 @@
                 android:layout_weight="15"></ImageView>
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-
-            ></ImageView>
-
         <LinearLayout
             android:id="@+id/l"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:orientation="horizontal"
-            android:weightSum="100">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="15"></ImageView>
-
-            <Button
-                android:id="@+id/competitionTracking"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="30"
-                android:background="@drawable/competition_tracking"
-                android:enabled="true"
-                android:visibility="visible"></Button>
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="10"></ImageView>
-
-            <Button
-                android:id="@+id/before_additional"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="30"
-                android:background="@drawable/additional_display_144"
-                android:enabled="true">
-
-            </Button>
-
-            <!--      <Button
-                     android:id="@+id/promotional_data"
-                     android:layout_width="0dp"
-                     android:layout_height="match_parent"
-                     android:layout_weight="30"
-                     android:background="@drawable/disabled_promo_compliance"
-                     android:visibility="visible"
-                     android:enabled="false" >
-                 </Button> -->
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="15"></ImageView>
-        </LinearLayout>
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="10dp"
-
-            ></ImageView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
             android:orientation="horizontal"
             android:weightSum="100">
 
@@ -282,7 +218,53 @@
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_weight="10"></ImageView>
 
+            <Button
+                android:id="@+id/before_additional"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="30"
+                android:background="@drawable/additional_display_144"
+                android:enabled="true">
+            </Button>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"></ImageView>
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="10dp"
+            ></ImageView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"></ImageView>
+
+            <Button
+                android:id="@+id/competitionTracking"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="30"
+                android:background="@drawable/competition_asset"
+                android:enabled="true"
+                android:visibility="visible"></Button>
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="10"></ImageView>
 
             <Button
@@ -292,21 +274,7 @@
                 android:layout_weight="30"
                 android:background="@drawable/disabled_promo_compliance"
                 android:enabled="true"
-                android:visibility="visible">
-
-            </Button>
-
-            <!--       <Button
-                      android:id="@+id/exist"
-                      android:layout_width="0dp"
-                      android:layout_height="match_parent"
-                      android:layout_weight="30"
-                      android:visibility="visible"
-                       android:background="@drawable/exit_ico"
-
-                       >
-                  </Button> -->
-
+                android:visibility="visible"/>
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -317,15 +285,13 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="10dp" />
 
-            ></ImageView>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:orientation="horizontal"
             android:weightSum="100">
 
@@ -340,16 +306,29 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="30"
                 android:background="@drawable/sales"
-
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 android:layout_weight="10"></ImageView>
 
+            <Button
+                android:id="@+id/comptitionfor_promotion"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="30"
+                android:background="@drawable/competition_promotion"
+                android:enabled="true"
+                android:visibility="visible"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"></ImageView>
 
         </LinearLayout>
+
     </LinearLayout>
 
 
